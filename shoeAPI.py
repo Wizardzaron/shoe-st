@@ -28,6 +28,8 @@ app = Flask(__name__)
 
 DATABASE_URL = os.environ['DATABASE_URL']
 
+print(DATABASE_URL)
+
 conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
 @app.route('/userdata', methods=['GET'])
