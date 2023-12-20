@@ -26,9 +26,32 @@ conn = psycopg2.connect(
     password=DB_PASS
 )
 
+@app.route('/userdata', methods=['GET'])
+def userdata_get():
+    cur = conn.cursor()
 
+    rows = []
+    try:
+         
+        getInfo =  '''SELECT firstname, lastname, username, passwd FROM customer'''
+        cur.execute(getInfo)
+        info = cur.fetchall()
 
-@app.route('/signup', methods =['POST'])
+        columns = ('firstname', 'lastname', 'username', 'passwd')
+
+        # creating dictionary
+        for row in info:
+            print(f"trying to serve {row}", file=sys.stderr)
+            rows.append({columns[i]: row[i] for i, _ in enumerate(columns)})
+            print(f"trying to serve {rows[-1]}", file=sys.stderr)
+
+    except Exception as e:
+        msg = 'Query Failed: %s\nError: %s' % (getInfo, str(e))
+        return jsonify(msg)
+
+    return rows
+
+@app.route('/signup', methods=['POST'])
 def signup_post():
 
     cur = conn.cursor()
@@ -69,10 +92,6 @@ def signup_post():
     #email cannot include whitespace
     if any (char.isspace() for char in email):
          return jsonify('Email cannot have spaces in it.')
-
-    
-    # cursor object
-    cur = conn.cursor()
     
     # to select all column we will use
     getCountByUsername = '''SELECT COUNT(*) FROM customer WHERE username = %s'''
