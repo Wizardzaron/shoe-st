@@ -12,11 +12,11 @@ import jwt
 app = Flask(__name__)
 
 
-DB_HOST = 'ec2-3-232-218-211.compute-1.amazonaws.com'
+DB_HOST = 'ec2-34-236-56-112.compute-1.amazonaws.com'
 DB_PORT = '5432'
-DB_NAME = 'd97oqnm7kdaeu4'
-DB_USER = 'odufpptwrqlxck'
-DB_PASS = '517454a1717232ca8718e7dc6ce3d0439d6380d169c2571a2ded23b853c89035'
+DB_NAME = 'dc80807q62eqq9'
+DB_USER = 'pnkxipkftigyrv'
+DB_PASS = '8755f1e28e8285bdb7b03f7ea2d3c0dd33022ceceddbcc3cd44a647bb705d8a8'
 
 conn = psycopg2.connect(
     host=DB_HOST,
