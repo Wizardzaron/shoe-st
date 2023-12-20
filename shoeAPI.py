@@ -26,10 +26,12 @@ conn = psycopg2.connect(
     password=DB_PASS
 )
 
-cur = conn.cursor()
+
 
 @app.route('/signup', methods =['POST'])
 def signup_post():
+
+    cur = conn.cursor()
 
     firstname = request.form.get('firstname')
     lastname = request.form.get('lastname')
