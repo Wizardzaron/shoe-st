@@ -28,14 +28,75 @@ conn = psycopg2.connect(
 
 cur = conn.cursor()
 
-createCustomerTable = '''CREATE TABLE IF NOT EXISTS customer (id SERIAL PRIMARY KEY, firstname VARCHAR(255) NOT NULL, 
-lastname VARCHAR(255) NOT NULL, username VARCHAR(255) NOT NULL UNIQUE, passwd VARCHAR(255) NOT NULL UNIQUE, streetaddress VARCHAR(255), 
-zipcode INTEGER, email VARCHAR(255) NOT NULL UNIQUE);'''
+@app.route('/signup', methods =['POST'])
+def signup_post():
 
-cur.execute(createCustomerTable)
+    firstname = request.form.get('firstname')
+    lastname = request.form.get('lastname')
+    username = request.form.get('username')
+    email = request.form.get('email')
+    zipcode = request.form.get('zipcode')
+    streetaddress = request.form.get('streetaddress')
+    passwd = request.form.get('passwd')
 
+	#password must be between 4 and 255
+    if len(passwd) < 4 or len(passwd) > 255:
+        return jsonify ("password must be between 4 and 255")    
+    
+    #username must be between 4 and 255 
+    if len(username) < 4 or len(username) > 255:
+         return jsonify ("Username needs to be between 4 and 255 characters long.")
+    
+    #check if email is valid
 
-createOrderTable = '''CREATE TABLE IF NOT EXISTS orders (orderid INTEGER NOT NULL UNIQUE, itemname VARCHAR(255) NOT NULL, price DOUBLE PRECISION, 
-quantity INTEGER, customer_id INTEGER, FOREIGN KEY(customer_id) REFERENCES customer(id));'''
+    #another way of doing if else statement
 
-cur.execute(createOrderTable)
+    try:
+        # Check that the email address is valid.
+        validation = validate_email(email)  
+        email = validation.email
+    except EmailNotValidError as e:
+        # Email is not valid.
+        # The exception message is human-readable.
+        return jsonify('Email not valid: ' + str(e))
+
+    #username cannot include whitespace
+    if any (char.isspace() for char in username):
+         return jsonify ('Username cannot have spaces in it.')
+    
+    #email cannot include whitespace
+    if any (char.isspace() for char in email):
+         return jsonify('Email cannot have spaces in it.')
+
+    
+    # cursor object
+    cur = conn.cursor()
+    
+    # to select all column we will use
+    getCountByUsername = '''SELECT COUNT(*) FROM customer WHERE username = %s'''
+    cur.execute(getCountByUsername,[username])
+    countOfUsername = cur.fetchone()
+
+    if countOfUsername[0] != 0 :
+         return jsonify('Username already exists.')
+              
+
+    #ready to insert into database
+    try:
+
+        insertNewUser = """INSERT INTO customer (email, firstname, lastname, passwd, streetaddress, username, zipcode) VALUES (%s,%s,%s,%s,%s,%s,%s)"""
+        cur.execute(insertNewUser, [email, firstname, lastname, passwd, streetaddress, username, zipcode])
+        conn.commit()
+
+    except Exception as err:
+        
+        #return render_template('welcome.html', msg = str(err))
+
+        msg = 'Query Failed: %s\nError: %s' % (insertNewUser, str(err))
+        return jsonify ( msg)
+        #print('Query Failed: %s\nError: %s' % (insertNewUser, str(err)))
+        
+    finally:
+        cur.close()
+
+    return jsonify('User created successfully')
