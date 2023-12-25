@@ -1,11 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { useAlert } from 'react-alert'
 import Form from 'react-bootstrap/Form';
-
-
-
-
-
 function Signup() {
 
     const [firstname, setFirstname] = useState('');
@@ -18,7 +13,7 @@ function Signup() {
 
     const alert = useAlert()
 
-    function handleZip(text){
+    const handleZip = (text) => {
       const numericValue = text.replace(/[^0-9]/g, ""); 
       const decimalCount = numericValue.split('.').length - 1;
       if (decimalCount !== 1) {
@@ -31,8 +26,7 @@ function Signup() {
 
 
     const formData = new FormData();
-    const zipcodeData = handleZip(zipcode);
-    const zipcodeInt = parseInt(zipcodeData);
+    const zipcodeInt = parseInt(zipcode, 10);
 
     formData.append("firstname", firstname);
     formData.append("lastname", lastname);
@@ -105,7 +99,7 @@ function Signup() {
 
           <Form.Group className="mb-3" controlId="formZipcode">
           <Form.Label>Zipcode</Form.Label>
-          <Form.Control type="integer"/>
+          <Form.Control type="integer" value={zipcode} onChange={handleZip}/>
           </Form.Group>
           
           <button variant="primary" type="submit">
