@@ -1,8 +1,7 @@
 import psycopg2
 import os
 from flask import Flask, render_template, request, redirect, url_for, session, abort, current_app,jsonify
-from datetime import timedelta
-import datetime
+from datetime import date, datetime
 from flask import send_from_directory
 from functools import wraps
 from email_validator import validate_email, EmailNotValidError
@@ -26,7 +25,12 @@ app = Flask(__name__)
 #     password=DB_PASS
 # )
 
-DATABASE_URL = os.environ['DATABASE_URL']
+DATABASE_URL = os.environ.get('DATABASE_URL')
+
+# if DATABASE_URL is None:
+#     print("DATABASE_URL is not set.")
+# else:
+#     print("DATABASE_URL:", DATABASE_URL)
 
 conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
@@ -54,6 +58,38 @@ def userdata_get():
         return jsonify(msg)
 
     return rows
+
+@app.route('/ordercreate', methods=['POST'])
+def order_post():
+
+    cur = conn.cursor()
+
+    brand = request.form.get('brand')
+    itemname = request.form.get('itemname')
+    price = request.form.get('price')
+    quantity = request.form.get('quantity')
+    customer_id = request.form.get('customer_id')
+    today = date.today()
+    dateoforder = today
+
+    try:
+
+        insertNewUser = """INSERT INTO orders (brand, customer_id, dateoforder, itemname, price, quantity) VALUES (%s,%s,%s,%s,%s,%s)"""
+        cur.execute(insertNewUser, [brand, customer_id, dateoforder, itemname, price, quantity])
+        conn.commit()
+
+    except Exception as err:
+        
+        #return render_template('welcome.html', msg = str(err))
+
+        msg = 'Query Failed: %s\nError: %s' % (insertNewUser, str(err))
+        return jsonify ( msg)
+        #print('Query Failed: %s\nError: %s' % (insertNewUser, str(err)))
+        
+    finally:
+        cur.close()
+
+    return jsonify('order created successfully')
 
 @app.route('/signup', methods=['POST'])
 def signup_post():
