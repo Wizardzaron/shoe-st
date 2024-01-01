@@ -31,10 +31,10 @@ CORS(app)
 
 DATABASE_URL = os.environ.get('DATABASE_URL')
 
-if DATABASE_URL is None:
-    logging.error("DATABASE_URL is not set.")
-else:
-    logging.info("DATABASE_URL:", DATABASE_URL)
+# if DATABASE_URL is None:
+#     logging.error("DATABASE_URL is not set.")
+# else:
+#     logging.info("DATABASE_URL:", DATABASE_URL)
 
 conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
