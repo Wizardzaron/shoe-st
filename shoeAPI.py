@@ -6,10 +6,13 @@ from flask import send_from_directory
 from functools import wraps
 from email_validator import validate_email, EmailNotValidError
 import sys
+from flask_cors import CORS
+
 import jwt
 import logging
 
 app = Flask(__name__)
+CORS(app)
 
 
 # DB_HOST = 'ec2-34-236-56-112.compute-1.amazonaws.com'
@@ -149,6 +152,11 @@ def signup_post():
         insertNewUser = """INSERT INTO customer (email, firstname, lastname, passwd, streetaddress, username, zipcode) VALUES (%s,%s,%s,%s,%s,%s,%s)"""
         cur.execute(insertNewUser, [email, firstname, lastname, passwd, streetaddress, username, zipcode])
         conn.commit()
+
+        msg = jsonify('Query Successful')
+        msg.headers['Access-Control-Allow-Origin'] = 'http://localhost:3000'
+        msg.headers['Access-Control-Allow-Methods'] = 'POST'
+        msg.headers['Access-Control-Allow-Headers'] = 'Content-Type'
 
     except Exception as err:
         
