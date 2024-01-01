@@ -7,6 +7,7 @@ from functools import wraps
 from email_validator import validate_email, EmailNotValidError
 import sys
 import jwt
+import logging
 
 app = Flask(__name__)
 
@@ -28,9 +29,9 @@ app = Flask(__name__)
 DATABASE_URL = os.environ.get('DATABASE_URL')
 
 if DATABASE_URL is None:
-    print("DATABASE_URL is not set.")
+    logging.error("DATABASE_URL is not set.")
 else:
-    print("DATABASE_URL:", DATABASE_URL)
+    logging.info("DATABASE_URL:", DATABASE_URL)
 
 conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
