@@ -13,8 +13,8 @@ function Signup() {
 
     const alert = useAlert()
 
-    const handleZip = (text) => {
-      const numericValue = text.replace(/[^0-9]/g, ""); 
+    const handleZip = (event) => {
+      const numericValue = event.target.value.replace(/[^0-9]/g, ""); 
       const decimalCount = numericValue.split('.').length - 1;
       if (decimalCount !== 1) {
         setZipcode(numericValue);
@@ -24,42 +24,49 @@ function Signup() {
       } 
       };
 
+    const submitInfo = () => {
+      const formData = new FormData();
+      const zipcodeInt = parseInt(zipcode, 10);
 
-    const formData = new FormData();
-    const zipcodeInt = parseInt(zipcode, 10);
+      formData.append("firstname", firstname);
+      formData.append("lastname", lastname);
+      formData.append("email", email);
+      formData.append("passwd", password);
+      formData.append("streetaddress", streetaddress);
+      formData.append("username", username);
+      formData.append("zipcode", zipcodeInt);
 
-    formData.append("firstname", firstname);
-    formData.append("lastname", lastname);
-    formData.append("email", email);
-    formData.append("passwd", password);
-    formData.append("streetaddress", streetaddress);
-    formData.append("username", username);
-    formData.append("zipcode", zipcodeInt);
-
-    try{
-        const posting = fetch('https://shoe-st-4581e5bc88b0.herokuapp.com/signup', {
-        method: 'POST',
-          headers: {
-                  'Content-Type': 'multipart/form-data',
-                },
-                body: formData,
+      try{
+          const posting = fetch('https://shoe-st-4581e5bc88b0.herokuapp.com/signup', {
+          method: 'POST',
+            headers: {
+              'Content-Type': 'multipart/form-data',
+            },
+            body: formData,
+          })
+            
+            .then((response) => response.json())
+            .then((data) => {
+              console.log("Data: " + data);
+            })
+            .catch((error) => {
+              console.log("Error: " + error);
             });
 
-        console.log('Upload successful');
-    
-        setFirstname('');
-        setLastname('');
-        setEmail('');
-        setZipcode('');
-        setPassword('');
-        setUsername('');
-        setStreetaddress('');
+          setFirstname('');
+          setLastname('');
+          setEmail('');
+          setZipcode('');
+          setPassword('');
+          setUsername('');
+          setStreetaddress('');
 
-            //navigation.goBack();
-    
-          }catch(error){
-              console.error("Error occured at posting data: ",error);
-            }
+              //navigation.goBack();
+      
+            }catch(error){
+                console.error("Error occured at posting data: ",error);
+              }
+    }
     return(
       <div>
         <h1>Sign Up</h1>
@@ -99,13 +106,11 @@ function Signup() {
 
           <Form.Group className="mb-3" controlId="formZipcode">
           <Form.Label>Zipcode</Form.Label>
-          <Form.Control type="integer" value={zipcode} onChange={handleZip}/>
+          <Form.Control type="text" value={zipcode} onChange={handleZip}/>
           </Form.Group>
-          
-          <button variant="primary" type="submit">
+          <button onClick={submitInfo}>
             Submit
           </button>
-
         </Form> 
       </div>
 
