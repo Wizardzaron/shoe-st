@@ -15,28 +15,28 @@ app = Flask(__name__)
 CORS(app)
 
 
-DB_HOST = 'ec2-34-236-56-112.compute-1.amazonaws.com'
-DB_PORT = '5432'
-DB_NAME = 'dc80807q62eqq9'
-DB_USER = 'pnkxipkftigyrv'
-DB_PASS = '8755f1e28e8285bdb7b03f7ea2d3c0dd33022ceceddbcc3cd44a647bb705d8a8'
+# DB_HOST = 'ec2-34-236-56-112.compute-1.amazonaws.com'
+# DB_PORT = '5432'
+# DB_NAME = 'dc80807q62eqq9'
+# DB_USER = 'pnkxipkftigyrv'
+# DB_PASS = '8755f1e28e8285bdb7b03f7ea2d3c0dd33022ceceddbcc3cd44a647bb705d8a8'
 
-conn = psycopg2.connect(
-    host=DB_HOST,
-    port=DB_PORT,
-    dbname=DB_NAME,
-    user=DB_USER,
-    password=DB_PASS
-)
+# conn = psycopg2.connect(
+#     host=DB_HOST,
+#     port=DB_PORT,
+#     dbname=DB_NAME,
+#     user=DB_USER,
+#     password=DB_PASS
+# )
 
-#DATABASE_URL = os.environ.get('DATABASE_URL')
+DATABASE_URL = os.environ.get('DATABASE_URL')
 
 # if DATABASE_URL is None:
 #     logging.error("DATABASE_URL is not set.")
 # else:
 #     logging.info("DATABASE_URL:", DATABASE_URL)
 
-#conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
 @app.route('/userdata', methods=['GET'])
 def userdata_get():
