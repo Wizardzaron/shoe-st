@@ -154,7 +154,7 @@ def signup_post():
         conn.commit()
 
         msg = jsonify('Query Successful')
-        msg.headers['Access-Control-Allow-Origin'] = 'http://localhost:3000'
+        msg.headers['Access-Control-Allow-Origin'] = 'http://localhost:3000/page'
         msg.headers['Access-Control-Allow-Methods'] = 'POST'
         msg.headers['Access-Control-Allow-Headers'] = 'Content-Type'
 
