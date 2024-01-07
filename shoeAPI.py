@@ -45,11 +45,11 @@ def userdata_get():
     rows = []
     try:
          
-        getInfo =  '''SELECT firstname, lastname, username, passwd, email, streetadress, zipcode FROM customer'''
+        getInfo =  '''SELECT firstname, lastname, username, passwd, email, streetaddress, zipcode FROM customer'''
         cur.execute(getInfo)
         info = cur.fetchall()
 
-        columns = ('firstname', 'lastname', 'username', 'passwd', 'email', 'streetadress', 'zipcode')
+        columns = ('firstname', 'lastname', 'username', 'passwd', 'email', 'streetaddress', 'zipcode')
 
         # creating dictionary
         for row in info:
