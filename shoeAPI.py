@@ -100,13 +100,15 @@ def signup_post():
 
     cur = conn.cursor()
 
-    firstname = request.form.get('firstname')
-    lastname = request.form.get('lastname')
-    username = request.form.get('username')
-    email = request.form.get('email')
-    zipcode = request.form.get('zipcode')
-    streetaddress = request.form.get('streetaddress')
-    passwd = request.form.get('passwd')
+    data = request.json
+
+    firstname = data.get('firstname')
+    lastname = data.get('lastname')
+    username = data.get('username')
+    email = data.get('email')
+    zipcode = data.get('zipcode')
+    streetaddress = data.get('streetaddress')
+    passwd = data.get('passwd')
 
 	#password must be between 4 and 255
     if len(passwd) < 4 or len(passwd) > 255:
@@ -152,11 +154,9 @@ def signup_post():
         insertNewUser = """INSERT INTO customer (email, firstname, lastname, passwd, streetaddress, username, zipcode) VALUES (%s,%s,%s,%s,%s,%s,%s)"""
         cur.execute(insertNewUser, [email, firstname, lastname, passwd, streetaddress, username, zipcode])
         conn.commit()
+        msg.headers['Access-Control-Allow-Methods'] = 'POST'
+        msg.headers['Access-Control-Allow-Headers'] = 'Content-Type'
 
-        # msg = jsonify('Query Successful')
-        # msg.headers['Access-Control-Allow-Origin'] = 'http://localhost:3000/page'
-        # msg.headers['Access-Control-Allow-Methods'] = 'POST'
-        # msg.headers['Access-Control-Allow-Headers'] = 'Content-Type'
 
     except Exception as err:
         
