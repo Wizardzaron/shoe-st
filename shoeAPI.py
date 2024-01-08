@@ -154,22 +154,19 @@ def signup_post():
         insertNewUser = """INSERT INTO customer (email, firstname, lastname, passwd, streetaddress, username, zipcode) VALUES (%s,%s,%s,%s,%s,%s,%s)"""
         cur.execute(insertNewUser, [email, firstname, lastname, passwd, streetaddress, username, zipcode])
         conn.commit()
+
+        msg = jsonify('Query inserted successfully')
         msg.headers['Access-Control-Allow-Methods'] = 'POST'
         msg.headers['Access-Control-Allow-Headers'] = 'Content-Type'
 
 
     except Exception as err:
-        
-        #return render_template('welcome.html', msg = str(err))
-
         msg = 'Query Failed: %s\nError: %s' % (insertNewUser, str(err))
-        return jsonify ( msg)
-        #print('Query Failed: %s\nError: %s' % (insertNewUser, str(err)))
-        
+        return jsonify ( msg)        
     finally:
         cur.close()
 
-    return jsonify('User created successfully')
+    return msg
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
