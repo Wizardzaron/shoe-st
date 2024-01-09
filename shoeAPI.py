@@ -158,6 +158,7 @@ def signup_post():
         msg = jsonify('Query inserted successfully')
         msg.headers['Access-Control-Allow-Methods'] = 'POST'
         msg.headers['Access-Control-Allow-Headers'] = 'Content-Type'
+        msg.headers['Access-Control-Allow-Origin'] = 'http://localhost:3000'
 
 
     except Exception as err:
