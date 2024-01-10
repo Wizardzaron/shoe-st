@@ -158,7 +158,7 @@ def signup_post():
         msg = jsonify('Query inserted successfully')
         msg.headers['Access-Control-Allow-Methods'] = 'POST'
         msg.headers['Access-Control-Allow-Headers'] = 'Content-Type'
-        msg.headers['Access-Control-Allow-Origin'] = 'https://shoe-st-4581e5bc88b0.herokuapp.com'
+        msg.headers['Access-Control-Allow-Origin'] = '*'
 
 
     except Exception as err:
