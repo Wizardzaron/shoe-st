@@ -77,11 +77,11 @@ def shoedata_get():
     rows = []
     try:
 
-        getInfo =  '''SELECT item_id, category, brand, color, gender, shoesize, images, descript FROM shoes'''
+        getInfo =  '''SELECT names, item_id, category, brand, color, gender, shoesize, price ,images, descript FROM shoes'''
         cur.execute(getInfo)
         info = cur.fetchall()
 
-        columns = ('item_id', 'category', 'brand', 'color', 'gender', 'shoesize', 'images', 'descript')
+        columns = ('names', 'item_id', 'category', 'brand', 'color', 'gender', 'shoesize','price' ,'images', 'descript')
 
         # creating dictionary
         for row in info:
