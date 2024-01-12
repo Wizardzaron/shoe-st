@@ -67,7 +67,7 @@ def shoedata_post():
     finally:
         cur.close()
 
-    return jsonify('shoe product created successfully')
+    return jsonify('shoe created successfully')
 
 @app.route('/shoedata', methods=['GET'])
 def shoedata_get():
