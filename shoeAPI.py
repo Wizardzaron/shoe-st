@@ -50,12 +50,13 @@ def shoedata_post():
     shoesize = request.form.get('shoesize')
     images = request.form.get('images')
     descript = request.form.get('descript')
-
+    price = request.form.get('price')
+    name = request.form.get('names')
 
     try:
 
-        insertNewShoe = """INSERT INTO shoes (item_id, category, brand, color, gender, shoesize, images, descript) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)"""
-        cur.execute(insertNewShoe, [itemid, category, brand, color, gender, shoesize, images, descript])
+        insertNewShoe = """INSERT INTO shoes (names, item_id, category, brand, color, gender, shoesize, price ,images, descript) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)"""
+        cur.execute(insertNewShoe, [name, itemid, category, brand, color, gender, shoesize, price ,images, descript])
         conn.commit()
 
     except Exception as err:
