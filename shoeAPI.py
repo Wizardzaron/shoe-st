@@ -38,6 +38,30 @@ DATABASE_URL = os.environ.get('DATABASE_URL')
 
 conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
+@app.route('/updateshoe', methods=['UPDATE'])
+def shoedata_update():
+    cur = conn.cursor()
+    
+    itemid = request.form.get('itemid')
+    images = request.form.get('images')
+
+    try:
+        updateOldShoe = """UPDATE shoes SET images = %s WHERE itemid = %s"""
+        cur.execute(updateOldShoe, [itemid, images])
+        conn.commit()
+
+    except Exception as err:
+            
+        msg = 'Query Failed: %s\nError: %s' % (updateOldShoe, str(err))
+        #used to reset connection after bad query transaction
+        conn.rollback()
+        return jsonify ( msg)
+            
+    finally:
+        cur.close()
+
+    return jsonify('shoe updated successfully')
+
 @app.route('/addshoe', methods=['POST'])
 def shoedata_post():
     cur = conn.cursor()
