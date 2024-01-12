@@ -62,6 +62,8 @@ def shoedata_post():
     except Exception as err:
         
         msg = 'Query Failed: %s\nError: %s' % (insertNewShoe, str(err))
+        #used to reset connection after bad query transaction
+        conn.rollback()
         return jsonify ( msg)
         
     finally:
@@ -142,6 +144,7 @@ def order_post():
         #return render_template('welcome.html', msg = str(err))
 
         msg = 'Query Failed: %s\nError: %s' % (insertNewUser, str(err))
+        conn.rollback()
         return jsonify ( msg)
         #print('Query Failed: %s\nError: %s' % (insertNewUser, str(err)))
         
@@ -218,6 +221,7 @@ def signup_post():
 
     except Exception as err:
         msg = 'Query Failed: %s\nError: %s' % (insertNewUser, str(err))
+        conn.rollback()
         return jsonify ( msg)        
     finally:
         cur.close()
