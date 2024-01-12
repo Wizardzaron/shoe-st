@@ -38,6 +38,60 @@ DATABASE_URL = os.environ.get('DATABASE_URL')
 
 conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
+@app.route('/addshoe', methods=['POST'])
+def shoedata_post():
+    cur = conn.cursor()
+
+    itemid = request.form.get('itemid')
+    category = request.form.get('category')
+    brand = request.form.get('brand')
+    color = request.form.get('color')
+    gender = request.form.get('gender')
+    shoesize = request.form.get('shoesize')
+    images = request.form.get('images')
+    descript = request.form.get('descript')
+
+
+    try:
+
+        insertNewShoe = """INSERT INTO shoes (item_id, category, brand, color, gender, shoesize, images, descript) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)"""
+        cur.execute(insertNewShoe, [itemid, category, brand, color, gender, shoesize, images, descript])
+        conn.commit()
+
+    except Exception as err:
+        
+        msg = 'Query Failed: %s\nError: %s' % (insertNewShoe, str(err))
+        return jsonify ( msg)
+        
+    finally:
+        cur.close()
+
+    return jsonify('order created successfully')
+
+@app.route('/shoedata', methods=['GET'])
+def shoedata_get():
+    cur = conn.cursor()
+    rows = []
+    try:
+
+        getInfo =  '''SELECT item_id, category, brand, color, gender, shoesize, images, descript FROM shoes'''
+        cur.execute(getInfo)
+        info = cur.fetchall()
+
+        columns = ('item_id', 'category', 'brand', 'color', 'gender', 'shoesize', 'images', 'descript')
+
+        # creating dictionary
+        for row in info:
+            print(f"trying to serve {row}", file=sys.stderr)
+            rows.append({columns[i]: row[i] for i, _ in enumerate(columns)})
+            print(f"trying to serve {rows[-1]}", file=sys.stderr)
+
+    except Exception as e:
+        msg = 'Query Failed: %s\nError: %s' % (getInfo, str(e))
+        return jsonify(msg)
+
+    return rows
+
 @app.route('/userdata', methods=['GET'])
 def userdata_get():
     cur = conn.cursor()
@@ -158,7 +212,7 @@ def signup_post():
         msg = jsonify('Query inserted successfully')
         msg.headers['Access-Control-Allow-Methods'] = 'POST'
         msg.headers['Access-Control-Allow-Headers'] = 'Content-Type'
-        msg.headers['Access-Control-Allow-Origin'] = '*'
+        msg.headers['Access-Control-Allow-Origin'] = 'http://localhost:3000'
 
 
     except Exception as err:
