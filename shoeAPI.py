@@ -55,7 +55,7 @@ def shoedata_post():
 
     try:
 
-        insertNewShoe = """INSERT INTO shoes (names, item_id, category, brand, color, gender, shoesize, price ,images, descript) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)"""
+        insertNewShoe = """INSERT INTO shoes (names, item_id, category, brand, color, gender, shoesize, price ,images, descript) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"""
         cur.execute(insertNewShoe, [name, itemid, category, brand, color, gender, shoesize, price ,images, descript])
         conn.commit()
 
@@ -67,7 +67,7 @@ def shoedata_post():
     finally:
         cur.close()
 
-    return jsonify('order created successfully')
+    return jsonify('shoe product created successfully')
 
 @app.route('/shoedata', methods=['GET'])
 def shoedata_get():
