@@ -101,7 +101,7 @@ def shoedata_get():
     rows = []
     try:
 
-        getInfo =  '''SELECT names, item_id, category, brand, color, gender, shoesize, price ,images, descript FROM shoes WHERE item_id = FB7582-001'''
+        getInfo =  '''SELECT names, item_id, category, brand, color, gender, shoesize, price ,images, descript FROM shoes WHERE shoesize = 7.3'''
         cur.execute(getInfo)
         info = cur.fetchall()
 
