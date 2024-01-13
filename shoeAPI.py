@@ -46,7 +46,7 @@ def shoedata_update():
     images = request.form.get('images')
 
     try:
-        updateOldShoe = """UPDATE shoes SET images = %s WHERE itemid = %s"""
+        updateOldShoe = """UPDATE shoes SET images = %s WHERE item_id = %s"""
         cur.execute(updateOldShoe, [itemid, images])
         conn.commit()
 
