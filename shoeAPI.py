@@ -38,7 +38,7 @@ DATABASE_URL = os.environ.get('DATABASE_URL')
 
 conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
-@app.route('/updateshoe', methods=['UPDATE'])
+@app.route('/updateshoe', methods=['PATCH'])
 def shoedata_update():
     cur = conn.cursor()
     
