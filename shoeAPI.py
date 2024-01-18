@@ -1,7 +1,7 @@
 import psycopg2
 import os
 from flask import Flask, render_template, request, redirect, url_for, session, abort, current_app,jsonify
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 from flask import send_from_directory
 from functools import wraps
 from email_validator import validate_email, EmailNotValidError
@@ -14,6 +14,8 @@ import logging
 app = Flask(__name__)
 CORS(app)
 
+app.config['SECRET_KEY'] = 'Sa_sa'
+app.permanent_session_lifetime = timedelta(minutes=10)
 
 # DB_HOST = 'ec2-34-236-56-112.compute-1.amazonaws.com'
 # DB_PORT = '5432'
@@ -166,7 +168,7 @@ def login():
         t = '{' + f'"loggedin":"{str(s)}"' + '}'
         print(t)
 
-        return jsonify("It works")
+        return t
 
     except Exception as e:
         print("An error occurred:", str(e))
