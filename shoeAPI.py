@@ -128,7 +128,7 @@ def login():
         username = request.form.get('username')
         passwd = request.form.get('password')
 
-        getCountByUsernameAndPassword = '''SELECT count(*) FROM info WHERE username = ? AND passwd = ?'''
+        getCountByUsernameAndPassword = '''SELECT count(*) FROM info WHERE username = %s AND passwd = %s'''
         cur.execute(getCountByUsernameAndPassword, [username, passwd])
             
             #print("Did execute")
