@@ -126,7 +126,7 @@ def login():
     try:
 
         username = request.form.get('username')
-        passwd = request.form.get('password')
+        passwd = request.form.get('passwd')
 
         #NOTE in sqlite and postgresql you use %s as placeholders instead of ?
 
