@@ -166,7 +166,7 @@ def login():
         t = '{' + f'"loggedin":"{str(s)}"' + '}'
         print(t)
 
-        return t
+        return jsonify("It works")
 
     except Exception as e:
         print("An error occurred:", str(e))
