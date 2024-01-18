@@ -206,7 +206,7 @@ def all_userdata_get():
         cur.execute(getInfo)
         info = cur.fetchall()
 
-        columns = ('firstname', 'lastname', 'username', 'passwd', 'email', 'streetaddress', 'zipcode', 'id')
+        columns = ('firstname', 'lastname', 'username', 'passwd', 'email', 'streetaddress', 'zipcode', 'id', 'mtd', 'ytd')
 
         # creating dictionary
         for row in info:
