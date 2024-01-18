@@ -176,7 +176,7 @@ def userdata_get():
     rows = []
     try:
          
-        getInfo =  '''SELECT firstname, lastname, username, passwd, email, streetaddress, zipcode FROM customer WHERE id = (?)'''
+        getInfo =  '''SELECT firstname, lastname, username, passwd, email, streetaddress, zipcode FROM customer'''
         id = request.args.get('id')
 
         cur.execute(getInfo,(id, ))
