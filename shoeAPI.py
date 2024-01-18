@@ -128,7 +128,9 @@ def login():
         username = request.form.get('username')
         passwd = request.form.get('password')
 
-        getCountByUsernameAndPassword = '''SELECT count(*) FROM info WHERE username = %s AND passwd = %s'''
+        #NOTE in sqlite and postgresql you use %s as placeholders instead of ?
+
+        getCountByUsernameAndPassword = '''SELECT count(*) FROM customer WHERE username = %s AND passwd = %s'''
         cur.execute(getCountByUsernameAndPassword, [username, passwd])
             
             #print("Did execute")
