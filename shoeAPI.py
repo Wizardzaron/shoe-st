@@ -179,12 +179,12 @@ def userdata_get():
         getInfo =  '''SELECT firstname, lastname, username, passwd, email, streetaddress, zipcode FROM customer WHERE id = ?'''
         id = request.args.get('id')
         cur.execute(getInfo,(id, ))
-        info = cur.fetchall()
+        userInfo = cur.fetchall()
 
         columns = ('firstname', 'lastname', 'username', 'passwd', 'email', 'streetaddress', 'zipcode')
 
         # creating dictionary
-        for row in info:
+        for row in userInfo:
             print(f"trying to serve {row}", file=sys.stderr)
             rows.append({columns[i]: row[i] for i, _ in enumerate(columns)})
             print(f"trying to serve {rows[-1]}", file=sys.stderr)
