@@ -201,8 +201,8 @@ def all_userdata_get():
 
     rows = []
     try:
-        getInfo =  '''SELECT * FROM customer'''
-        #getInfo =  '''SELECT firstname, lastname, username, passwd, email, streetaddress, zipcode FROM customer'''
+        #getInfo =  '''SELECT * FROM customer'''
+        getInfo =  '''SELECT firstname, lastname, username, passwd, email, streetaddress, zipcode, id, mtd, ytd FROM customer'''
         cur.execute(getInfo)
         info = cur.fetchall()
 
