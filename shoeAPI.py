@@ -119,8 +119,84 @@ def shoedata_get():
 
     return rows
 
+@app.route('/login', methods=['GET'])
+def login():
+    cur = conn.cursor()
+    
+    try:
+
+        username = request.form.get('username')
+        passwd = request.form.get('password')
+
+        getCountByUsernameAndPassword = '''SELECT count(*) FROM info WHERE username = ? AND passwd = ?'''
+        cur.execute(getCountByUsernameAndPassword, [username, passwd])
+            
+            #print("Did execute")
+            
+        countOfUsernameAndPassword = cur.fetchone()
+
+            #print("Did fetchone")
+
+        if countOfUsernameAndPassword[0] == 0:
+            print('setting logged in to False')
+            session['loggedin'] = False
+            #token = create_token(user_name, session['loggedin'])
+            
+            #return jsonify(token)
+            print('about to return False')
+            s = str(session['loggedin'])
+            t = '{' + f'"loggedin":"{str(s)}"' + '}'
+            print(t)
+            return t        
+
+
+
+        #session['Authorization'] = token
+        # sessions carry data over the website
+        session['loggedin'] = True
+
+        session['username'] = username
+            
+        #token = create_token(user_name, session['loggedin'])
+        print("at the end")
+        print(f'at the end -- printing jsonify|{session["loggedin"]}|and more to go')
+        s = str(session['loggedin'])
+        t = '{' + f'"loggedin":"{str(s)}"' + '}'
+        print(t)
+
+        return t
+
+    except Exception as e:
+        print("An error occurred:", str(e))
+
 @app.route('/userdata', methods=['GET'])
 def userdata_get():
+
+    cur = conn.cursor()
+    rows = []
+    try:
+         
+        getInfo =  '''SELECT firstname, lastname, username, passwd, email, streetaddress, zipcode FROM customer WHERE id = ?'''
+        id = request.args.get('id')
+        cur.execute(getInfo,(id, ))
+        info = cur.fetchall()
+
+        columns = ('firstname', 'lastname', 'username', 'passwd', 'email', 'streetaddress', 'zipcode')
+
+        # creating dictionary
+        for row in info:
+            print(f"trying to serve {row}", file=sys.stderr)
+            rows.append({columns[i]: row[i] for i, _ in enumerate(columns)})
+            print(f"trying to serve {rows[-1]}", file=sys.stderr)
+
+    except Exception as e:
+        msg = 'Query Failed: %s\nError: %s' % (getInfo, str(e))
+        return jsonify(msg)
+
+    return rows
+
+@app.route('/alluserdata', methods=['GET'])
+def all_userdata_get():
     cur = conn.cursor()
 
     rows = []
