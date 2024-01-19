@@ -15,7 +15,7 @@ app = Flask(__name__)
 CORS(app)
 
 app.config['SECRET_KEY'] = 'Sa_sa'
-app.permanent_session_lifetime = timedelta(minutes=10)
+app.permanent_session_lifetime = timedelta(minutes=30)
 
 # DB_HOST = 'ec2-34-236-56-112.compute-1.amazonaws.com'
 # DB_PORT = '5432'
@@ -121,7 +121,7 @@ def shoedata_get():
 
     return rows
 
-@app.route('/login', methods=['GET'])
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     cur = conn.cursor()
     
