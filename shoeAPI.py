@@ -166,6 +166,8 @@ def login():
 
         session['id'] = id
             
+        print(id)
+
         #token = create_token(user_name, session['loggedin'])
         print("at the end")
         print(f'at the end -- printing jsonify|{session["loggedin"]}|and more to go')
