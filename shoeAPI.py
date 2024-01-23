@@ -12,7 +12,9 @@ import jwt
 import logging
 
 app = Flask(__name__)
-CORS(app)
+
+#supports_credentials allows us to use  include the Access-Control-Allow-Credentials header in the response. thus letting us to send cookies(thus allowing us to properly use sessions) or http authentication
+CORS(app, supports_credentials=True)
 
 app.config['SECRET_KEY'] = 'Sa_sa'
 app.permanent_session_lifetime = timedelta(minutes=30)
