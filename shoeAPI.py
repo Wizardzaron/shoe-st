@@ -17,28 +17,28 @@ CORS(app)
 app.config['SECRET_KEY'] = 'Sa_sa'
 app.permanent_session_lifetime = timedelta(minutes=30)
 
-# DB_HOST = 'ec2-34-236-56-112.compute-1.amazonaws.com'
-# DB_PORT = '5432'
-# DB_NAME = 'dc80807q62eqq9'
-# DB_USER = 'pnkxipkftigyrv'
-# DB_PASS = '8755f1e28e8285bdb7b03f7ea2d3c0dd33022ceceddbcc3cd44a647bb705d8a8'
+DB_HOST = 'ec2-34-236-56-112.compute-1.amazonaws.com'
+DB_PORT = '5432'
+DB_NAME = 'dc80807q62eqq9'
+DB_USER = 'pnkxipkftigyrv'
+DB_PASS = '8755f1e28e8285bdb7b03f7ea2d3c0dd33022ceceddbcc3cd44a647bb705d8a8'
 
-# conn = psycopg2.connect(
-#     host=DB_HOST,
-#     port=DB_PORT,
-#     dbname=DB_NAME,
-#     user=DB_USER,
-#     password=DB_PASS
-# )
+conn = psycopg2.connect(
+    host=DB_HOST,
+    port=DB_PORT,
+    dbname=DB_NAME,
+    user=DB_USER,
+    password=DB_PASS
+)
 
-DATABASE_URL = os.environ.get('DATABASE_URL')
+# DATABASE_URL = os.environ.get('DATABASE_URL')
 
 # if DATABASE_URL is None:
 #     logging.error("DATABASE_URL is not set.")
 # else:
 #     logging.info("DATABASE_URL:", DATABASE_URL)
 
-conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+# conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
 @app.route('/updateshoe', methods=['PATCH'])
 def shoedata_update():
@@ -130,6 +130,12 @@ def login():
         username = request.form.get('username')
         passwd = request.form.get('passwd')
 
+        msg = jsonify('Query inserted successfully')
+        msg.headers['Access-Control-Allow-Methods'] = 'POST'
+        msg.headers['Access-Control-Allow-Headers'] = 'Content-Type'
+        msg.headers['Access-Control-Allow-Origin'] = 'http://localhost:3000'
+
+
         #NOTE in sqlite and postgresql you use %s as placeholders instead of ?
 
         getCountByUsernameAndPassword = '''SELECT count(*) FROM customer WHERE username = %s AND passwd = %s'''
@@ -189,6 +195,7 @@ def userdata_get():
          
         #id = request.args.get('id')
         id = session.get('id')
+        print("id + ", id)
         getInfo =  '''SELECT firstname, lastname, username, passwd, email, streetaddress, zipcode FROM customer WHERE id = %s'''
 
         cur.execute(getInfo,(id, ))
