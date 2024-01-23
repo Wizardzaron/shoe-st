@@ -199,6 +199,10 @@ def userdata_get():
         id = session.get('id')
         print("id + ", id)
         getInfo =  '''SELECT firstname, lastname, username, passwd, email, streetaddress, zipcode FROM customer WHERE id = %s'''
+        msg = jsonify('Query inserted successfully')
+        msg.headers['Access-Control-Allow-Methods'] = 'GET'
+        msg.headers['Access-Control-Allow-Headers'] = 'Content-Type'
+        msg.headers['Access-Control-Allow-Origin'] = 'http://localhost:3000'
 
         cur.execute(getInfo,(id, ))
         userInfo = cur.fetchall()
