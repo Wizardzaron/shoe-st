@@ -130,16 +130,18 @@ def login():
         username = request.form.get('username')
         passwd = request.form.get('passwd')
 
-        msg = jsonify('Query inserted successfully')
-        msg.headers['Access-Control-Allow-Methods'] = 'POST'
-        msg.headers['Access-Control-Allow-Headers'] = 'Content-Type'
-        msg.headers['Access-Control-Allow-Origin'] = 'http://localhost:3000'
 
 
         #NOTE in sqlite and postgresql you use %s as placeholders instead of ?
 
         getCountByUsernameAndPassword = '''SELECT count(*) FROM customer WHERE username = %s AND passwd = %s'''
         cur.execute(getCountByUsernameAndPassword, [username, passwd])
+
+        
+        msg = jsonify('Query inserted successfully')
+        msg.headers['Access-Control-Allow-Methods'] = 'POST'
+        msg.headers['Access-Control-Allow-Headers'] = 'Content-Type'
+        msg.headers['Access-Control-Allow-Origin'] = 'http://localhost:3000'
             
             #print("Did execute")
             
