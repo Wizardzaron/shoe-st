@@ -154,12 +154,17 @@ def login():
             return t        
 
 
+        getId = '''SELECT id FROM customer WHERE username = %s AND passwd = %s'''
+        cur.execute(getId, [username, passwd])
+        id = cur.fetchone()
 
         #session['Authorization'] = token
         # sessions carry data over the website
         session['loggedin'] = True
 
         session['username'] = username
+
+        session['id'] = id
             
         #token = create_token(user_name, session['loggedin'])
         print("at the end")
@@ -180,7 +185,8 @@ def userdata_get():
     rows = []
     try:
          
-        id = request.args.get('id')
+        #id = request.args.get('id')
+        id = session.get('id')
         getInfo =  '''SELECT firstname, lastname, username, passwd, email, streetaddress, zipcode FROM customer WHERE id = %s'''
 
         cur.execute(getInfo,(id, ))
