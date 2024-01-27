@@ -176,10 +176,10 @@ def login():
 
         session['id'] = id
             
-        print(id)
+        print("session id does exist: ", session.get('id'))
 
         #token = create_token(user_name, session['loggedin'])
-        print("at the end")
+        #print("at the end")
         print(f'at the end -- printing jsonify|{session["loggedin"]}|and more to go')
         s = str(session['loggedin'])
         t = '{' + f'"loggedin":"{str(s)}"' + '}'
@@ -196,15 +196,15 @@ def userdata_get():
     cur = conn.cursor()
     rows = []
     try:
-         
-        #id = request.args.get('id')
-        id = session.get('id')
-        print("id + ", id)
-        getInfo =  '''SELECT firstname, lastname, username, passwd, email, streetaddress, zipcode FROM customer WHERE id = %s'''
         msg = jsonify('Query inserted successfully')
         msg.headers['Access-Control-Allow-Methods'] = 'GET'
         msg.headers['Access-Control-Allow-Credentials'] = 'true'
         msg.headers['Access-Control-Allow-Origin'] = 'http://localhost:3000'
+         
+        #id = request.args.get('id')
+        id = session['id']
+        print("id + ", id)
+        getInfo =  '''SELECT firstname, lastname, username, passwd, email, streetaddress, zipcode FROM customer WHERE id = %s'''
 
         cur.execute(getInfo,(id, ))
         userInfo = cur.fetchall()
