@@ -19,28 +19,28 @@ CORS(app, supports_credentials=True)
 app.config['SECRET_KEY'] = 'Sa_sa'
 app.permanent_session_lifetime = timedelta(minutes=30)
 
-DB_HOST = 'ec2-34-236-56-112.compute-1.amazonaws.com'
-DB_PORT = '5432'
-DB_NAME = 'dc80807q62eqq9'
-DB_USER = 'pnkxipkftigyrv'
-DB_PASS = '8755f1e28e8285bdb7b03f7ea2d3c0dd33022ceceddbcc3cd44a647bb705d8a8'
+# DB_HOST = 'ec2-34-236-56-112.compute-1.amazonaws.com'
+# DB_PORT = '5432'
+# DB_NAME = 'dc80807q62eqq9'
+# DB_USER = 'pnkxipkftigyrv'
+# DB_PASS = '8755f1e28e8285bdb7b03f7ea2d3c0dd33022ceceddbcc3cd44a647bb705d8a8'
 
-conn = psycopg2.connect(
-    host=DB_HOST,
-    port=DB_PORT,
-    dbname=DB_NAME,
-    user=DB_USER,
-    password=DB_PASS
-)
+# conn = psycopg2.connect(
+#     host=DB_HOST,
+#     port=DB_PORT,
+#     dbname=DB_NAME,
+#     user=DB_USER,
+#     password=DB_PASS
+# )
 
-# DATABASE_URL = os.environ.get('DATABASE_URL')
+DATABASE_URL = os.environ.get('DATABASE_URL')
 
 # if DATABASE_URL is None:
 #     logging.error("DATABASE_URL is not set.")
 # else:
 #     logging.info("DATABASE_URL:", DATABASE_URL)
 
-# conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
 @app.route('/updateshoe', methods=['PATCH'])
 def shoedata_update():
@@ -99,17 +99,41 @@ def shoedata_post():
 
     return jsonify('shoe created successfully')
 
+@app.route('/shoeimages', methods=['GET'])
+def shoeimages():
+
+    cur = conn.cursor()
+    rows = []
+
+    try:
+        getImages = '''SELECT images, item_id, descript, names FROM shoes'''
+        cur.execute(getImages)
+        info =cur.fetchall()
+        columns = ('images','item_id')
+
+        # creating dictionary
+        for row in info:
+            print(f"trying to serve {row}", file=sys.stderr)
+            rows.append({columns[i]: row[i] for i, _ in enumerate(columns)})
+            print(f"trying to serve {rows[-1]}", file=sys.stderr)
+
+    except Exception as e:
+        msg = 'Query Failed: %s\nError: %s' % (getImages, str(e))
+        return jsonify(msg)
+
+    return rows
+
 @app.route('/shoedata', methods=['GET'])
 def shoedata_get():
     cur = conn.cursor()
     rows = []
     try:
-
-        getInfo =  '''SELECT names, item_id, category, brand, color, gender, shoesize, price ,images, descript FROM shoes WHERE shoesize = 7.3'''
-        cur.execute(getInfo)
+        itemId = request.form.get('item_id')
+        getInfo =  '''SELECT names, category, brand, color, gender, shoesize, price ,images, descript FROM shoes WHERE item_id = %s'''
+        cur.execute(getInfo, itemId)
         info = cur.fetchall()
 
-        columns = ('names', 'item_id', 'category', 'brand', 'color', 'gender', 'shoesize','price' ,'images', 'descript')
+        columns = ('names', 'category', 'brand', 'color', 'gender', 'shoesize','price' ,'images', 'descript')
 
         # creating dictionary
         for row in info:
