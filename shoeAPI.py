@@ -109,7 +109,7 @@ def shoeimages():
         getImages = '''SELECT images, item_id, descript, names FROM shoes'''
         cur.execute(getImages)
         info =cur.fetchall()
-        columns = ('images','item_id')
+        columns = ('images','item_id', 'decsript', 'names')
 
         # creating dictionary
         for row in info:
