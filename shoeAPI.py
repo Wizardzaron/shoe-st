@@ -163,7 +163,7 @@ def shoebrand_get():
         cur.execute(getInfo, [brand])
         info = cur.fetchall()
 
-        columns = ('names', 'brand', 'price' ,'images')
+        columns = ('names', 'item_id', 'price' ,'images')
 
         # creating dictionary
         for row in info:
