@@ -131,6 +131,7 @@ def shoedata_get():
         
         itemId = request.args.get('item_id')
         #itemId = 'FB7582-001'
+        print(itemId)
         getInfo =  '''SELECT names, category, brand, color, gender, shoesize, price ,images, descript FROM shoes WHERE item_id = %s '''
         cur.execute(getInfo, [itemId])
         info = cur.fetchall()
