@@ -129,7 +129,7 @@ def shoedata_get():
     rows = []
     try:
         
-        itemId = request.form.get('item_id')
+        itemId = request.args.get('item_id')
         #itemId = 'FB7582-001'
         getInfo =  '''SELECT names, category, brand, color, gender, shoesize, price ,images, descript FROM shoes WHERE item_id = %s '''
         cur.execute(getInfo, [itemId])
