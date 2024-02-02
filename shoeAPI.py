@@ -156,11 +156,11 @@ def shoebrand_get():
     rows = []
     try:
         
-        itemId = request.args.get('brand')
+        brand = request.args.get('brand')
         #itemId = 'FB7582-001'
         #print(itemId)
         getInfo =  '''SELECT names, item_id, price ,images FROM shoes WHERE brand = %s '''
-        cur.execute(getInfo, [itemId])
+        cur.execute(getInfo, [brand])
         info = cur.fetchall()
 
         columns = ('names', 'brand', 'price' ,'images')
