@@ -150,6 +150,34 @@ def shoedata_get():
 
     return rows
 
+@app.route('/shoebrand', methods=['GET'])
+def shoebrand_get():
+    cur = conn.cursor()
+    rows = []
+    try:
+        
+        itemId = request.args.get('brand')
+        #itemId = 'FB7582-001'
+        #print(itemId)
+        getInfo =  '''SELECT names, item_id, price ,images FROM shoes WHERE brand = %s '''
+        cur.execute(getInfo, [itemId])
+        info = cur.fetchall()
+
+        columns = ('names', 'brand', 'price' ,'images')
+
+        # creating dictionary
+        for row in info:
+            print(f"trying to serve {row}", file=sys.stderr)
+            rows.append({columns[i]: row[i] for i, _ in enumerate(columns)})
+            print(f"trying to serve {rows[-1]}", file=sys.stderr)
+
+    except Exception as e:
+        msg = 'Query Failed: %s\nError: %s' % (getInfo, str(e))
+        return jsonify(msg)
+
+
+    return rows
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     cur = conn.cursor()
