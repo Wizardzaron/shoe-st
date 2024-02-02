@@ -106,10 +106,10 @@ def shoeimages():
     rows = []
 
     try:
-        getImages = '''SELECT images, item_id, descript, names FROM shoes'''
+        getImages = '''SELECT images, item_id, descript, names, brand FROM shoes'''
         cur.execute(getImages)
         info =cur.fetchall()
-        columns = ('images','item_id', 'descript', 'names')
+        columns = ('images','item_id', 'descript', 'names', 'brand')
 
         # creating dictionary
         for row in info:
