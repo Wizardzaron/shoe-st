@@ -178,6 +178,17 @@ def shoebrand_get():
 
     return rows
 
+# @app.route('/search', methods=['GET'])
+# def search():
+
+#     cur = conn.cursor()
+
+#     try:
+
+#         searching = request.args.get('searchValue')
+
+
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     cur = conn.cursor()
@@ -237,7 +248,8 @@ def login():
         #print("at the end")
         print(f'at the end -- printing jsonify|{session["loggedin"]}|and more to go')
         s = str(session['loggedin'])
-        t = '{' + f'"loggedin":"{str(s)}"' + '}'
+        i = str(session['id'])
+        t = '{' + f'"loggedin":"{str(s)}",' + f'"id":"{str(i)}"' + '}'
         print(t)
 
         return t
