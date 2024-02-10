@@ -249,7 +249,7 @@ def login():
         print(f'at the end -- printing jsonify|{session["loggedin"]}|and more to go')
         s = str(session['loggedin'])
         i = str(session['id'])
-        t = '{' + f'"loggedin":"{str(s)}",' + f'"id":"{str(i)}"' + '}'
+        t = '{' + f'"loggedin":"{str(s)}"' + '}'
         print(t)
 
         return t
@@ -269,7 +269,7 @@ def userdata_get():
         msg.headers['Access-Control-Allow-Origin'] = 'http://localhost:3000'
          
         #id = request.args.get('id')
-        id = session['id']
+        id = session.get('id')
         print("id + ", id)
         getInfo =  '''SELECT firstname, lastname, username, passwd, email, streetaddress, zipcode FROM customer WHERE id = %s'''
 
