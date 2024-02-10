@@ -269,7 +269,8 @@ def userdata_get():
         msg.headers['Access-Control-Allow-Origin'] = 'http://localhost:3000'
          
         #id = request.args.get('id')
-        id = session.get('id')
+        #id = session.get('id')
+        id = 2
         print("id + ", id)
         getInfo =  '''SELECT firstname, lastname, username, passwd, email, streetaddress, zipcode FROM customer WHERE id = %s'''
 
