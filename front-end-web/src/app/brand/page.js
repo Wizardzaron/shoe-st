@@ -56,7 +56,7 @@ function Brand(){
 
                         return(
 
-                            <div class={styles.brand}>
+                            <div class={styles.brand} key={it.item_id}>
                                 <a href={"/shoedetail?id=" + it.item_id}>
                                     <img
                                         src = {it.images}

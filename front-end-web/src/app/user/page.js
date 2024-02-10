@@ -30,9 +30,9 @@ function CustomerData() {
     //if (!data) return <p>No profile data</p>
     return(
         <>
-        {item.map((it) => {
+        {item.map((it, index) => {
             return (
-                <div> 
+                <div key={index}> 
                     <section className={styles.userinfo}>
                         <h1>First Name</h1>
                         {it.firstname}

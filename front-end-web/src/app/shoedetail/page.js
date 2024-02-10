@@ -5,7 +5,7 @@ import Link from 'next/link'
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha512-kgrXVPaJi1gUqEbb3lVdpJ3tWjfCfEUGD4tKm5GpUW1Gy6PIq3n89kk0zEIWxgBlfpaZD7lcmTFdHL8u5eSzug==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 
-const shoePage = () => {
+const ShoePage = () => {
 
     const [searchValue, setSearchValue] = useState(null);
 
@@ -68,9 +68,9 @@ const shoePage = () => {
 return(
 <>
     <div>
-        {item.map((it) => {
+        {item.map((it, index) => {
             return(
-                <div className={styles.shoe}>
+                <div className={styles.shoe} key={index}>
                     <div class={styles.followers}>
                         <div class={styles.spacingInsideSticky}>
                             <img
@@ -255,4 +255,4 @@ return(
 )
 };
 
-export default shoePage;
+export default ShoePage;

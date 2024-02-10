@@ -71,7 +71,7 @@ function HomePage(){
             <Carousel>
                 {item.map((it) => {
                     return (
-                        <div>
+                        <div key={it.item_id}>
                             <div class={styles.flexcontainer}>
                                 <section className={styles.block1}> 
                                     {/* Needed to add display flex style to link so it can cover the entire image */}
