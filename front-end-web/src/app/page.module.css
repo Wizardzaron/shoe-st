@@ -1,0 +1,258 @@
+
+
+.aligntext{
+  text-align: center;
+}
+
+.attributetext{
+
+  margin-top:10px;
+  display:block;
+}
+
+.brand{
+
+  display: inline-block;
+  margin-top:40px;
+  margin-left:150px;
+
+}
+
+.brand img + b{
+
+  display:block;
+}
+
+.button{
+
+  border-radius: 25px;
+  background-color: aqua;
+  margin-top: 40px;
+}
+
+.block1{
+  flex-grow:2;
+  position: relative;
+  left: 360px;
+  width:300px;
+  padding:10px;
+}
+
+/* .oldblock2{
+  display: inline-block;
+  flex-grow:1;
+  position: relative;
+  bottom: 275px;
+  width: auto;
+  background-color: white;
+  font-size: 20px;
+} */
+
+.block2{
+
+  position: relative;
+  bottom: 270px;
+  background-color: white;
+  font-size: 20px;
+}
+
+.block3{
+  position:relative;
+  bottom: 270px;
+  width: 380px;
+  background-color: white;
+  font-size: 17px;
+  overflow-wrap:break-word;
+}
+
+.brandpage{
+  
+  background-color: white;
+  height: 100vh;
+  width: 100vw;
+}
+
+.centerstage{
+
+  display:flex;
+  align-items: center;
+  flex-direction: column;
+  border: black solid;
+  width: 11%;
+  margin:auto;
+}
+
+.custombutton{
+  margin-top: 40px;
+  background-color: red;
+  text-align: center; 
+
+}
+
+.custombutton2{
+  border-radius:25px;
+  /* margin-top: 20px; */
+  background-color: blue;
+  text-align: center; 
+  color:red;
+}
+
+.custombutton3{
+  border-radius: 25px;
+  background-color: green;
+  text-align: center; 
+  color:magenta;
+}
+
+.descriptivetext{
+
+  font-weight: bold;
+  font-size:15px;
+  text-align:left;
+  margin-left: 850px;
+}
+
+.descriptivetext p {
+
+  margin-top: 10px;
+
+}
+
+.flexcontainer{
+  display:flex;
+  background-color: gray;
+  flex-direction: column;
+  height: 260px;
+  width:650px;
+}
+
+.followers{
+
+  position:stickey;
+  background-color: white;
+  border: 2px solid black;
+  top: 0;
+}
+
+.ghostbutton { 
+  
+  display: inline-block; 
+  width: 200px; 
+  padding: 8px; 
+  color: black; 
+  border: 3px solid black; 
+  text-align: center; 
+  outline: none; 
+  text-decoration: none; 
+  position:relative;
+  left:200px;
+  top: 180px;
+  transition: background-color 300ms ease;
+}
+
+.ghostbutton:hover{
+
+  background-color: black;
+  color:white;
+}
+
+.ghostbutton:active{
+
+  background-color: black;
+  color:white;
+}
+
+/* .ghostbutton + .ghostbutton { 
+
+  margin-top: 10px;
+} */
+
+.hideradio{
+
+  visibility: hidden;
+}
+
+.homeimg{
+
+  display:flex;
+  align-items: center;
+  flex-direction: row;
+  border: black solid;
+  width: 30%;
+  margin:auto;
+}
+
+.homepage{
+  
+  background-color: white;
+  height: 100vh;
+  width: 100vw;
+}
+
+.images{
+
+  position: relative;
+  right: 375px;
+  bottom: 880px;
+}
+
+
+.loginpage{
+
+  background-color: white;
+  height: 100vh;
+  width: 100vw;
+  text-align: center;
+}
+
+/* Using a to anchor the element that comes after the img tage */
+
+/* Needed to create a separate class for Link tag because it doesn't work in css  */
+
+.spacingInsideSticky img + .stickySpaceLink{
+  margin-left: 45px;
+}
+
+/* If two elements are using the same class then this class will activate */
+
+.spacingInsideSticky .stickySpaceLink + .stickySpaceLink{
+  margin-left: 20px;
+}
+
+.shoe{
+
+  background-color: white;
+  text-align: center;
+
+}
+
+.signup{
+
+  background-color: white;
+  height: 100vh;
+  width: 100vw;
+  text-align: center;
+
+}
+
+.split{
+
+  position:relative;
+  left:220px;
+  bottom:440px;
+}
+
+.textbox{
+  border-radius: 25px;
+  margin-top: 20px;
+  height: 65px;
+  width: 179px;
+}
+
+.userinfo{
+
+  background-color: coral !important;
+  display:flex;
+  align-items: center;
+  flex-direction: column;
+}
