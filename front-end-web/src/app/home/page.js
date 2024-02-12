@@ -27,7 +27,7 @@ function HomePage(){
 
     useEffect(() => {
        
-        fetch('shoe-st.vercel.app/shoeimages')
+        fetch('https://shoe-st.vercel.app/shoeimages')
         
         .then((response) => response.json()) 
         .then((item) => {
