@@ -27,7 +27,7 @@ function HomePage(){
 
     useEffect(() => {
        
-        fetch('https://shoe-st-4581e5bc88b0.herokuapp.com/shoeimages')
+        fetch('shoe-st.vercel.app/shoeimages')
         
         .then((response) => response.json()) 
         .then((item) => {
