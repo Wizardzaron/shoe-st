@@ -1,7 +1,8 @@
 {
   "dependencies": {
+    "@vercel/postgres": "^0.7.2",
     "email_validator": "^1.0.0",
     "flask": "^0.2.10",
-    "react-popup-alert": "^2.0.0"
+    "react-popup-alert": "^1.0.7"
   }
 }
