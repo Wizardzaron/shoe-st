@@ -7,4 +7,4 @@ function Redirect() {
     redirect('/home');
 
 }
-export default Redirect();
+export default Redirect;
