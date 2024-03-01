@@ -37,7 +37,7 @@ function HomePage(){
           .catch(e => console.log(e))
     },[])
     if(item == null){
-        return console.log("returned null")
+        return console.log(e)
     }
 
     return(
