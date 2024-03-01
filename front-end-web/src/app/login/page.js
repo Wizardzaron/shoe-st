@@ -22,28 +22,48 @@ const LoginPage = () =>{
                 body: formData,
             })
 
-            .then(response => response.json())
-            .then(loggedin => {
-
-
-                const login = loggedin;
-
-                console.log('login is', login);
-
-                if (login["loggedin"] === "False"){
-                    console.log("Incorrect login");
-                    router.push('/login');
+            .then(response =>{ 
+                
+                    const status = response.status
+                
+                    if(status === 401){
+                        console.log("Incorrect login");
+                        router.push('/login');
+                    }
+                    else if(status === 200){
+                        const code = request.cookies.get('userID');
+                        console.log("Success login");
+                        router.push('/user');
+                    }
+                    else{
+                        router.push('/login');
+                    }
+    
                 }
-                else if (login["loggedin"] === "True"){
-                    console.log("Correct login");
-                    router.push('/user');
-                }
+            )
+            // .then(loggedin => {
 
-                else{
-                    router.push('/login');
-                }
 
-            })
+            //     const login = loggedin;
+            //     const id = login.id;
+
+            //     //console.log('login is', login);
+            //     //console.log('id is', id);
+
+            //     if (login["loggedin"] === "False"){
+            //         console.log("Incorrect login");
+            //         router.push('/login');
+            //     }
+            //     else if (login["loggedin"] === "True"){
+            //         console.log("Correct login");
+            //         router.push('/user');
+            //     }
+
+            //     else{
+            //         router.push('/login');
+            //     }
+
+            // })
 
 
         }
