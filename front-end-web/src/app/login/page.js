@@ -17,9 +17,10 @@ const LoginPage = () =>{
         console.log(formData);
 
         try{
-            fetch('https://shoe-st-api-58c2623d13b8.herokuapp.com/login',{
+            fetch('https://shoe-st-4581e5bc88b0.herokuapp.com/login',{
                 method: 'POST',
                 body: formData,
+                credentials: 'include'
             })
 
             .then(response =>{ 
@@ -31,7 +32,6 @@ const LoginPage = () =>{
                         router.push('/login');
                     }
                     else if(status === 200){
-                        const code = request.cookies.get('userID');
                         console.log("Success login");
                         router.push('/user');
                     }
