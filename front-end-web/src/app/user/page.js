@@ -11,7 +11,7 @@ function CustomerData() {
 
     useEffect(() => {
        
-        fetch('https://shoe-st-4581e5bc88b0.herokuapp.com/userdata',{
+        fetch('https://shoe-st-api-58c2623d13b8.herokuapp.com/userdata',{
             method: 'GET',
             credentials:'include',
         })

@@ -45,7 +45,7 @@ const ShoePage = () => {
         formData.append("item_id", item_id);
 
        
-        fetch('https://shoe-st-4581e5bc88b0.herokuapp.com/shoedata?item_id=' + item_id,{
+        fetch('https://shoe-st-api-58c2623d13b8.herokuapp.com/shoedata?item_id=' + item_id,{
 
             method: 'GET',
             headers: {

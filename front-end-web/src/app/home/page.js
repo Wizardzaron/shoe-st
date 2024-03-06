@@ -27,7 +27,7 @@ function HomePage(){
 
     useEffect(() => {
        
-        fetch('https://shoe-st-4581e5bc88b0.herokuapp.com/shoeimages')
+        fetch('https://shoe-st-api-58c2623d13b8.herokuapp.com/shoeimages')
         
         .then((response) => response.json()) 
         .then((item) => {
