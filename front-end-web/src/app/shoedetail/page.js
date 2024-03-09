@@ -239,6 +239,10 @@ return(
                         </div>
                     </section>
 
+                    <div id="form-action">
+                        <button type="submit" class="btn btn-default">Submit</button>
+                    </div>
+
                     <img
                         className={styles.images}
                         src = {it.images}

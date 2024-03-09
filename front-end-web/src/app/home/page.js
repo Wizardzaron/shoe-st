@@ -4,12 +4,16 @@ import React, {useState, useEffect} from 'react';
 import "react-responsive-carousel/lib/styles/carousel.min.css"; 
 import { Carousel } from 'react-responsive-carousel';
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import styles from '../page.module.css'
 
 function HomePage(){
 
     const [searchValue, setSearchValue] = useState(null);
     const [item, setItem] = useState(null);
+    const [connect, setConnect] = useState(null);
+
+    const router = useRouter()
 
     const setSearch = (event) => {
 
@@ -27,6 +31,18 @@ function HomePage(){
 
     useEffect(() => {
        
+        fetch('https://shoe-st-api-58c2623d13b8.herokuapp.com/connect')
+
+        .then((response) => response.json()) 
+        .then((connect) => {
+            console.log(connect)
+            setConnect(connect)
+            if(connect.status == 404){
+                router.push('../public/404.js')
+            }
+        })
+        .catch(e => console.log(e))
+
         fetch('https://shoe-st-api-58c2623d13b8.herokuapp.com/shoeimages')
         
         .then((response) => response.json()) 

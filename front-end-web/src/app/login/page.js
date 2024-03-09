@@ -41,30 +41,6 @@ const LoginPage = () =>{
     
                 }
             )
-            // .then(loggedin => {
-
-
-            //     const login = loggedin;
-            //     const id = login.id;
-
-            //     //console.log('login is', login);
-            //     //console.log('id is', id);
-
-            //     if (login["loggedin"] === "False"){
-            //         console.log("Incorrect login");
-            //         router.push('/login');
-            //     }
-            //     else if (login["loggedin"] === "True"){
-            //         console.log("Correct login");
-            //         router.push('/user');
-            //     }
-
-            //     else{
-            //         router.push('/login');
-            //     }
-
-            // })
-
 
         }
         catch(error){
