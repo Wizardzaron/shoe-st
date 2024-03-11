@@ -30,15 +30,29 @@ function HomePage(){
     }
 
     useEffect(() => {
+
+
+        // const url = 'https://example.com'; // Replace with the URL you want to check
+
+        // fetch(url)
+        //     .then(response => {
+        //         console.log('Status code:', response.status);
+        //         // Handle the response status code as needed
+        //     })
+        //     .catch(error => {
+        //         console.error('Error fetching URL:', error);
+        //     });
+
        
         fetch('https://shoe-st-api-58c2623d13b8.herokuapp.com/connect')
 
         .then((response) => response.json()) 
         .then((connect) => {
-            console.log(connect)
             setConnect(connect)
-            if(connect.status == 404){
-                router.push('../public/404.js')
+            console.log("Hi")
+            console.log(connect.status)
+            if(connect.status == 503){
+                router.push('../public/503.jsx')
             }
         })
         .catch(e => console.log(e))
