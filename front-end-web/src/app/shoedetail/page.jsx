@@ -178,7 +178,7 @@ return(
                                 W 10/ M 8.5
                             </label>
                         </div>
-                        <section className={styles.split}>
+                        {/* <section className={styles.split}> */}
                             <div className="radio">
                                 <label className={styles.ghostbutton}>
                                     <input type="radio" name="size" value="10.5" className={styles.hideradio}/>
@@ -245,7 +245,7 @@ return(
                                     W 15.5/ M 14
                                 </label>
                             </div>
-                        </section>
+                        {/* </section> */}
 
                         <div id="form-action">
                             <button type="submit" class="btn btn-default">Submit</button>
