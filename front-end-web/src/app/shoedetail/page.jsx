@@ -32,16 +32,16 @@ const ShoePage = () => {
         
         event.preventDefault();
         var input = document.querySelector('input[name="size"]:checked').value;
-        //console.log(input);
+        console.log(input);
 
-        <link
-            href={{
-                pathname: '../checkout',
-                query: input
+        // <link
+        //     href={{
+        //         pathname: '../checkout',
+        //         query: input
 
-            }}
-        >       
-        </link>
+        //     }}
+        // >       
+        // </link>
 
     }
 
