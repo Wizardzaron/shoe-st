@@ -23,24 +23,28 @@ const LoginPage = () =>{
                 credentials: 'include'
             })
 
-            .then(response =>{ 
-                
-                    const status = response.status
-                
-                    if(status === 401){
-                        console.log("Incorrect login");
-                        router.push('/login');
-                    }
-                    else if(status === 200){
-                        console.log("Success login");
-                        router.push('/user');
-                    }
-                    else{
-                        router.push('/login');
-                    }
-    
+            .then(response => response.json())
+            .then(loggedin => {
+
+
+                const login = loggedin;
+
+                console.log('login is', login);
+
+                if (login["loggedin"] === "False"){
+                    console.log("Incorrect login");
+                    router.push('/login');
                 }
-            )
+                else if (login["loggedin"] === "True"){
+                    console.log("Correct login");
+                    router.push('/user');
+                }
+
+                else{
+                    router.push('/login');
+                }
+
+            })
 
         }
         catch(error){

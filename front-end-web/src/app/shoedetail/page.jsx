@@ -14,14 +14,6 @@ const ShoePage = () => {
         setSearchValue(event.target.value)
     }
 
-    // if (typeof Storage !== 'undefined') {
-    //     // Web Storage is supported
-    //     console.log('Web Storage is supported in this browser.');
-    // } else {
-    //     // Web Storage is not supported
-    //     console.log('Web Storage is not supported in this browser.');
-    // }
-
     const searching = (event) =>{
 
         event.preventDefault();
@@ -31,12 +23,25 @@ const ShoePage = () => {
     
     }
 
+    const testing = (event) =>{
+        event.preventDefault();
+        console.log("Hello");
+    }
 
     const displayValue = (event) => {
         
         event.preventDefault();
         var input = document.querySelector('input[name="size"]:checked').value;
-        console.log(input);
+        //console.log(input);
+
+        <link
+            href={{
+                pathname: '../checkout',
+                query: input
+
+            }}
+        >       
+        </link>
 
     }
 
@@ -45,7 +50,11 @@ const ShoePage = () => {
 
     useEffect(() => {
 
+        const button = document.querySelector('.ghostbutton');
         
+        if(button){
+            button.addEventListener('click', testing)
+        }
         const urlParams = new URLSearchParams(window.location.search);
         var item_id = urlParams.get('id')
         //console.log(item_id);
@@ -178,7 +187,7 @@ return(
                                 W 10/ M 8.5
                             </label>
                         </div>
-                        {/* <section className={styles.split}> */}
+                        <section className={styles.split}>
                             <div className="radio">
                                 <label className={styles.ghostbutton}>
                                     <input type="radio" name="size" value="10.5" className={styles.hideradio}/>
@@ -245,7 +254,7 @@ return(
                                     W 15.5/ M 14
                                 </label>
                             </div>
-                        {/* </section> */}
+                        </section>
 
                         <div id="form-action">
                             <button type="submit" class="btn btn-default">Submit</button>
