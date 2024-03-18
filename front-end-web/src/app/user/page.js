@@ -10,7 +10,7 @@ function CustomerData() {
     const [item, setItem] = useState(null);
 
     // useEffect(() => {
-    (function functionName() {
+    (async() => {
         fetch('https://shoe-st-api-58c2623d13b8.herokuapp.com/userdata', {
             method: 'GET',
             credentials: 'include',
@@ -29,7 +29,7 @@ function CustomerData() {
                 console.log({ e })
                 console.log("After error")
             })
-     }) ()
+    })();
     if (item == null) {
         return console.log("returned null")
     }
