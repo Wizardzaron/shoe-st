@@ -21,7 +21,7 @@ function CustomerData() {
             console.log(item)
             setItem(item)
           })
-          .catch(e => console.log(e))
+          .catch(e => console.log({e}))
     },[])
     if(item == null){
         return console.log("returned null")

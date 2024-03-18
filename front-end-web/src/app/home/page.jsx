@@ -55,7 +55,7 @@ function HomePage(){
                 router.push('../public/503.jsx')
             }
         })
-        .catch(e => console.log(e))
+        .catch(e => console.log({e}))
 
         fetch('https://shoe-st-api-58c2623d13b8.herokuapp.com/shoeimages')
         
@@ -64,7 +64,7 @@ function HomePage(){
             console.log(item)
             setItem(item)
           })
-          .catch(e => console.log(e))
+          .catch(e => console.log({e}))
     },[])
     if(item == null){
         return console.log("returned null")

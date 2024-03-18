@@ -28,7 +28,7 @@ function Brand(){
             console.log(item)
             setItem(item)
           })
-          .catch(e => console.log(e))
+          .catch(e => console.log({e}))
 
 
     },[])
