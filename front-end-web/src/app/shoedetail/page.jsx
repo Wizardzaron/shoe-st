@@ -76,7 +76,11 @@ const ShoePage = () => {
             console.log(item)
             setItem(item)
           })
-          .catch(e => console.log(e))
+          .catch(e =>{ 
+            console.log("Before error")    
+            console.log({e})
+            console.log("After error")
+        })
     },[])
     if(item == null){
         return console.log("returned null")
