@@ -18,8 +18,10 @@ function CustomerData() {
         
         .then((response) => response.json()) 
         .then((item) => {
+            console.log("Before setItem" + setItem);
             console.log(item)
             setItem(item)
+            console.log("After setItem:" + setItem)
           })
           .catch(e => console.log({e}))
     },[])
