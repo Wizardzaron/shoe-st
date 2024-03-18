@@ -18,6 +18,10 @@ function CustomerData() {
 
             .then((response) => response.json())
             .then((itemx) => {
+                if ("message" in itemx) {
+                    console.log("Got an error: " + itemx.message)
+                    return
+                }
                 console.log("Before setItem: ", item);
                 //itemx is the result of the promise i.e. the parameter
                 console.log("itemx is: ", itemx)
