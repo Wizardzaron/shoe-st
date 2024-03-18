@@ -18,12 +18,16 @@ function CustomerData() {
         
         .then((response) => response.json()) 
         .then((item) => {
-            console.log("Before setItem" + setItem);
+            console.log("Before setItem: " + setItem);
             console.log(item)
             setItem(item)
-            console.log("After setItem:" + setItem)
+            console.log("After setItem: " + setItem)
           })
-          .catch(e => console.log({e}))
+          .catch(e =>{ 
+            console.log("Before error")    
+            console.log({e})
+            console.log("After error")
+        })
     },[])
     if(item == null){
         return console.log("returned null")
