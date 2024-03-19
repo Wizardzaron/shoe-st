@@ -9,11 +9,10 @@ function CustomerData() {
 
     const [item, setItem] = useState(null);
 
-    // useEffect(() => {
     (async() => {
         fetch('https://shoe-st-api-58c2623d13b8.herokuapp.com/userdata', {
             method: 'GET',
-            credentials: 'include',
+            // credentials: 'include',
         })
 
             .then((response) => response.json())
@@ -23,7 +22,7 @@ function CustomerData() {
                     return
                 }
                 console.log("Before setItem: ", item);
-                //itemx is the result of the promise i.e. the parameter
+                //itemx is the result of the promise i.e. the response parameter
                 console.log("itemx is: ", itemx)
                 setItem(itemx)
                 console.log("After setItem: ", item)
