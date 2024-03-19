@@ -12,7 +12,7 @@ function CustomerData() {
     (async() => {
         fetch('https://shoe-st-api-58c2623d13b8.herokuapp.com/userdata', {
             method: 'GET',
-            // credentials: 'include',
+            credentials: 'include',
         })
 
             .then((response) => response.json())
