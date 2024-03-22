@@ -3,6 +3,7 @@
 
 import React, { useState, useEffect } from 'react';
 import styles from '../page.module.css'
+import Link from 'next/link'
 
 
 function CustomerData() {
@@ -59,6 +60,7 @@ function CustomerData() {
                             <h1>Zipcode</h1>
                             {it.zipcode}
                         </section>
+                        <Link href="/home" className={styles.stickySpaceLink}> Home</Link>
                     </div>
                 )
             })}
