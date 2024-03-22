@@ -46,6 +46,9 @@ const LoginPage = () => {
 
                 // })
                 cookie = request.cookies.get('loggedin')
+
+                console.log(json("The cookie is '{cookie}'"));
+
                 if({cookie} == "False"){
                     console.log("Incorrect login");
                     router.push('/login');
@@ -55,6 +58,7 @@ const LoginPage = () => {
                     router.push('/user');
                 }
                 else {
+                    console.log("something went wrong");
                     router.push('/login');
                 }
 
