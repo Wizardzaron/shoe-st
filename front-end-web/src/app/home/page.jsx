@@ -12,6 +12,8 @@ function HomePage() {
     const [searchValue, setSearchValue] = useState(null);
     const [item, setItem] = useState(null);
     const [connect, setConnect] = useState(null);
+    const [authenticate, setAuthenticate] = useState(null);
+
 
     const router = useRouter()
 
@@ -43,6 +45,23 @@ function HomePage() {
         //         console.error('Error fetching URL:', error);
         //     });
 
+
+        fetch('https://shoe-st-api-58c2623d13b8.herokuapp.com/getlogin')
+
+            .then((response) => response.json())
+            .then((authenticate) => {
+                setAuthenticate(authenticate);
+                console.log("Hi")
+                console.log(authenticate["loggedin"])
+                if (authenticate["loggedin"]== "False") {
+                    console.log("Endpoint works")
+                }
+            })
+            .catch(e => {
+                console.log("Before error")
+                console.log({ e })
+                console.log("After error")
+            })
 
         fetch('https://shoe-st-api-58c2623d13b8.herokuapp.com/connect')
 

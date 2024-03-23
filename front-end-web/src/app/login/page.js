@@ -37,6 +37,7 @@ const LoginPage = () => {
                     }
                     else if (login["loggedin"] === "True") {
                         console.log("Correct login");
+                        // document.cookie = "checked=True";
                         router.push('/user');
                     }
 
