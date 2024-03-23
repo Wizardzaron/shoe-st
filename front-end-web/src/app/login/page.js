@@ -24,43 +24,27 @@ const LoginPage = () => {
             })
 
                 .then(response => response.json())
-                // .then(loggedin => {
+                .then(loggedin => {
 
 
-                //     const login = loggedin;
+                    const login = loggedin;
 
-                //     console.log('login is', login);
+                    console.log('login is', login);
 
-                //     if (login["loggedin"] === "False") {
-                //         console.log("Incorrect login");
-                //         router.push('/login');
-                //     }
-                //     else if (login["loggedin"] === "True") {
-                //         console.log("Correct login");
-                //         router.push('/user');
-                //     }
+                    if (login["loggedin"] === "False") {
+                        console.log("Incorrect login");
+                        router.push('/login');
+                    }
+                    else if (login["loggedin"] === "True") {
+                        console.log("Correct login");
+                        router.push('/user');
+                    }
 
-                //     else {
-                //         router.push('/login');
-                //     }
+                    else {
+                        router.push('/login');
+                    }
 
-                // })
-                cookie = request.cookies.get('loggedin')
-
-                console.log(json("The cookie is '{cookie}'"));
-
-                if({cookie} == "False"){
-                    console.log("Incorrect login");
-                    router.push('/login');
-                }
-                else if ({cookie} == "True"){
-                    console.log("Correct login");
-                    router.push('/user');
-                }
-                else {
-                    console.log("something went wrong");
-                    router.push('/login');
-                }
+                })
 
         }
         catch (error) {
