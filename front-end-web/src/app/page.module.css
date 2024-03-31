@@ -1,41 +1,39 @@
-
-
-.aligntext{
+.aligntext {
   text-align: center;
 }
 
-.attributetext{
+.attributetext {
 
-  margin-top:10px;
-  display:block;
+  margin-top: 10px;
+  display: block;
 }
 
-.brand{
+.brand {
 
   display: inline-block;
-  margin-top:40px;
-  margin-left:150px;
+  margin-top: 40px;
+  margin-left: 150px;
 
 }
 
-.brand img + b{
+.brand img+b {
 
-  display:block;
+  display: block;
 }
 
-.button{
+.button {
 
   border-radius: 25px;
   background-color: aqua;
   margin-top: 40px;
 }
 
-.block1{
-  flex-grow:2;
+.block1 {
+  flex-grow: 2;
   position: relative;
   left: 360px;
-  width:300px;
-  padding:10px;
+  width: 300px;
+  padding: 10px;
 }
 
 /* .oldblock2{
@@ -48,7 +46,7 @@
   font-size: 20px;
 } */
 
-.block2{
+.block2 {
 
   position: relative;
   bottom: 270px;
@@ -56,59 +54,61 @@
   font-size: 20px;
 }
 
-.block3{
-  position:relative;
+.block3 {
+  position: relative;
   bottom: 270px;
-  width: 380px;
-  background-color: white;
+  width: 250px;
+  background-color: blue;
+  color: white;
   font-size: 17px;
-  overflow-wrap:break-word;
+  overflow-wrap: break-word;
 }
 
-.brandpage{
-  
+.brandpage {
+
   background-color: white;
   height: 100vh;
   width: 100vw;
 }
 
-.centerstage{
 
-  display:flex;
+.centerstage {
+
+  display: flex;
   align-items: center;
   flex-direction: column;
   border: black solid;
   width: 11%;
-  margin:auto;
+  margin: auto;
 }
 
-.custombutton{
+.custombutton {
   margin-top: 40px;
   background-color: red;
-  text-align: center; 
+  text-align: center;
 
 }
 
-.custombutton2{
-  border-radius:25px;
+.custombutton2 {
+  border-radius: 25px;
   /* margin-top: 20px; */
   background-color: blue;
-  text-align: center; 
-  color:red;
+  text-align: center;
+  color: red;
 }
 
-.custombutton3{
+.custombutton3 {
   border-radius: 25px;
   background-color: green;
-  text-align: center; 
-  color:magenta;
+  text-align: center;
+  color: magenta;
 }
 
-.descriptivetext{
+.descriptivetext {
 
   font-weight: bold;
-  font-size:15px;
-  text-align:left;
+  font-size: 15px;
+  text-align: left;
   margin-left: 850px;
 }
 
@@ -118,48 +118,49 @@
 
 }
 
-.flexcontainer{
-  display:flex;
-  background-color: gray;
+.flexcontainer {
+  display: flex;
+  /* I intentionally should use ugly colors to remind myself that they are for testing
+  and need to be removed when finished */
+  background-color: purple;
   flex-direction: column;
-  height: 260px;
-  width:650px;
+
 }
 
-.followers{
+.followers {
 
-  position:stickey;
+  position: stickey;
   background-color: white;
   border: 2px solid black;
   top: 0;
 }
 
-.ghostbutton { 
-  
-  display: inline-block; 
-  width: 200px; 
-  padding: 8px; 
-  color: black; 
-  border: 3px solid black; 
-  text-align: center; 
-  outline: none; 
-  text-decoration: none; 
-  position:relative;
-  left:200px;
+.ghostbutton {
+
+  display: inline-block;
+  width: 200px;
+  padding: 8px;
+  color: black;
+  border: 3px solid black;
+  text-align: center;
+  outline: none;
+  text-decoration: none;
+  position: relative;
+  left: 200px;
   top: 75px;
   transition: background-color 300ms ease;
 }
 
-.ghostbutton:hover{
+.ghostbutton:hover {
 
   background-color: black;
-  color:white;
+  color: white;
 }
 
-.ghostbutton:active{
+.ghostbutton:active {
 
   background-color: black;
-  color:white;
+  color: white;
 }
 
 /* .ghostbutton + .ghostbutton { 
@@ -167,66 +168,80 @@
   margin-top: 10px;
 } */
 
-.hideradio{
+.hideradio {
 
   visibility: hidden;
 }
 
-.homeimg{
+.homeimg {
 
-  display:flex;
+  display: flex;
   align-items: center;
   flex-direction: row;
   border: black solid;
   width: 30%;
-  margin:auto;
+  margin: auto;
 }
 
-.homepage{
-  
+.homepage {
+
   background-color: white;
   height: 100vh;
   width: 100vw;
 }
 
-.images{
+.images {
 
   position: relative;
   right: 375px;
   bottom: 880px;
 }
 
+.itemdiv {
 
-.loginpage{
+  background-color: greenyellow;
+  color: lightpink;
+
+}
+
+.loginpage {
 
   background-color: white;
   height: 100vh;
   width: 100vw;
   text-align: center;
 }
+
 
 /* Using a to anchor the element that comes after the img tage */
 
 /* Needed to create a separate class for Link tag because it doesn't work in css  */
 
-.spacingInsideSticky img + .stickySpaceLink{
+.spacingInsideSticky img+.stickySpaceLink {
   margin-left: 45px;
 }
 
 /* If two elements are using the same class then this class will activate */
 
-.spacingInsideSticky .stickySpaceLink + .stickySpaceLink{
+.spacingInsideSticky .stickySpaceLink+.stickySpaceLink {
   margin-left: 20px;
 }
 
-.shoe{
+.shoe {
 
   background-color: white;
   text-align: center;
 
 }
 
-.signup{
+.shoelist {
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.signup {
 
   background-color: white;
   height: 100vh;
@@ -235,25 +250,28 @@
 
 }
 
-.split{
+.split {
 
-  
-  position:relative;
-  left:240px;
-  bottom:440px;
+
+  position: relative;
+  left: 240px;
+  bottom: 440px;
 }
 
-.textbox{
+.textbox {
   border-radius: 25px;
   margin-top: 20px;
   height: 65px;
   width: 179px;
 }
 
-.userinfo{
+
+.userinfo {
 
   background-color: coral !important;
-  display:flex;
+  display: flex;
   align-items: center;
   flex-direction: column;
 }
+
+

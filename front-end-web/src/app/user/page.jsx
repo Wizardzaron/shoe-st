@@ -22,11 +22,11 @@ function CustomerData() {
                     console.log("Got an error: " + itemx.message)
                     return
                 }
-                console.log("Before setItem: ", item);
+                // console.log("Before setItem: ", item);
                 //itemx is the result of the promise i.e. the response parameter
-                console.log("itemx is: ", itemx)
+                //console.log("itemx is: ", itemx)
                 setItem(itemx)
-                console.log("After setItem: ", item)
+                //console.log("After setItem: ", item)
             })
             .catch(e => {
                 console.log("Before error")

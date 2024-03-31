@@ -46,16 +46,19 @@ function HomePage() {
         //     });
 
 
-        fetch('https://shoe-st-api-58c2623d13b8.herokuapp.com/getlogin')
+        fetch('https://shoe-st-api-58c2623d13b8.herokuapp.com/getlogin',{
+            method: 'GET',
+            credentials: 'include',
+        })
 
             .then((response) => response.json())
             .then((authenticate) => {
                 setAuthenticate(authenticate);
                 console.log("Hi")
                 console.log(authenticate["loggedin"])
-                if (authenticate["loggedin"]== "False") {
-                    console.log("Endpoint works")
-                }
+                // if (authenticate["loggedin"]== "False") {
+                //     console.log("Endpoint works")
+                // }
             })
             .catch(e => {
                 console.log("Before error")
@@ -98,6 +101,7 @@ function HomePage() {
     }
 
     return (
+        //fragments are used to wrap around elements without including DOM nodes
         <>
             <div class={styles.homepage}>
                 <div class={styles.followers}>
@@ -107,8 +111,11 @@ function HomePage() {
                             width={100}
                             hieght={100}
                         />
-                        <Link href="/signup" className={styles.stickySpaceLink}> Create Account</Link>
-                        <Link href="/login" className={styles.stickySpaceLink}> Login</Link>
+                        <>
+                            {authenticate["loggedin"] == "False" ? <><Link href="/signup" className={styles.stickySpaceLink}> Create Account</Link><Link href="/login" className={styles.stickySpaceLink}> Login</Link></> : <Link href="/logout" className={styles.stickySpaceLink}> Logout</Link>}
+                        </>
+                        <Link href="/list" className={styles.stickySpaceLink}> Shoe List</Link>
+
                         <form style={{ display: 'inline-block' }} onSubmit={searching}>
                             <input style={{ marginLeft: "30px" }}
                                 id="search"
@@ -125,29 +132,38 @@ function HomePage() {
                     </div>
                 </div>
                 {/* autoPlay infiniteLoop */}
-                <Carousel>
+                <Carousel> 
                     {item.map((it) => {
                         return (
                             <div key={it.item_id}>
-                                <div class={styles.flexcontainer}>
-                                    <section className={styles.block1}>
-                                        {/* Needed to add display flex style to link so it can cover the entire image */}
-                                        <a href={"/shoedetail?id=" + it.item_id} style={{ display: 'flex' }}>
-                                            <img
-                                                src={it.images}
-                                                height={250}
-                                                alt="random stuff"
-                                            />
-                                        </a>
-                                    </section>
-                                    <section className={styles.block2}>
-                                        {it.names}
-                                    </section>
-                                    <section className={styles.block3}>
-                                        {it.descript}
-                                    </section>
-                                </div>
+                                {/* <span>Before</span> */}
+                                <img
+                                    src={it.images}
+                                    alt="random stuff"
+                                />
+                                    {it.names}
+                                {/* <span>After</span> */}
                             </div>
+                            // <div key={it.item_id} class={styles.itemdiv}>
+                            //     <div class={styles.flexcontainer}>
+                            //         <div className={styles.block1}>
+                            //             {/* Needed to add display flex style to link so it can cover the entire image */}
+                            //             <a href={"/shoedetail?id=" + it.item_id} style={{ display: 'flex' }}>
+                            //                 <img
+                            //                     src={it.images}
+                            //                     height={250}
+                            //                     alt="random stuff"
+                            //                 />
+                            //             </a>
+                            //         </div>
+                            //         <section className={styles.block2}>
+                            //             {it.names}
+                            //         </section>
+                            //         {/* <div className={styles.block3}>
+                            //             {it.descript}
+                            //         </div> */}
+                            //     </div>
+                            // </div>
                         )
                     })}
                 </Carousel>
