@@ -4,7 +4,7 @@
 import React, { useState } from 'react';
 import { toast } from "react-hot-toast";
 import Form from 'react-bootstrap/Form';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import styles from '../page.module.css'
 
@@ -26,6 +26,8 @@ function Signup() {
   const [username, setUsername] = useState('');
   const [zipcode, setZipcode] = useState('');
 
+  const router = useRouter()
+
   const handleZip = (event) => {
     const numericValue = event.target.value.replace(/[^0-9]/g, "");
     const decimalCount = numericValue.split('.').length - 1;
@@ -45,7 +47,7 @@ function Signup() {
     console.log(obj);
 
     try {
-      fetch('https://shoe-st-4581e5bc88b0.herokuapp.com/signup', {
+      fetch('http://127.0.0.1:5000/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(obj)
@@ -69,6 +71,7 @@ function Signup() {
     } catch (error) {
       console.error("Error occured at posting data: ", error);
     }
+    router.push('/home');
   };
 
   return (

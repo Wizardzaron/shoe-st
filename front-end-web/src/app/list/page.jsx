@@ -70,31 +70,31 @@ function ShoeList(){
 
     return (
             <div class={styles.homepage}>
-                <div class={styles.followers}>
-                    <div class={styles.spacingInsideSticky}>
+                <div class={styles.navigationbar}>
+                    <div class={styles.spaceForImage}>
                         <img
                             src="/fakeLogo.png"
                             width={100}
                             hieght={100}
                         />
                         <>
-                            {authenticate["loggedin"] == "False"  ? <><Link href="/signup" className={styles.stickySpaceLink}> Create Account</Link><Link href="/login" className={styles.stickySpaceLink}> Login</Link></> : <Link href="/logout" className={styles.stickySpaceLink}> Logout</Link>}
+                            {authenticate["loggedin"] == "False"  ? <><Link href="/signup" className={styles.spaceBetweenLink}> Create Account</Link><Link href="/login" className={styles.spaceBetweenLink}> Login</Link></> : <Link href="/logout" className={styles.spaceBetweenLink}> Logout</Link>}
                         </>
-                        <Link href="/home" className={styles.stickySpaceLink}> Home</Link>
+                        <Link href="/home" className={styles.spaceBetweenLink}> Home</Link>
                     </div>
                 </div>
                 {item.map((it) => {
                     return (
                         <div key={it.item_id}>
-                            <section className={styles.shoelist}>
-    
-                                <img
-                                    src={it.images}
-                                    height={250}
-                                    alt="random stuff"
-                                />
+                            <div class={styles.shoelist}>
+                                <div>
+                                    <img
+                                        src={it.images}
+                                        alt="random stuff"
+                                    />
 
-                            </section>
+                                </div>
+                            </div>
                         </div>
                     )
                 })}

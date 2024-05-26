@@ -17,7 +17,7 @@ const LoginPage = () => {
         console.log(formData);
 
         try {
-            fetch('https://shoe-st-api-58c2623d13b8.herokuapp.com/login', {
+            fetch(process.env.NEXT_PUBLIC_LOCAL_HOST_URL +'/login', {
                 method: 'POST',
                 body: formData,
                 credentials: 'include'
@@ -32,13 +32,12 @@ const LoginPage = () => {
                     console.log('login is', login);
 
                     if (login["loggedin"] === "False") {
-                        console.log("Incorrect login");
-                        router.push('/login');
+                        alert("Incorrect login")
                     }
                     else if (login["loggedin"] === "True") {
                         console.log("Correct login");
                         // document.cookie = "checked=True";
-                        router.push('/user');
+                        router.push('/home');
                     }
 
                     else {

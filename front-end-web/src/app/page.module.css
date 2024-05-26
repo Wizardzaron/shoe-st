@@ -28,6 +28,7 @@
   margin-top: 40px;
 }
 
+
 .block1 {
   flex-grow: 2;
   position: relative;
@@ -36,21 +37,11 @@
   padding: 10px;
 }
 
-/* .oldblock2{
-  display: inline-block;
-  flex-grow:1;
-  position: relative;
-  bottom: 275px;
-  width: auto;
-  background-color: white;
-  font-size: 20px;
-} */
-
 .block2 {
 
   position: relative;
-  bottom: 270px;
-  background-color: white;
+  bottom: 280px;
+  right: 100px;
   font-size: 20px;
 }
 
@@ -58,10 +49,8 @@
   position: relative;
   bottom: 270px;
   width: 250px;
-  background-color: blue;
-  color: white;
   font-size: 17px;
-  overflow-wrap: break-word;
+  text-wrap:balanced;
 }
 
 .brandpage {
@@ -105,17 +94,30 @@
 }
 
 .descriptivetext {
-
   font-weight: bold;
   font-size: 15px;
-  text-align: left;
-  margin-left: 850px;
 }
 
 .descriptivetext p {
 
   margin-top: 10px;
 
+}
+
+.detailflex {
+
+  display: flex;
+  width: 80%;
+  margin: auto;
+  /* justify-content: center; */
+}
+
+.descriptiveflex {
+
+  display:flex;
+  flex-direction: column;
+  width: 50%;
+  margin-left: 70px;
 }
 
 .flexcontainer {
@@ -127,9 +129,30 @@
 
 }
 
-.followers {
+.flexbrand {
 
-  position: stickey;
+  display: inline-block;
+  margin-left: 10px;
+  height: 80px;
+  width: 70px;
+  border-radius: 10px;
+  border-color: purple;
+}
+
+.flexbrand:hover {
+  border-color:black;
+}
+
+.flexcarousel {
+
+  display: flex;
+  flex-direction: column;
+  width: 10%;
+}
+
+.navigationbar {
+
+  position: sticky;
   background-color: white;
   border: 2px solid black;
   top: 0;
@@ -146,7 +169,7 @@
   outline: none;
   text-decoration: none;
   position: relative;
-  left: 200px;
+  /* left: 200px; */
   top: 75px;
   transition: background-color 300ms ease;
 }
@@ -157,16 +180,18 @@
   color: white;
 }
 
-.ghostbutton:active {
+.ghostbutton:active{
 
-  background-color: black;
+  background-color: red;
   color: white;
 }
 
-/* .ghostbutton + .ghostbutton { 
+/* .ghostbutton:focus {
 
-  margin-top: 10px;
+  background-color: blue;
+  color: white;
 } */
+
 
 .hideradio {
 
@@ -175,9 +200,8 @@
 
 .homeimg {
 
-  display: flex;
+  display: block;
   align-items: center;
-  flex-direction: row;
   border: black solid;
   width: 30%;
   margin: auto;
@@ -190,18 +214,50 @@
   width: 100vw;
 }
 
-.images {
-
-  position: relative;
-  right: 375px;
-  bottom: 880px;
+.imgdiv {
+  display: block;
+  width: 50%;
 }
+.imgsize {
+  width: 100%;
+  height: auto;
+  margin-top: 20px;
+}
+
+/* makes sure that my list of images wont split apart */
+/* .dontbreakcolumn{
+  flex-wrap: wrap;
+  width: 100px;
+  writing-mode: vertical-lr;
+  break-before: avoid-column;
+} */
+
+/* splits the column once the list of images are set */
+/* .breakcolumn {
+  break-before: column;
+  position: relative;
+  right: 450px;
+} */
+
+/* .imageform {
+  display:flex;
+  flex-direction: column;
+  row-gap: 20px;
+} */
+
 
 .itemdiv {
 
   background-color: greenyellow;
   color: lightpink;
 
+}
+
+.shoeimg {
+  margin-top: 25px;
+  height: 80px;
+  width: 70px;
+  border-radius: 10px;
 }
 
 .loginpage {
@@ -212,33 +268,60 @@
   text-align: center;
 }
 
+.buttonorder {
+
+  background-color: black;
+  color:white;
+  text-align: center;
+  border-radius: 25px;
+  padding: 25px 120px;
+  margin-top: 100px;
+  margin-left: 100px;
+  transition: background-color 300ms ease;
+
+}
+
+.buttonorder:hover {
+
+  background-color: white;
+  color: black;
+}
+
+.buttonorder + .buttonorder {
+
+  margin-top: 50px;
+}
+
+.split {
+  columns:2;
+  column-gap: 20px;
+}
 
 /* Using a to anchor the element that comes after the img tage */
 
 /* Needed to create a separate class for Link tag because it doesn't work in css  */
 
-.spacingInsideSticky img+.stickySpaceLink {
+.spaceForImage img+.spaceBetweenLink {
   margin-left: 45px;
 }
 
 /* If two elements are using the same class then this class will activate */
 
-.spacingInsideSticky .stickySpaceLink+.stickySpaceLink {
+.spaceForImage .spaceBetweenLink+.spaceBetweenLink {
   margin-left: 20px;
 }
 
-.shoe {
-
-  background-color: white;
-  text-align: center;
-
-}
 
 .shoelist {
 
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
+  flex-wrap: nowrap;
+  flex-direction: row;
+}
+
+
+.shoelist img {
+  height: 250px;
 }
 
 .signup {
@@ -250,12 +333,10 @@
 
 }
 
-.split {
+.backgroundpage {
 
+  background: white;
 
-  position: relative;
-  left: 240px;
-  bottom: 440px;
 }
 
 .textbox {
