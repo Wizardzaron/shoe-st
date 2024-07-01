@@ -17,13 +17,16 @@ const ShoePage = () => {
   const [shoedet, setShoedet] = useState(null);
   const [authenticate, setAuthenticate] = useState(null);
   const [mainImage, setMainImage] = useState(null);
-
+  const [selectedSize, setSelectedSize] = useState(null);
   const router = useRouter()
 
   const setMain = (event) => {
     // event.preventDefault();
     setMainImage(event);
-    console.log(mainImage);
+  }
+
+  const currentSize = (event) => {
+    setSelectedSize(event.target.value);
   }
 
   const setSearch = (event) => {
@@ -41,10 +44,10 @@ const ShoePage = () => {
     console.log("Hello");
   };
 
-  const goToCart = (event) => {
+  const addItemToCart = (event) => {
     event.preventDefault();
-    var size = document.querySelector('input[name="size"]:checked').value;
-    console.log(size);
+    var size_id = document.querySelector('input[name="size"]:checked').value;
+    console.log(size_id);
     console.log("Heyo");
 
     if (authenticate["loggedin"]== "False") {
@@ -52,17 +55,17 @@ const ShoePage = () => {
     }
     else{
 
-      const formData = new FormData(size);
-      formData.append(shoedet.brand_name);
-      formData.append(shoedet.shoe_name);
-      formData.append(shoedet.price);
+      const formData = new FormData();
+      formData.append('size_id',size_id);
       const obj = Object.fromEntries(formData.entries());
       console.log(obj);
+
       try {
-        fetch(process.env.NEXT_PUBLIC_LOCAL_HOST_URL + '/cartdata', {
+        fetch(process.env.NEXT_PUBLIC_LOCAL_HOST_URL + '/cartitem', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(obj)
+          body: JSON.stringify(obj),
+          credentials: 'include'
         })
   
           .then((response) => {
@@ -83,7 +86,7 @@ const ShoePage = () => {
       } catch (error) {
         console.error("Error occured at posting data: ", error);
       }
-
+  
       router.push('/cart');
     }
 
@@ -117,7 +120,7 @@ const ShoePage = () => {
     fetch(process.env.NEXT_PUBLIC_LOCAL_HOST_URL + '/getlogin',{
       method: 'GET',
       credentials: 'include',
-  })
+    })
 
       .then((response) => response.json())
       .then((authenticate) => {
@@ -144,6 +147,8 @@ const ShoePage = () => {
       .then((anItem) => {
         console.log(anItem);
         setShoedet(anItem);
+        setMainImage(anItem.images[0].image_url);
+        // console.log(anItem.images[0].image_url);
       })
       .catch((e) => {
         console.log("Before error");
@@ -159,7 +164,9 @@ const ShoePage = () => {
     <div className={styles.backgroundpage}>
       <div className={styles.navigationbar}>
         <div className={styles.spaceForImage}>
-          <img src="/fakeLogo.png" width={100} height={100} />
+          <a href="/home">
+            <img src="/fakeLogo.png" width={100} height={100} />
+          </a>
           <Link href="/signup" className={styles.spaceBetweenLink}>
             {" "}
             Create Account
@@ -201,7 +208,6 @@ const ShoePage = () => {
           <img
             className={styles.imgsize}
             src={mainImage}
-            // onMouseOut={shoedet.images[0].image_url}
           />
         </div>
         <div className={styles.descriptiveflex}>
@@ -224,14 +230,15 @@ const ShoePage = () => {
             <div className={styles.split}>
               {shoedet.sizes.map((aSize, sizeIndex) => (
                 <div className="radio" key={sizeIndex + 1}>
-                  <label className={styles.ghostbutton}>
+                  <label className={(aSize.in_stock > 0 ? styles.ghostbutton: "") + (selectedSize == aSize.size_id ? " " + styles.ispressed : "")}>
                     <input
                       type="radio"
                       name="size"
-                      value={aSize.size}
+                      value={aSize.size_id}
                       key={sizeIndex + 1}
                       disabled={!aSize.in_stock}
                       className={styles.hideradio}
+                      onClick={currentSize}
                     />
                     {aSize.size}
                   </label>
@@ -239,13 +246,24 @@ const ShoePage = () => {
               ))}
             </div>
             
+            {/* <div class={styles.flexbutton}>
+              <div id="form-action">
+                  <button type="submit" class={styles.buttoncontainer}>
+                      Send username
+                  </button>
+              </div>
+            </div> */}
             <div id="form-action">
-              <button type="submit" className={styles.buttonorder}>
-                Checkout
-              </button>
-              <button type="button" onClick={goToCart} className={styles.buttonorder}>
-                Add to Bag
-              </button>
+              <div class={styles.flexbutton}>
+                <button type="submit" className={styles.buttoncontainer}>
+                  Checkout
+                </button>
+              </div>
+              <div class={styles.flexbutton}>
+                <button type="button" onClick={addItemToCart} className={styles.buttoncontainer}>
+                  Add to Bag
+                </button>
+              </div>
             </div>
           </form>
           <div className={styles.descriptivetext}>

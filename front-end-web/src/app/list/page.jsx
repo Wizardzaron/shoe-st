@@ -8,36 +8,20 @@ function ShoeList(){
 
     const [item, setItem] = useState(null);   
     const [connect, setConnect] = useState(null);
-    const [authenticate, setAuthenticate] = useState(null);   
+    const [mainImage, setMainImage] = useState([]);
+    const [colorImage, setColorImages] = useState([]);
+
+    const setMain = (event) => {
+        setMainImage(event);
+      }
 
     useEffect(() => {
 
-        fetch('https://shoe-st-api-58c2623d13b8.herokuapp.com/getlogin',{
-            method: 'GET',
-            credentials: 'include',
-        })
-
-            .then((response) => response.json())
-            .then((authenticate) => {
-                setAuthenticate(authenticate);
-                console.log("Hi")
-                console.log(authenticate["loggedin"])
-                // if (authenticate["loggedin"]== "False") {
-                //     console.log("Endpoint works")
-                // }
-            })
-            .catch(e => {
-                console.log("Before error")
-                console.log({ e })
-                console.log("After error")
-            })
-
-        fetch('https://shoe-st-api-58c2623d13b8.herokuapp.com/connect')
+        fetch(process.env.NEXT_PUBLIC_LOCAL_HOST_URL + '/connect')
 
             .then((response) => response.json())
             .then((connect) => {
                 setConnect(connect)
-                console.log("Hi")
                 console.log(connect.status)
                 if (connect.status == 503) {
                     router.push('../public/503.jsx')
@@ -49,12 +33,36 @@ function ShoeList(){
                 console.log("After error")
             })
 
-        fetch('https://shoe-st-api-58c2623d13b8.herokuapp.com/shoeimages')
+        fetch(process.env.NEXT_PUBLIC_LOCAL_HOST_URL + '/allshoes')
 
         .then((response) => response.json())
-        .then((item) => {
-            console.log(item)
-            setItem(item)
+        .then((items) => {
+
+            console.log(items)
+            //need to do this since we are retrieve an array of objects/dictionaries so we need to step through each one
+            items.forEach(item => {
+                setMainImage(item.image_url)
+                console.log("Test")
+            })
+
+            setItem(items)
+        })
+        .catch(e => {
+            console.log("Before error")
+            console.log({ e })
+            console.log("After error")
+        })
+
+        fetch(process.env.NEXT_PUBLIC_LOCAL_HOST_URL + '/allshoecolors')
+
+        .then((response) => response.json())
+        .then((colors) => {
+            console.log(colors)
+            //need to use Object.values because we returned a dictionary and .map only works with arrays
+            const arrayOfColors = Object.values(colors)
+            console.log("Hi")
+            console.log(arrayOfColors)
+            setColorImages(arrayOfColors)
         })
         .catch(e => {
             console.log("Before error")
@@ -77,27 +85,43 @@ function ShoeList(){
                             width={100}
                             hieght={100}
                         />
-                        <>
-                            {authenticate["loggedin"] == "False"  ? <><Link href="/signup" className={styles.spaceBetweenLink}> Create Account</Link><Link href="/login" className={styles.spaceBetweenLink}> Login</Link></> : <Link href="/logout" className={styles.spaceBetweenLink}> Logout</Link>}
-                        </>
-                        <Link href="/home" className={styles.spaceBetweenLink}> Home</Link>
+                        <Link href="/home" class={styles.spaceBetweenLink}> Home</Link>
                     </div>
                 </div>
-                {item.map((it) => {
-                    return (
-                        <div key={it.item_id}>
-                            <div class={styles.shoelist}>
-                                <div>
-                                    <img
-                                        src={it.images}
-                                        alt="random stuff"
-                                    />
-
-                                </div>
+                <div class={styles.flexshoelist}>
+                    {item.map((it) => {
+                        return (
+                            <div key={it.item_id}>
+                                <a href={"/shoedetail?id=" + it.id + "&brand_id=" + it.brand_id}>
+                                    <div class={styles.shoelist}>
+                                        <div>
+                                            <img
+                                                src={mainImage}
+                                                alt="random stuff"
+                                            />
+                                            <p style={{fontWeight:"bold"}}>{it.brand_name} {it.shoe_name}</p>
+                                            <p>{it.sex + "'s Shoes"}</p>
+                                            <p>{"$" + it.price}</p>
+                                        </div>
+                                        {/* tried putting colorImage at line 96 but it caused duplicate images to appear */}
+                                        {colorImage.map((color) => {
+                                        return(
+                                            <div class={styles.flexcarouselrow}>
+                                                <img
+                                                class={styles.shoeimg}
+                                                key={color.image_id}
+                                                src={color.image_url}
+                                                onMouseOver={() => setMain(color.image_url)}
+                                                />
+                                            </div>
+                                        )
+                                        })}
+                                    </div>
+                                </a>
                             </div>
-                        </div>
-                    )
-                })}
+                        )
+                    })}
+                </div>
             </div>
 
     )

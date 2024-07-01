@@ -5,7 +5,8 @@
 .attributetext {
 
   margin-top: 10px;
-  display: block;
+  /* display: block;
+  text-align: left; */
 }
 
 .brand {
@@ -27,7 +28,6 @@
   background-color: aqua;
   margin-top: 40px;
 }
-
 
 .block1 {
   flex-grow: 2;
@@ -60,6 +60,41 @@
   width: 100vw;
 }
 
+.cartitem {
+
+  display: flex;
+  margin-left: 15%;
+  margin-top: 30px;
+  flex-direction: row;
+}
+
+.cartdescriptivetext {
+  margin-top: 30px;
+  margin-left: 20px;
+  gap: 10px;
+  width: 35%;
+}
+
+.cartprice {
+  display:flex;
+  flex-direction: column;
+  margin-top: 15px;
+}
+
+.cartimagediv {
+  /* margin-left: 15%;
+  margin-top: 25px; */
+  height: 180px;
+  width: 150px;
+}
+
+.cartimage {
+
+  width: 100%;
+  height: auto;
+  margin-top: 20px;
+
+}
 
 .centerstage {
 
@@ -93,6 +128,12 @@
   color: magenta;
 }
 
+.dropdownbutton {
+  display:flex;
+  flex-wrap: wrap;
+  padding-top: 20px;
+}
+
 .descriptivetext {
   font-weight: bold;
   font-size: 15px;
@@ -109,7 +150,6 @@
   display: flex;
   width: 80%;
   margin: auto;
-  /* justify-content: center; */
 }
 
 .descriptiveflex {
@@ -118,6 +158,22 @@
   flex-direction: column;
   width: 50%;
   margin-left: 70px;
+}
+
+.eyeimage {
+
+  height: 40px;
+  width: 40px;
+}
+
+.forgotpassword {
+  padding: 15px;
+  color:blue;
+  transition: background-color 300ms ease;
+}
+
+.forgotpassword:hover {
+  color: skyblue;
 }
 
 .flexcontainer {
@@ -150,6 +206,12 @@
   width: 10%;
 }
 
+.flexcarouselrow {
+  display:flex;
+  flex-direction: row;
+  width: 10%;
+}
+
 .navigationbar {
 
   position: sticky;
@@ -158,40 +220,24 @@
   top: 0;
 }
 
-.ghostbutton {
-
-  display: inline-block;
-  width: 200px;
-  padding: 8px;
-  color: black;
-  border: 3px solid black;
-  text-align: center;
-  outline: none;
-  text-decoration: none;
-  position: relative;
-  /* left: 200px; */
-  top: 75px;
-  transition: background-color 300ms ease;
-}
-
 .ghostbutton:hover {
 
   background-color: black;
   color: white;
 }
 
-.ghostbutton:active{
+.ghostbutton {
 
-  background-color: red;
-  color: white;
+  display: inline-block;
+  width: 200px;
+  padding: 8px;
+  background-color: white;
+  color: black;
+  border: 3px solid black;
+  text-align: center;
+  top: 75px;
+  transition: background-color 300ms ease;
 }
-
-/* .ghostbutton:focus {
-
-  background-color: blue;
-  color: white;
-} */
-
 
 .hideradio {
 
@@ -214,6 +260,13 @@
   width: 100vw;
 }
 
+.icons {
+  display:flex;
+  flex-direction:row;
+  gap: 15px;
+  margin-top: 30px;
+}
+
 .imgdiv {
   display: block;
   width: 50%;
@@ -222,6 +275,12 @@
   width: 100%;
   height: auto;
   margin-top: 20px;
+}
+
+.ispressed {
+
+  background-color: black;
+  color: white;
 }
 
 /* makes sure that my list of images wont split apart */
@@ -268,6 +327,47 @@
   text-align: center;
 }
 
+.loginbutton {
+  background-color: black;
+  color:white;
+  text-align: center;
+  transition: background-color 300ms ease;
+}
+
+.loginbutton:hover {
+
+  background-color: white;
+  color: black;
+}
+
+.flexbutton {
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 15px;
+
+}
+
+.buttoncontainer {
+  background-color: black;
+  color:white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 150px;
+  height: 50px;
+  transition: background-color 300ms ease;
+  margin-top: 15px;
+}
+
+.buttoncontainer:hover {
+
+  background-color: white;
+  color: black;
+}
+
 .buttonorder {
 
   background-color: black;
@@ -312,11 +412,19 @@
 }
 
 
+.flexshoelist {
+
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
 .shoelist {
 
   display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
+  margin-top: 30px;
+  width: 40%;
 }
 
 
@@ -340,12 +448,28 @@
 }
 
 .textbox {
-  border-radius: 25px;
-  margin-top: 20px;
+  margin-top: 10px;
   height: 65px;
   width: 179px;
+  margin-left: 20px;
 }
 
+/* .textbox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 200px;
+  height: 50px;
+} */
+
+.textcondense {
+
+  width: 300px;
+  /* center an element horizontally within its parent container */
+  margin: auto;
+  text-align: center;
+}
 
 .userinfo {
 

@@ -12,7 +12,7 @@ function HomePage() {
     const [searchValue, setSearchValue] = useState(null);
     const [item, setItem] = useState(null);
     const [connect, setConnect] = useState(null);
-    const [authenticate, setAuthenticate] = useState(null);
+    const [authenticate, setAuthenticate] = useState({});
     const [images, setImages] = useState(null);
 
     // const { REACT_APP_API_ENDPOINT } = process.env;
@@ -30,8 +30,6 @@ function HomePage() {
         event.preventDefault();
 
         console.log(searchValue);
-
-
     }
 
     useEffect(() => {
@@ -49,27 +47,6 @@ function HomePage() {
         //     });
 
 
-        fetch(process.env.NEXT_PUBLIC_LOCAL_HOST_URL + '/getlogin',{
-            method: 'GET',
-            credentials: 'include',
-        })
-
-            .then((response) => response.json())
-            .then((authenticate) => {
-                setAuthenticate(authenticate);
-                console.log("Hi")
-                console.log(authenticate["loggedin"])
-                // if (authenticate["loggedin"]== "False") {
-                //     console.log("Endpoint works")
-                // }
-            })
-            .catch(e => {
-                console.log("Before error")
-                console.log({ e })
-                console.log("After error")
-            })
-
-            // https://shoe-st-api-58c2623d13b8.herokuapp.com
 
         fetch(process.env.NEXT_PUBLIC_LOCAL_HOST_URL + '/connect')
 
@@ -87,6 +64,28 @@ function HomePage() {
                 console.log({ e })
                 console.log("After error")
             })
+
+        fetch(process.env.NEXT_PUBLIC_LOCAL_HOST_URL + '/getlogin',{
+            method: 'GET',
+            credentials: 'include',
+        })
+
+            .then((response) => response.json())
+            .then((authenticateValue) => {
+                setAuthenticate(authenticateValue);
+                console.log("Hi")
+                console.log(authenticate["loggedin"])
+                // if (authenticate["loggedin"]== "False") {
+                //     console.log("Endpoint works")
+                // }
+            })
+            .catch(e => {
+                console.log("Before error")
+                console.log({ e })
+                console.log("After error")
+            })
+
+            // https://shoe-st-api-58c2623d13b8.herokuapp.com
 
         fetch(process.env.NEXT_PUBLIC_LOCAL_HOST_URL + '/allshoedata')
 
@@ -129,7 +128,17 @@ function HomePage() {
                             hieght={100}
                         />
                         <>
-                            {authenticate["loggedin"] == "False" ? <><Link href="/signup" className={styles.spaceBetweenLink}> Create Account</Link><Link href="/login" className={styles.spaceBetweenLink}> Login</Link></> : <Link href="/logout" className={styles.spaceBetweenLink}> Logout</Link>}
+                            {/* need to find a way to make an OR statement when authenticate["loggedin"] is undefined */}
+                            {authenticate["loggedin"] == 'False' ? (
+                            <>
+                                <Link href="/signup" className={styles.spaceBetweenLink}> Create Account</Link>
+                                <Link href="/login" className={styles.spaceBetweenLink}> Login</Link>
+                            </>) : (
+                            <>
+                                <Link href="/logout" className={styles.spaceBetweenLink}> Logout</Link>
+                                <Link href="/cart" className={styles.spaceBetweenLink}> Cart</Link>
+                            </>)
+                            }
                         </>
                         <Link href="/list" className={styles.spaceBetweenLink}> Shoe List</Link>
 

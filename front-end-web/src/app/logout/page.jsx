@@ -10,7 +10,7 @@ function Logout(){
 
     useEffect(() => {
 
-        fetch('https://shoe-st-api-58c2623d13b8.herokuapp.com/getlogin',{
+        fetch(process.env.NEXT_PUBLIC_LOCAL_HOST_URL + '/logout',{
             method: 'GET',
             credentials: 'include',
         })
@@ -20,7 +20,7 @@ function Logout(){
                 setLogout(logout);
                 console.log("Hi")
                 console.log(logout["Signout"])
-                router.push('../home')
+                router.push('/home')
             })
             .catch(e => {
                 console.log("Before error")
@@ -28,7 +28,7 @@ function Logout(){
                 console.log("After error")
             })
 
-
+            
     },[])
 
 };
