@@ -6,14 +6,12 @@ import styles from '../page.module.css'
 
 function ShoeList(){
 
-    const [item, setItem] = useState(null);   
+    const [brands, setBrands] = useState(null);   
     const [connect, setConnect] = useState(null);
-    const [mainImage, setMainImage] = useState([]);
-    const [colorImage, setColorImages] = useState([]);
+    // const [mainImage, setMainImage] = useState([]);
+    // const [colorImage, setColorImages] = useState([]);
 
-    const setMain = (event) => {
-        setMainImage(event);
-      }
+
 
     useEffect(() => {
 
@@ -36,16 +34,16 @@ function ShoeList(){
         fetch(process.env.NEXT_PUBLIC_LOCAL_HOST_URL + '/allshoes')
 
         .then((response) => response.json())
-        .then((items) => {
+        .then((fetchedBrands) => {
 
-            console.log(items)
+            console.log(fetchedBrands)
             //need to do this since we are retrieve an array of objects/dictionaries so we need to step through each one
-            items.forEach(item => {
-                setMainImage(item.image_url)
+            fetchedBrands.forEach(brand => {
+                brand.currentColorImageIndex = 0
                 console.log("Test")
             })
 
-            setItem(items)
+            setBrands(fetchedBrands)
         })
         .catch(e => {
             console.log("Before error")
@@ -53,25 +51,25 @@ function ShoeList(){
             console.log("After error")
         })
 
-        fetch(process.env.NEXT_PUBLIC_LOCAL_HOST_URL + '/allshoecolors')
+        // fetch(process.env.NEXT_PUBLIC_LOCAL_HOST_URL + '/allshoecolors')
 
-        .then((response) => response.json())
-        .then((colors) => {
-            console.log(colors)
-            //need to use Object.values because we returned a dictionary and .map only works with arrays
-            const arrayOfColors = Object.values(colors)
-            console.log("Hi")
-            console.log(arrayOfColors)
-            setColorImages(arrayOfColors)
-        })
-        .catch(e => {
-            console.log("Before error")
-            console.log({ e })
-            console.log("After error")
-        })
+        // .then((response) => response.json())
+        // .then((colors) => {
+        //     console.log(colors)
+        //     //need to use Object.values because we returned a dictionary and .map only works with arrays
+        //     const arrayOfColors = Object.values(colors)
+        //     console.log("Hi")
+        //     console.log(arrayOfColors)
+        //     setColorImages(arrayOfColors)
+        // })
+        // .catch(e => {
+        //     console.log("Before error")
+        //     console.log({ e })
+        //     console.log("After error")
+        // })
 
     },[])
-    if (item == null) {
+    if (brands == null) {
         return console.log("returned null")
     }
 
@@ -89,34 +87,34 @@ function ShoeList(){
                     </div>
                 </div>
                 <div class={styles.flexshoelist}>
-                    {item.map((it) => {
+                    {brands.map((aBrand) => {
                         return (
-                            <div key={it.item_id}>
-                                <a href={"/shoedetail?id=" + it.id + "&brand_id=" + it.brand_id}>
+                            <div key={aBrand.brand_id}>
+                                <a href={"/shoedetail?id=" + aBrand.id + "&brand_id=" + aBrand.brand_id}>
                                     <div class={styles.shoelist}>
-                                        <div>
+                                        <div class={styles.list}>
                                             <img
-                                                src={mainImage}
+                                                src={aBrand.images[aBrand.currentColorImageIndex].image_url}
                                                 alt="random stuff"
                                             />
-                                            <p style={{fontWeight:"bold"}}>{it.brand_name} {it.shoe_name}</p>
-                                            <p>{it.sex + "'s Shoes"}</p>
-                                            <p>{"$" + it.price}</p>
+                                            <p style={{fontWeight:"bold"}}>{aBrand.brand_name} {aBrand.shoe_name}</p>
+                                            <p>{aBrand.sex + "'s Shoes"}</p>
+                                            <p>{"$" + aBrand.images[aBrand.currentColorImageIndex].price}</p>
                                         </div>
-                                        {/* tried putting colorImage at line 96 but it caused duplicate images to appear */}
-                                        {colorImage.map((color) => {
-                                        return(
-                                            <div class={styles.flexcarouselrow}>
-                                                <img
-                                                class={styles.shoeimg}
-                                                key={color.image_id}
-                                                src={color.image_url}
-                                                onMouseOver={() => setMain(color.image_url)}
-                                                />
-                                            </div>
-                                        )
-                                        })}
                                     </div>
+                                    {/* curly brace in a .map means we are returing either a block of code or data structures */}
+                                    <div class={styles.flexcarouselrow}>
+
+                                        {aBrand.images.map((aImage, theIndex) => 
+                                                <img
+                                                    class={styles.shoeimg}
+                                                    key={aImage.image_id}
+                                                    src={aImage.image_url}
+                                                    onMouseOver={(e) => {aBrand.currentColorImageIndex = theIndex; setBrands([...brands])}}
+                                                />
+                                        )}
+                                    </div>    
+
                                 </a>
                             </div>
                         )

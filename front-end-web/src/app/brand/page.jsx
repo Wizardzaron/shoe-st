@@ -4,6 +4,10 @@ import React, { useState, useEffect } from 'react';
 import styles from '../page.module.css'
 import Link from 'next/link'
 
+import SignUpButton from "../components/SignUpButton"
+import LoginButton from "../components/LoginButton"
+import ShoeBrandList from "../components/ShoeBrandList"
+
 function Brand() {
 
     const [item, setItem] = useState(null);
@@ -50,8 +54,8 @@ function Brand() {
                             width={100}
                             hieght={100}
                         />
-                        <Link href="/signup" className={styles.stickySpaceLink}> Create Account</Link>
-                        <Link href="/login" className={styles.stickySpaceLink}> Login</Link>
+                        <SignUpButton />
+                        <LoginButton />
                     </div>
                 </div>
 
@@ -59,18 +63,7 @@ function Brand() {
                     {item.map((it) => {
 
                         return (
-
-                            <div class={styles.brand} key={it.item_id}>
-                                <a href={"/shoedetail?id=" + it.item_id}>
-                                    <img
-                                        src={it.images}
-                                        height={250}
-                                        alt="random stuff"
-                                    />
-                                    <b>{it.names}</b>
-                                    <b>{it.price}</b>
-                                </a>
-                            </div>
+                            <ShoeBrandList key={it.item_id} brands={it}/>
                         )
 
                     })}

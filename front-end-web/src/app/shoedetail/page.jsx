@@ -4,6 +4,16 @@ import styles from "../page.module.css";
 import Link from "next/link";
 import { useRouter } from 'next/navigation';
 
+import SignUpButton from "../components/SignUpButton"
+import LoginButton from "../components/LoginButton"
+import LogoutButton from "../components/LogoutButton"
+import BagButton from "../components/BagButton";
+import SearchButton from "../components/SearchButton"
+import CartButton from "../components/CartButton"
+import ShoeDescription from "../components/ShoeDescription";
+import ListOfSize from "../components/ListOfSize";
+import ChangeMainImage from "../components/ChangeMainImage";
+
 <link
   rel="stylesheet"
   href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap-theme.min.css"
@@ -13,44 +23,33 @@ import { useRouter } from 'next/navigation';
 />;
 
 const ShoePage = () => {
-  const [searchValue, setSearchValue] = useState("");
   const [shoedet, setShoedet] = useState(null);
-  const [authenticate, setAuthenticate] = useState(null);
+  const [authenticate, setAuthenticate] = useState({});
   const [mainImage, setMainImage] = useState(null);
   const [selectedSize, setSelectedSize] = useState(null);
   const router = useRouter()
 
   const setMain = (event) => {
-    // event.preventDefault();
     setMainImage(event);
   }
 
-  const currentSize = (event) => {
-    setSelectedSize(event.target.value);
+  const currentSize = (shoeSize) => {
+    setSelectedSize(shoeSize);
   }
-
-  const setSearch = (event) => {
-    setSearchValue(event.target.value);
-  };
-
-  const searching = (event) => {
-    event.preventDefault();
-
-    console.log(searchValue);
-  };
 
   const testing = (event) => {
     event.preventDefault();
-    console.log("Hello");
+    console.log("This is testing");
   };
 
-  const addItemToCart = (event) => {
-    event.preventDefault();
+  //cannot use components in executable code or jsx
+
+  const addItemToCart = (event) => { 
+    console.log("addItemToCart");
     var size_id = document.querySelector('input[name="size"]:checked').value;
     console.log(size_id);
-    console.log("Heyo");
 
-    if (authenticate["loggedin"]== "False") {
+    if (authenticate["loggedin"] == "False") {
       alert("You must be logged in to be able to order shoes")
     }
     else{
@@ -88,13 +87,15 @@ const ShoePage = () => {
       }
   
       router.push('/cart');
-    }
-
-  };
+    }  
+  }
 
   const goToCheckout = (event) => {
+    console.log("goToCheckout");
     event.preventDefault();
-    var size = document.querySelector('input[name="size"]:checked').value;
+    //when retrieving the value it retrieves it as a string,even if the value is an integer
+    //need to convert back to a integer for the api
+    var size = parseInt(document.querySelector('input[name="size"]:checked').value);
     console.log(size);
 
     if (authenticate["loggedin"]== "False") {
@@ -125,8 +126,7 @@ const ShoePage = () => {
       .then((response) => response.json())
       .then((authenticate) => {
           setAuthenticate(authenticate);
-          console.log("Hi")
-          console.log(authenticate["loggedin"])
+          console.log("We received a response for getlogin", authenticate["loggedin"]);
           // if (authenticate["loggedin"]== "False") {
           //     console.log("Endpoint works")
           // }
@@ -137,7 +137,7 @@ const ShoePage = () => {
           console.log("After error")
       })
 
-    fetch("http://127.0.0.1:5000/shoedata?id=" + item_id, {
+    fetch(process.env.NEXT_PUBLIC_LOCAL_HOST_URL + '/shoedata?id=' + item_id, {
       method: "GET",
       headers: {
         "Content-Type": "multipart/form-data",
@@ -167,41 +167,25 @@ const ShoePage = () => {
           <a href="/home">
             <img src="/fakeLogo.png" width={100} height={100} />
           </a>
-          <Link href="/signup" className={styles.spaceBetweenLink}>
-            {" "}
-            Create Account
-          </Link>
-          <Link href="/login" className={styles.spaceBetweenLink}>
-            {" "}
-            Login
-          </Link>
-          <form style={{ display: "inline-block" }} onSubmit={searching}>
-            <input
-              style={{ marginLeft: "30px" }}
-              id="search"
-              type="text"
-              placeholder="search..."
-              value={searchValue}
-              onChange={setSearch}
-            />
-            <div id="form-action" style={{ display: "inline-block" }}>
-              <button type="submit" style={{ marginLeft: "10px" }}>
-                Search
-              </button>
-            </div>
-          </form>
+              {authenticate["loggedin"] == "False" ? (
+                <>
+                  <SignUpButton />
+                  <LoginButton />
+                </>
+              ) : (
+                <>
+                  <LogoutButton />
+                  <CartButton />
+                </>
+              )}
+              <SearchButton />
         </div>
       </div>
 
       <div className={styles.detailflex}>
         <div className={styles.flexcarousel}>
           {shoedet.images.map((anImage) => (
-            <img
-              className={styles.shoeimg}
-              key={anImage.image_id}
-              src={anImage.image_url}
-              onMouseOver={() => setMain(anImage.image_url)}
-            />
+            <ChangeMainImage images={anImage} setMain={setMain} />
           ))}
         </div>
         <div className={styles.imgdiv}>
@@ -211,12 +195,7 @@ const ShoePage = () => {
           />
         </div>
         <div className={styles.descriptiveflex}>
-          <div className={styles.descriptivetext}>
-            <p>{shoedet.brand_name}</p>
-            <p>{shoedet.shoe_name}</p>
-            <p>{shoedet.sex}</p>
-            <p>${shoedet.price}</p>
-          </div>
+          <ShoeDescription ShoeDesc={shoedet} />
           <div>
             {shoedet.brand_images.map((brandImg) => (
               <div key={brandImg.shoe_id}>
@@ -229,30 +208,10 @@ const ShoePage = () => {
           <form onSubmit={goToCheckout}>
             <div className={styles.split}>
               {shoedet.sizes.map((aSize, sizeIndex) => (
-                <div className="radio" key={sizeIndex + 1}>
-                  <label className={(aSize.in_stock > 0 ? styles.ghostbutton: "") + (selectedSize == aSize.size_id ? " " + styles.ispressed : "")}>
-                    <input
-                      type="radio"
-                      name="size"
-                      value={aSize.size_id}
-                      key={sizeIndex + 1}
-                      disabled={!aSize.in_stock}
-                      className={styles.hideradio}
-                      onClick={currentSize}
-                    />
-                    {aSize.size}
-                  </label>
-                </div>
+                <ListOfSize ListSize={aSize} IndexOfSize={sizeIndex} currentSize={currentSize}/>
               ))}
             </div>
             
-            {/* <div class={styles.flexbutton}>
-              <div id="form-action">
-                  <button type="submit" class={styles.buttoncontainer}>
-                      Send username
-                  </button>
-              </div>
-            </div> */}
             <div id="form-action">
               <div class={styles.flexbutton}>
                 <button type="submit" className={styles.buttoncontainer}>
@@ -260,9 +219,7 @@ const ShoePage = () => {
                 </button>
               </div>
               <div class={styles.flexbutton}>
-                <button type="button" onClick={addItemToCart} className={styles.buttoncontainer}>
-                  Add to Bag
-                </button>
+                <BagButton callBackFunc={addItemToCart}/>
               </div>
             </div>
           </form>

@@ -60,6 +60,10 @@
   width: 100vw;
 }
 
+.checkout {
+  text-align: center;
+}
+
 .cartitem {
 
   display: flex;
@@ -160,8 +164,14 @@
   margin-left: 70px;
 }
 
-.eyeimage {
+.dropdown {
 
+  background-color: white;
+
+
+}
+
+.eyeimage {
   height: 40px;
   width: 40px;
 }
@@ -218,6 +228,20 @@
   background-color: white;
   border: 2px solid black;
   top: 0;
+}
+
+.grid-item:hover {
+  background-color: white;
+  color:black;
+}
+
+.grid-item {
+  grid-template-columns: auto auto auto auto auto;
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  font-size: 30px;
+  text-align: center;
 }
 
 .ghostbutton:hover {
@@ -400,8 +424,12 @@
 /* Using a to anchor the element that comes after the img tage */
 
 /* Needed to create a separate class for Link tag because it doesn't work in css  */
+/*causes a cannot read properties of null because of the cursor property affected the other html elements that use this class but aren't buttons */
 
 .spaceForImage img+.spaceBetweenLink {
+  background: none;
+  border: none;
+  cursor: pointer;
   margin-left: 45px;
 }
 
