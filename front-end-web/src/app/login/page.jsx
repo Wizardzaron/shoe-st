@@ -76,6 +76,13 @@ const LoginPage = () => {
                 Create Account
               </button>
             </a>
+
+            <a href={"/home"}>
+              <button type="button" class={styles.buttoncontainer}>
+                Go Back
+              </button>
+            </a>
+
           </form>
         </div>
       </section>

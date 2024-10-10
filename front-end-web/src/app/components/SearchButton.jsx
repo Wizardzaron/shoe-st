@@ -7,7 +7,7 @@ export default function SearchButton() {
   //In future need to create search page to show search results
 
 
-    const [searchValue, setSearchValue] = useState(null); 
+    const [searchValue, setSearchValue] = useState(""); 
    
     const beginSearch = (searchValue) => {    
         console.log("I would search for '" + searchValue + "' if I knew how");
@@ -23,7 +23,7 @@ export default function SearchButton() {
             <input style={{ marginLeft: "30px" }}
                 id="search"
                 type="text"
-                class="input"
+                className="input"
                 placeholder="search..."
                 value={searchValue}
                 onChange={ (e) =>  setSearchValue(e.target.value)}

@@ -208,17 +208,17 @@ const ShoePage = () => {
           <form onSubmit={goToCheckout}>
             <div className={styles.split}>
               {shoedet.sizes.map((aSize, sizeIndex) => (
-                <ListOfSize ListSize={aSize} IndexOfSize={sizeIndex} currentSize={currentSize}/>
+                <ListOfSize listOfShoeSizes={aSize} indexOfSize={sizeIndex} currentSize={currentSize}/>
               ))}
             </div>
             
             <div id="form-action">
-              <div class={styles.flexbutton}>
+              <div className={styles.flexbutton}>
                 <button type="submit" className={styles.buttoncontainer}>
                   Checkout
                 </button>
               </div>
-              <div class={styles.flexbutton}>
+              <div className={styles.flexbutton}>
                 <BagButton callBackFunc={addItemToCart}/>
               </div>
             </div>

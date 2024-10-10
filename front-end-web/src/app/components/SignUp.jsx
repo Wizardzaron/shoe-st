@@ -16,7 +16,21 @@ const SignUp = ({}, ref) => {
     const [zipcode, setZipcode] = useState('');
     const [city, setCity] = useState('');
     const [state, setState] = useState('');
+    const [showTextBox, setShowTextBox] = useState('hidden');
+    const [changeButton, setChangeButton] = useState(false);
     
+    const hideTextBox = () => {
+      if(changeButton == false){
+        setShowTextBox('text');
+        setChangeButton(true);
+      }
+      else{
+        setShowTextBox('hidden');
+        setChangeButton(false);
+      }
+    }
+
+
     const handleZip = (event) => {
         const numericValue = event.target.value.replace(/[^0-9]/g, "");
         const decimalCount = numericValue.split('.').length - 1;
@@ -110,6 +124,34 @@ const SignUp = ({}, ref) => {
             className={styles.textbox}
           />
         </div>
+        <div id="city" className="mb-3">
+          <label htmlFor="city" className={styles.attributetext}>City</label>
+          <input
+            type={showTextBox}
+            placeholder="Please Enter your city"
+            name="city"
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
+            className={styles.textbox}
+          />
+        </div>
+
+        <button onClick={hideTextBox()}>
+            Would you like to input city and state?
+        </button>
+
+        <div id="state" className="mb-3">
+          <label htmlFor="state" className={styles.attributetext}>State</label>
+          <input
+            type={showTextBox}
+            placeholder="Please Enter your state"
+            name="state"
+            value={state}
+            onChange={(e) => setState(e.target.value)}
+            className={styles.textbox}
+          />
+        </div>
+
         <div id="form-action">
           <div className={styles.flexbutton}>
             <button type='submit' className={styles.buttoncontainer}>Submit</button>

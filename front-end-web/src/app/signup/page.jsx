@@ -34,7 +34,8 @@ function Signingup() {
     formData.append("streetaddress", x[4]);
     formData.append("username", x[5]);
     formData.append("zipcode", x[6]);
-
+    formData.append("city", x[7]);
+    formData.append("state", x[8]);
 
     const obj = Object.fromEntries(formData.entries());
     console.log(obj);

@@ -10,31 +10,34 @@ import React, {useState} from "react";
   referrerpolicy="no-referrer"
 />;
 
-export default function CheckoutButton ({ListSize, IndexOfSize, currentSize}) {
+export default function ListOfSize ({listOfShoeSizes, indexOfSize, currentSize}) {
     
     const [selectedSize, setSelectedSize] = useState(null);
 
 
     const returnSize = (event) => {
+        console.log(event.target.value)
         const shoeSize = event.target.value
         setSelectedSize(shoeSize);
         currentSize(shoeSize);
       }    
 
     return (
-            <div className="radio" key={IndexOfSize + 1}>
-            <label className={(ListSize.in_stock > 0 ? styles.ghostbutton: "") + (selectedSize == ListSize.size_id ? " " + styles.ispressed : "")}>
-            <input
-                type="radio"
-                name="size"
-                value={ListSize.size_id}
-                key={IndexOfSize + 1}
-                disabled={!ListSize.in_stock}
-                className={styles.hideradio}
-                onClick={returnSize}
-            />
-            {ListSize.size}
-            </label>
+            <div className="radio" key={indexOfSize + 1}>
+            {/* need some help with explanation */}
+            {listOfShoeSizes.in_stock > 0 &&(
+              <label className={ styles.ghostbutton + " " + (selectedSize == listOfShoeSizes.size_id ? styles.ispressed : "")}>
+              <input
+                  type="radio"
+                  name="size"
+                  value={listOfShoeSizes.size_id}
+                  key={indexOfSize + 1}
+                  className={styles.hideradio}
+                  onClick={returnSize}
+              />
+              {listOfShoeSizes.size}
+              </label>
+            )}
         </div>
     );
 }

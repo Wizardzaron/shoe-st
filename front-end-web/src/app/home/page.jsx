@@ -141,8 +141,6 @@ function HomePage() {
           <div className={styles.spaceForImage}>
             <img src="/fakeLogo.png" width={100} height={100} />
             <>
-              {/* need to find a way to make an OR statement when authenticate["loggedin"] is undefined */}
-              {/*appcontext[logintoken] is Null */}
               {loginToken["loggedin"] == "False" ? (
                 <>
                   <SignUpButton />
@@ -167,7 +165,9 @@ function HomePage() {
             )}
           )}
         </Carousel>
-        <b style={{ marginTop: "20px" }}>Available Brands</b>
+        <div style={{ marginTop: "20px", textAlign: "center" }}>
+          <b>Available Brands</b>
+        </div>
         <BrandImage />
       </div>
     </>

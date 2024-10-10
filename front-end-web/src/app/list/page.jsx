@@ -3,11 +3,15 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link'
 import styles from '../page.module.css'
+import SignUpButton from "../components/SignUpButton"
+import LoginButton from "../components/LoginButton"
+import LogoutButton from "../components/LogoutButton"
+import CartButton from "../components/CartButton"
 
 function ShoeList(){
 
     const [brands, setBrands] = useState(null);   
-    const [connect, setConnect] = useState(null);
+    const [connect, setConnect] = useState({});
     // const [mainImage, setMainImage] = useState([]);
     // const [colorImage, setColorImages] = useState([]);
 
@@ -19,7 +23,6 @@ function ShoeList(){
 
             .then((response) => response.json())
             .then((connect) => {
-                setConnect(connect)
                 console.log(connect.status)
                 if (connect.status == 503) {
                     router.push('../public/503.jsx')
@@ -30,6 +33,19 @@ function ShoeList(){
                 console.log({ e })
                 console.log("After error")
             })
+
+        fetch(process.env.NEXT_PUBLIC_LOCAL_HOST_URL + "/getlogin", {
+            method: "GET",
+            credentials: "include",
+        })
+            .then((response) => response.json())
+            .then((authenticateValue) => {
+                console.log(authenticateValue);
+                setConnect(connect)
+            })
+            .catch((e) => {
+                console.log({ e });
+            });
 
         fetch(process.env.NEXT_PUBLIC_LOCAL_HOST_URL + '/allshoes')
 
@@ -51,23 +67,6 @@ function ShoeList(){
             console.log("After error")
         })
 
-        // fetch(process.env.NEXT_PUBLIC_LOCAL_HOST_URL + '/allshoecolors')
-
-        // .then((response) => response.json())
-        // .then((colors) => {
-        //     console.log(colors)
-        //     //need to use Object.values because we returned a dictionary and .map only works with arrays
-        //     const arrayOfColors = Object.values(colors)
-        //     console.log("Hi")
-        //     console.log(arrayOfColors)
-        //     setColorImages(arrayOfColors)
-        // })
-        // .catch(e => {
-        //     console.log("Before error")
-        //     console.log({ e })
-        //     console.log("After error")
-        // })
-
     },[])
     if (brands == null) {
         return console.log("returned null")
@@ -78,12 +77,20 @@ function ShoeList(){
             <div class={styles.homepage}>
                 <div class={styles.navigationbar}>
                     <div class={styles.spaceForImage}>
-                        <img
-                            src="/fakeLogo.png"
-                            width={100}
-                            hieght={100}
-                        />
-                        <Link href="/home" class={styles.spaceBetweenLink}> Home</Link>
+                        <a href="/home">
+                            <img src="/fakeLogo.png" width={100} hieght={100} />
+                        </a>
+                        {connect["loggedin"] === "False" ? (
+                            <>
+                                <SignUpButton />
+                                <LoginButton />
+                            </>
+                        ) : (
+                            <>
+                                <LogoutButton />
+                                <CartButton />
+                            </>
+                        )}
                     </div>
                 </div>
                 <div class={styles.flexshoelist}>
