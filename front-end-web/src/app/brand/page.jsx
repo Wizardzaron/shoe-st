@@ -46,9 +46,9 @@ function Brand() {
 
     return (
         <>
-            <div class={styles.brandpage}>
-                <div class={styles.followers}>
-                    <div class={styles.spacingInsideSticky}>
+            <div className={styles.brandpage}>
+                <div className={styles.followers}>
+                    <div className={styles.spacingInsideSticky}>
                         <img
                             src="/fakeLogo.png"
                             width={100}

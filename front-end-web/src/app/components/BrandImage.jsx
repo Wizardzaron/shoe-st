@@ -4,7 +4,7 @@ import styles from "../page.module.css";
 export default function BrandImage(){
 
     return( 
-        <div class={styles.homeimg}>         
+        <div className={styles.homeimg}>         
             <a href={"/brand?brand=Adidas"}>
                 <img src="/adidas.png" width={100} hieght={100} />
             </a>

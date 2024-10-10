@@ -159,7 +159,7 @@ const SignUp = ({}, ref) => {
         </div>
         <ul>
           {/* <li>
-            <Link href="/user" class={styles.custombutton2}>Look At User Data</Link>
+            <Link href="/user" className={styles.custombutton2}>Look At User Data</Link>
           </li> */}
           <div className={styles.flexbutton}>
             <li>

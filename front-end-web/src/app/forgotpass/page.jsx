@@ -39,23 +39,23 @@ const RecoveryPage = () => {
     }
 
     return (
-        <div class={styles.loginpage}>
-            <h1 class={styles.aligntext}>Lost your password?</h1>
-                <p class={styles.textcondense}>Enter the username associated with your account and click Submit. 
+        <div className={styles.loginpage}>
+            <h1 className={styles.aligntext}>Lost your password?</h1>
+                <p className={styles.textcondense}>Enter the username associated with your account and click Submit. 
                     If your username is connected to a valid account 
                     you will receive a reset code to your email that allows you to change your password.</p>
                 <form onSubmit={submitEmail}>
                     <UserName />
-                    <div class={styles.flexbutton}>
+                    <div className={styles.flexbutton}>
                         <div id="form-action">
-                            <button type="submit" class={styles.buttoncontainer}>
+                            <button type="submit" className={styles.buttoncontainer}>
                                 Request recovery code
                             </button>
                         </div>
                     </div>
-                    <div class={styles.flexbutton}>
+                    <div className={styles.flexbutton}>
                         <a href={"/login"}>
-                            <button type="button" class={styles.buttoncontainer}>
+                            <button type="button" className={styles.buttoncontainer}>
                                 Go Back
                             </button>
                         </a>

@@ -127,11 +127,11 @@ const orderPage = () => {
         //     retrieveShippingAddress() 
         // },[shippingAddressAvailable]);
     return(
-        <div class={styles.homepage}>
+        <div className={styles.homepage}>
 
             {/* conditional rendering is like if statements */}
 
-            <div class={styles.checkout}>
+            <div className={styles.checkout}>
                 {shippingAddressAvailable === null &&
                     <>
                         <p>

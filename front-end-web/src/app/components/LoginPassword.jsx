@@ -19,21 +19,21 @@ const LoginPassword = ({}, ref) => {
 
     return (
         <div id="passwd" className="mb-3">
-            <label htmlFor="password" class={styles.attributetext}>
+            <label htmlFor="password" className={styles.attributetext}>
             Password
             </label>
             <input
             type={showPassword ? "text" : "password"}
             placeholder="Password..."
             name="passwd"
-            class={styles.textbox}
+            className={styles.textbox}
             value={sendPassword}
             onChange={(e) => setSendPassword(e.target.value)}
             />
             {/*if showPassword is true we us eyeOpen.png else we use eyeClosed.png*/}
             <img
             src={showPassword ? "/eyeOpen.png" : "/eyeClosed.png"}
-            class={styles.eyeimage}
+            className={styles.eyeimage}
             onClick={() => setShowPassword(!showPassword)}
             />
         </div>

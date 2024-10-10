@@ -17,7 +17,7 @@ const UserName = ({}, ref) => {
 
     return(
         <div id="username" className="mb-3">
-        <label htmlFor="username" class={styles.attributetext}>
+        <label htmlFor="username" className={styles.attributetext}>
             Username
         </label>
         <input
@@ -26,7 +26,7 @@ const UserName = ({}, ref) => {
         name="username"
         value={showUsername}
         onChange={(e) => setShowUsername(e.target.value)}
-        class={styles.textbox}
+        className={styles.textbox}
         />
         </div>
     )

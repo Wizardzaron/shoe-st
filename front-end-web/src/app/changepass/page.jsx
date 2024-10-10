@@ -34,15 +34,15 @@ const PassPage = () => {
     }
 
     return (
-        <div class={styles.loginpage}>
+        <div className={styles.loginpage}>
 
             <h1>Enter new password</h1>
             
             <form onSubmit={changepassword}>
                 <ChangePassword />
-                <div class={styles.flexbutton}>
+                <div className={styles.flexbutton}>
                     <div id="form-action">
-                        <button type="submit" class={styles.buttoncontainer}>
+                        <button type="submit" className={styles.buttoncontainer}>
                             Submit new password
                         </button>
                     </div>

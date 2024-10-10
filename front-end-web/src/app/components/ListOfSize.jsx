@@ -10,15 +10,12 @@ import React, {useState} from "react";
   referrerpolicy="no-referrer"
 />;
 
-export default function ListOfSize ({listOfShoeSizes, indexOfSize, currentSize}) {
+export default function ListOfSize ({listOfShoeSizes, indexOfSize, currentSize, selectedSize}) {
     
-    const [selectedSize, setSelectedSize] = useState(null);
-
 
     const returnSize = (event) => {
         console.log(event.target.value)
         const shoeSize = event.target.value
-        setSelectedSize(shoeSize);
         currentSize(shoeSize);
       }    
 

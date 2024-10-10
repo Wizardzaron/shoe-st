@@ -54,31 +54,31 @@ const LoginPage = () => {
   return (
     <div>
       <section className={styles.loginpage}>
-        <h1 class={styles.aligntext}>Welcome to fake.com</h1>
-        <div class={styles.flexbutton}>
+        <h1 className={styles.aligntext}>Welcome to fake.com</h1>
+        <div className={styles.flexbutton}>
           <form onSubmit={Login}>
             <UserName ref={UsernameRef}/>
             <LoginPassword ref={AddressRef}/>
 
-            <Link href={"/forgotpass"} class={styles.forgotpassword}>
+            <Link href={"/forgotpass"} className={styles.forgotpassword}>
               Forgot your password?{" "}
             </Link>
 
             <div id="form-action">
-              <button type="submit" class={styles.buttoncontainer}>
+              <button type="submit" className={styles.buttoncontainer}>
                 Sign in
               </button>
             </div>
             {/* <text>(or)</text> */}
             {/* need to use goto */}
             <a href={"/signup"}>
-              <button type="button" class={styles.buttoncontainer}>
+              <button type="button" className={styles.buttoncontainer}>
                 Create Account
               </button>
             </a>
 
             <a href={"/home"}>
-              <button type="button" class={styles.buttoncontainer}>
+              <button type="button" className={styles.buttoncontainer}>
                 Go Back
               </button>
             </a>

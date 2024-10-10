@@ -63,18 +63,18 @@ const CodePage = () => {
   };
 
   return (
-    <div class={styles.loginpage}>
+    <div className={styles.loginpage}>
       <h1>Enter recovery code</h1>
 
-      <p class={styles.textcondense}>
+      <p className={styles.textcondense}>
         Enter the recovery code sent to you via email and click Submit. If the
         email you provided wasn't found in our database double-check to see if
         you spelled it correctly, or sign up to create an account.
       </p>
 
       <form onSubmit={checkcode}>
-        <div id="recovery" class="mb-3">
-          <label htmlFor="resetCode" class={styles.attributetext}>
+        <div id="recovery" className="mb-3">
+          <label htmlFor="resetCode" className={styles.attributetext}>
             Recovery code
           </label>
           <input
@@ -82,18 +82,18 @@ const CodePage = () => {
             placeholder="Recovery code..."
             name="resetCode"
             required
-            class={styles.textbox}
+            className={styles.textbox}
           />
         </div>
 
-        <div class={styles.flexbutton}>
+        <div className={styles.flexbutton}>
           <div id="form-action">
-            <button type="submit" class={styles.buttoncontainer}>
+            <button type="submit" className={styles.buttoncontainer}>
               Verify recovery code
             </button>
           </div>
         </div>
-        <div class={styles.flexbutton}>
+        <div className={styles.flexbutton}>
           <a href={"/forgotpass"}>
             <button type="button" className={styles.buttoncontainer}>
               Go Back

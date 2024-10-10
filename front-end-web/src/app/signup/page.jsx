@@ -70,8 +70,8 @@ function Signingup() {
   };
 
   return (
-    <div class={styles.signup}>
-      <h1 class={styles.aligntext}>Sign Up</h1>
+    <div className={styles.signup}>
+      <h1 className={styles.aligntext}>Sign Up</h1>
         <form onSubmit={submitInfo}>
           <SignUp ref={UserRef}/>
         </form>

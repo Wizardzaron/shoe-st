@@ -5,7 +5,7 @@ export default function ShoeBrandList(brands) {
 
     return (
 
-        <div class={styles.brand} key={brands.item_id}>
+        <div className={styles.brand} key={brands.item_id}>
             <a href={"/shoedetail?id=" + brands.item_id}>
                 <img
                     src={brands.images}

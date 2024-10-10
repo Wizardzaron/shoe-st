@@ -17,27 +17,27 @@ export default function ChangePassword() {
 
     return(
         <>
-            <div id="password1" class="mb-3">
-                <label htmlFor="passwordcode1" class={styles.attributetext}>Password</label>
+            <div id="password1" className="mb-3">
+                <label htmlFor="passwordcode1" className={styles.attributetext}>Password</label>
                 <input
                     type="text"
                     placeholder="Enter your new password"
                     name="passwordcode1"
-                    class={styles.textbox}
+                    className={styles.textbox}
                 />
             </div>
             
-            <div id="password2" class="mb-3">
-                <label htmlFor="passwordcode2" class={styles.attributetext}>Confirm Password</label>
+            <div id="password2" className="mb-3">
+                <label htmlFor="passwordcode2" className={styles.attributetext}>Confirm Password</label>
                 <input
                     type={showPassword ? "text" : "password"}
                     placeholder="Confirm your new password"
                     name="passwordcode2"
-                    class={styles.textbox}
+                    className={styles.textbox}
                 />
                 <img 
                     src={eye}
-                    class={styles.eyeimage}
+                    className={styles.eyeimage}
                     onClick={changEye}
                 />
             </div>

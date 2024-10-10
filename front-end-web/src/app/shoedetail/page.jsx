@@ -28,6 +28,7 @@ const ShoePage = () => {
   const [mainImage, setMainImage] = useState(null);
   const [selectedSize, setSelectedSize] = useState(null);
   const router = useRouter()
+  
 
   const setMain = (event) => {
     setMainImage(event);
@@ -208,7 +209,7 @@ const ShoePage = () => {
           <form onSubmit={goToCheckout}>
             <div className={styles.split}>
               {shoedet.sizes.map((aSize, sizeIndex) => (
-                <ListOfSize listOfShoeSizes={aSize} indexOfSize={sizeIndex} currentSize={currentSize}/>
+                <ListOfSize listOfShoeSizes={aSize} indexOfSize={sizeIndex} currentSize={currentSize} selectedSize={selectedSize}/>
               ))}
             </div>
             

@@ -74,9 +74,9 @@ function ShoeList(){
 
 
     return (
-            <div class={styles.homepage}>
-                <div class={styles.navigationbar}>
-                    <div class={styles.spaceForImage}>
+            <div className={styles.homepage}>
+                <div className={styles.navigationbar}>
+                    <div className={styles.spaceForImage}>
                         <a href="/home">
                             <img src="/fakeLogo.png" width={100} hieght={100} />
                         </a>
@@ -93,13 +93,13 @@ function ShoeList(){
                         )}
                     </div>
                 </div>
-                <div class={styles.flexshoelist}>
+                <div className={styles.flexshoelist}>
                     {brands.map((aBrand) => {
                         return (
                             <div key={aBrand.brand_id}>
                                 <a href={"/shoedetail?id=" + aBrand.id + "&brand_id=" + aBrand.brand_id}>
-                                    <div class={styles.shoelist}>
-                                        <div class={styles.list}>
+                                    <div className={styles.shoelist}>
+                                        <div className={styles.list}>
                                             <img
                                                 src={aBrand.images[aBrand.currentColorImageIndex].image_url}
                                                 alt="random stuff"
@@ -110,11 +110,11 @@ function ShoeList(){
                                         </div>
                                     </div>
                                     {/* curly brace in a .map means we are returing either a block of code or data structures */}
-                                    <div class={styles.flexcarouselrow}>
+                                    <div className={styles.flexcarouselrow}>
 
                                         {aBrand.images.map((aImage, theIndex) => 
                                                 <img
-                                                    class={styles.shoeimg}
+                                                    className={styles.shoeimg}
                                                     key={aImage.image_id}
                                                     src={aImage.image_url}
                                                     onMouseOver={(e) => {aBrand.currentColorImageIndex = theIndex; setBrands([...brands])}}
