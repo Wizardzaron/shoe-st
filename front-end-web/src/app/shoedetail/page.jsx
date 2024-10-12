@@ -197,7 +197,7 @@ const ShoePage = () => {
         </div>
         <div className={styles.descriptiveflex}>
           <ShoeDescription ShoeDesc={shoedet} />
-          <div>
+          <div className={styles.colorshoes}>
             {shoedet.brand_images.map((brandImg) => (
               <div key={brandImg.shoe_id}>
                 <a href={"/shoedetail?id=" + brandImg.shoe_id}>

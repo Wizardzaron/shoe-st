@@ -132,6 +132,11 @@
   color: magenta;
 }
 
+.colorshoes {
+  flex-direction: row !important;
+  flex-wrap: wrap;
+}
+
 .dropdownbutton {
   display:flex;
   flex-wrap: wrap;
@@ -419,7 +424,7 @@
 
 .split {
   columns:2;
-  column-gap: 20px;
+  column-gap: 20%;
 }
 
 /* Using a to anchor the element that comes after the img tage */
