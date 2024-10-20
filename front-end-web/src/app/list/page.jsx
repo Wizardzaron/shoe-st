@@ -49,9 +49,26 @@ function ShoeList(){
 
         fetch(process.env.NEXT_PUBLIC_LOCAL_HOST_URL + '/allshoes')
 
-        .then((response) => response.json())
-        .then((fetchedBrands) => {
+        .then((response) => { 
+            
+            console.log(response.status)
 
+            if(response.status === 403){
+                // alert("You are not an approved URL")
+                // return;
+                router.push("public/403");
+            }
+            
+            if(!response.ok){
+                console.error("An error occurred:", response.status);
+                return;
+            }
+
+            return response.json()
+        })
+
+
+        .then((fetchedBrands) =>{
             console.log(fetchedBrands)
             //need to do this since we are retrieve an array of objects/dictionaries so we need to step through each one
             fetchedBrands.forEach(brand => {
@@ -61,6 +78,7 @@ function ShoeList(){
 
             setBrands(fetchedBrands)
         })
+
         .catch(e => {
             console.log("Before error")
             console.log({ e })

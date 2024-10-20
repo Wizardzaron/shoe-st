@@ -4,7 +4,7 @@ import React, { useState, useImperativeHandle } from "react";
 
 const UserName = ({}, ref) => {
 
-    const [showUsername, setShowUsername] = useState(null);
+    const [showUsername, setShowUsername] = useState("");
 
     const getUsername = () => {
       return showUsername;

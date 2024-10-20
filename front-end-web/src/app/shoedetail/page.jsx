@@ -127,7 +127,7 @@ const ShoePage = () => {
       .then((response) => response.json())
       .then((authenticate) => {
           setAuthenticate(authenticate);
-          console.log("We received a response for getlogin", authenticate["loggedin"]);
+          // console.log("We received a response for getlogin", authenticate["loggedin"]);
           // if (authenticate["loggedin"]== "False") {
           //     console.log("Endpoint works")
           // }
@@ -186,7 +186,7 @@ const ShoePage = () => {
       <div className={styles.detailflex}>
         <div className={styles.flexcarousel}>
           {shoedet.images.map((anImage) => (
-            <ChangeMainImage images={anImage} setMain={setMain} />
+            <ChangeMainImage key={anImage.image_id} images={anImage} setMain={setMain} />
           ))}
         </div>
         <div className={styles.imgdiv}>
@@ -209,7 +209,7 @@ const ShoePage = () => {
           <form onSubmit={goToCheckout}>
             <div className={styles.split}>
               {shoedet.sizes.map((aSize, sizeIndex) => (
-                <ListOfSize listOfShoeSizes={aSize} indexOfSize={sizeIndex} currentSize={currentSize} selectedSize={selectedSize}/>
+                <ListOfSize key={aSize.size_id} listOfShoeSizes={aSize} indexOfSize={sizeIndex} currentSize={currentSize} selectedSize={selectedSize}/>
               ))}
             </div>
             

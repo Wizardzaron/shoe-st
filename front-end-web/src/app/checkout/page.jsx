@@ -12,29 +12,6 @@ const orderPage = () => {
     const [state, setState] = useState('');
     const [city, setCity] = useState('');
     const router = useRouter()
-    
-    // const retrieveShippingAddress = () => {
-
-    //     const url = process.env.NEXT_PUBLIC_LOCAL_HOST_URL + '/getshippingaddress'
-    //     const encodedURL = encodeURI(url)
-
-    //     fetch(encodedURL, {
-    //         method: 'GET',
-    //         credentials: 'include',
-    //     })
-    
-    //         .then((response) => response.json())
-    //         .then((shipping) => {
-    //             console.log("Shipping object: ", shipping)
-    //             const value = shipping.addressPresent
-    //             setShippingAddress(value)
-    //         })
-    //         .catch(e => {
-    //             console.log("Before error")
-    //             console.log({ e })
-    //             console.log("After error")
-    //         })
-    // }
 
     const createOrder = () => {
         const searchParams = new URLSearchParams(window.location.search);
@@ -61,7 +38,10 @@ const orderPage = () => {
 
     const updateUserInfo = () => {
         const formData = new FormData();
-            
+        
+        formData.append("city", city);
+        formData.append("state", state);
+
         const obj = Object.fromEntries(formData.entries());
         console.log("user info ", obj);
     
@@ -132,6 +112,7 @@ const orderPage = () => {
             {/* conditional rendering is like if statements */}
 
             <div className={styles.checkout}>
+                <div>
                 {shippingAddressAvailable === null &&
                     <>
                         <p>
@@ -177,6 +158,7 @@ const orderPage = () => {
                     <button className={styles.buttonorder} onClick={() => createOrder()}>
                         Place your order
                     </button>
+                </div>
             </div>
         </div>
     );

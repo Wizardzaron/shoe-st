@@ -42,7 +42,7 @@ import {
 const orderPage = () => {
     const [cartData, setCartData] = useState([]);
     const [authenticate, setAuthenticate] = useState({});
-    const [searchValue, setSearchValue] = useState(null); 
+    const [searchValue, setSearchValue] = useState(""); 
     const [sizeData, setSizeData] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
     const router = useRouter()
@@ -53,6 +53,7 @@ const orderPage = () => {
 
         const formData = new FormData();
         formData.append('cart_item_id',cart_item_id);
+        formData.append('url',window.location.origin);
         const obj = Object.fromEntries(formData.entries());
 
         fetch(process.env.NEXT_PUBLIC_LOCAL_HOST_URL + '/cartitemremoved', {
@@ -276,7 +277,7 @@ const orderPage = () => {
                 {/* Item image component (essentially how we handle css in mobile apps)*/}
                 {cartData.map((cartItem, index) => (
                     <div className={styles.cartitem}>
-                        <div className={styles.cartimagediv}>
+                        <div className={styles.cartimagediv} key={cartItem.image_id}>
                             <img
                                 className={styles.cartimage}
                                 key={cartItem.image_id}
@@ -297,7 +298,7 @@ const orderPage = () => {
                                 <DropdownMenu aria-label="Static Actions">
                                     {/* <div className={styles.dropdown}> */}
                                     {/* setSizeData(data);  */}
-                                        {range(sizeData).map((qty) => 
+                                        {sizeData.map((qty) => 
                                             <DropdownItem 
                                                 key={qty} 
                                                 // onClick={() => changeSize(cartItem,qty)}
