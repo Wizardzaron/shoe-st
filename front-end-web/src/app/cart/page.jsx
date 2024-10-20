@@ -39,7 +39,7 @@ import {
 
 
 
-const orderPage = () => {
+const OrderPage = () => {
     const [cartData, setCartData] = useState([]);
     const [authenticate, setAuthenticate] = useState({});
     const [searchValue, setSearchValue] = useState(""); 
@@ -276,7 +276,7 @@ const orderPage = () => {
                 <p style={{fontWeight: "bold" , fontSize: "25px", marginLeft: "15%", marginTop: "25px"}}>Bag</p>
                 {/* Item image component (essentially how we handle css in mobile apps)*/}
                 {cartData.map((cartItem, index) => (
-                    <div className={styles.cartitem}>
+                    <div className={styles.cartitem} key={cartItem.cart_item_id}>
                         <div className={styles.cartimagediv} key={cartItem.image_id}>
                             <img
                                 className={styles.cartimage}
@@ -286,7 +286,7 @@ const orderPage = () => {
                         </div>
                         <div className={styles.cartdescriptivetext}>
                             <p style={{fontWeight:"bold"}}>{cartItem.brand_name} {cartItem.shoe_name}</p>
-                            <p>{cartItem.sex} Shoe's</p>
+                            <p>{cartItem.sex} Shoe&apos;s</p>
                             <p>{cartItem.color}</p>
 
                             <Dropdown>
@@ -363,4 +363,4 @@ const orderPage = () => {
         </div>
     );
 };
-export default orderPage;
+export default OrderPage;

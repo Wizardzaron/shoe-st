@@ -68,7 +68,7 @@ const CodePage = () => {
 
       <p className={styles.textcondense}>
         Enter the recovery code sent to you via email and click Submit. If the
-        email you provided wasn't found in our database double-check to see if
+        email you provided was&apos;t found in our database double-check to see if
         you spelled it correctly, or sign up to create an account.
       </p>
 

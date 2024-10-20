@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import styles from '../page.module.css'
 
-const orderPage = () => {
+const OrderPage = () => {
     const [authenticate, setAuthenticate] = useState({});
     // const [shippingAddress, setShippingAddress] = useState(null);
     const [shippingAddressAvailable, setShippingAddressAvailable] = useState(null); 
@@ -116,7 +116,7 @@ const orderPage = () => {
                 {shippingAddressAvailable === null &&
                     <>
                         <p>
-                            We noticed that you didn't include your state and city, in order to continue through checkout we need this info
+                            We noticed that you didn&apos;t include your state and city, in order to continue through checkout we need this info
                         </p>
                         <form onSubmit={updateUserInfo}>
                             <div id="state" className="mb-3">
@@ -163,4 +163,4 @@ const orderPage = () => {
         </div>
     );
 };
-export default orderPage;
+export default OrderPage;
