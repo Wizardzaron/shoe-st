@@ -3,10 +3,8 @@
 import React, { createContext, useState, useEffect,  useContext} from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import styles from "../page.module.css";
-import {AppContext} from '../components/AppContext'
 import ShoeImage from "../components/ShoeImage"
 import BrandImage from "../components/BrandImage"
 import SignUpButton from "../components/SignUpButton"
