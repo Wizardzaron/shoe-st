@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useState, useEffect,  useContext} from "react";
+import React, { createContext, useState, useEffect} from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 import { useRouter } from "next/navigation";
@@ -21,7 +21,7 @@ function HomePage() {
   // const [searchValue, setSearchValue] = useState(null); 
   const [item, setItem] = useState(null);
   //rename to login token
-  const [authenticate, setAuthenticate] = useState({});
+  // const [authenticate, setAuthenticate] = useState({});
 
   const [loginToken, setLoginToken] = useState({});
   
