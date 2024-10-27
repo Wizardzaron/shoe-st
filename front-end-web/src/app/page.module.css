@@ -8,7 +8,26 @@
   display:block
 }
 
+.brandContainer {
+  display: flex;
+  flex-wrap: wrap; /* Allows multiple "cards" to wrap onto new lines */
+  gap: 20px; /* Space between each card */
+}
+
 .brand {
+  display: flex;
+  flex-direction: column; /* Stack image and text vertically */
+  align-items: center;
+  text-align: center;
+  width: 200px; /* Adjust width as needed */
+}
+
+.brand img {
+  margin-bottom: 10px; /* Space between image and text */
+}
+
+
+/* .brand {
 
   display: inline-block;
   margin-top: 40px;
@@ -19,7 +38,7 @@
 .brand img+b {
 
   display: block;
-}
+} */
 
 .button {
 
@@ -65,8 +84,6 @@
 
 .checkoutflex {
   display: flex;
-
-
 }
 
 
@@ -248,7 +265,33 @@
   width: auto;
 }
 
-.grid-item:hover {
+.grid-container {
+  display:grid;
+
+/* grid-template-areas is used to define spaces for where we want to place our items */
+
+  grid-template-areas: 
+  "address total total"
+  "address total total"
+  "address checkoutimage cart"
+  "address checkoutimage cart";
+}
+
+.address {
+  grid-area: address;
+}
+.total {
+  grid-area: total;
+}
+.cart {
+  grid-area: cart;
+}
+
+.checkoutimage {
+  grid-area: checkoutimage;
+}
+
+/* .grid-item:hover {
   background-color: white;
   color:black;
 }
@@ -260,7 +303,7 @@
   padding: 20px;
   font-size: 30px;
   text-align: center;
-}
+} */
 
 .ghostbutton:hover {
 
@@ -389,7 +432,6 @@
   align-items: center;
   justify-content: center;
   margin-top: 15px;
-
 }
 
 
@@ -406,6 +448,8 @@
   transition: background-color 300ms ease;
   margin-top: 15px;
   margin-left: 15px;
+  border-radius: 15px;
+
 }
 
 .buttoncontainer:hover {
@@ -443,22 +487,32 @@
   column-gap: 20%;
 }
 
+.dropdown-item {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
 /* Using a to anchor the element that comes after the img tage */
 
 /* Needed to create a separate class for Link tag because it doesn't work in css  */
 /*causes a cannot read properties of null because of the cursor property affected the other html elements that use this class but aren't buttons */
 
-.spaceForImage img+.spaceBetweenLink {
+.spaceBetweenLink {
   background: none;
   border: none;
   cursor: pointer;
   margin-left: 45px;
+  font-size: 15px;
+  font-family: serif;
 }
+
 
 /* If two elements are using the same class then this class will activate */
 
 .spaceForImage .spaceBetweenLink+.spaceBetweenLink {
   margin-left: 20px;
+
 }
 
 
@@ -499,7 +553,7 @@
 
 .textbox {
   margin-top: 10px;
-  height: 65px;
+  height: 45px;
   width: 179px;
 }
 

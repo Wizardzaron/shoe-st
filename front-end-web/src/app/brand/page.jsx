@@ -2,24 +2,42 @@
 
 import React, { useState, useEffect } from 'react';
 import styles from '../page.module.css'
-import Link from 'next/link'
 
 import SignUpButton from "../components/SignUpButton"
 import LoginButton from "../components/LoginButton"
 import ShoeBrandList from "../components/ShoeBrandList"
+import LogoutButton from "../components/LogoutButton"
+import CartButton from "../components/CartButton"
+
+
 
 function Brand() {
 
-    const [item, setItem] = useState(null);
-
+    const [shoeBrand, setShoeBrand] = useState(null);
+    const [loginToken, setLoginToken] = useState({});
 
     useEffect(() => {
 
         const urlParams = new URLSearchParams(window.location.search);
-        var brand = urlParams.get('brand')
+        var id = urlParams.get('manufacture_id')
         //console.log(item_id);
 
-        fetch('https://shoe-st-api-58c2623d13b8.herokuapp.com/shoebrand?brand=' + brand, {
+        fetch(process.env.NEXT_PUBLIC_LOCAL_HOST_URL + "/getlogin", {
+            method: "GET",
+            credentials: "include",
+          })
+            .then((response) => response.json())
+            .then((authenticateValue) => {
+              console.log(authenticateValue);
+              setLoginToken(authenticateValue);
+            })
+            .catch((e) => {
+              console.log({ e });
+            });
+
+
+
+        fetch(process.env.NEXT_PUBLIC_LOCAL_HOST_URL+'/shoebrand?manufacture_id='+id, {
 
             method: 'GET',
             headers: {
@@ -30,7 +48,7 @@ function Brand() {
             .then((response) => response.json())
             .then((item) => {
                 console.log(item)
-                setItem(item)
+                setShoeBrand(item)
             })
             .catch(e => {
                 console.log("Before error")
@@ -40,34 +58,41 @@ function Brand() {
 
 
     }, [])
-    if (item == null) {
+    if (shoeBrand == null) {
         return console.log("returned null")
     }
 
     return (
         <>
             <div className={styles.brandpage}>
-                <div className={styles.followers}>
-                    <div className={styles.spacingInsideSticky}>
-                        <img
-                            src="/fakeLogo.png"
-                            width={100}
-                            hieght={100}
-                        />
-                        <SignUpButton />
-                        <LoginButton />
+                <div className={styles.navigationbar}>
+                    <div className={styles.spaceForImage}>
+                        <a href="/home">
+                            <img src="/fakeLogo.png" width={100} hieght={100} />
+                        </a>
+                        {loginToken["loggedin"] === "False" ? (
+                            <>
+                            <SignUpButton />
+                            <LoginButton />
+                            </>
+                        ) : (
+                            <>
+                            <LogoutButton />
+                            <CartButton />
+                            </>
+                        )}
                     </div>
                 </div>
-
                 <div>
-                    {item.map((it) => {
-
-                        return (
-                            <ShoeBrandList key={it.item_id} brands={it}/>
-                        )
-
-                    })}
-
+                    {shoeBrand && shoeBrand.length > 0 ? (
+                        shoeBrand.map((it) => {
+                            return (
+                                <ShoeBrandList key={it.id} brands={it}/>
+                            )
+                        })
+                    ): (
+                        <p style={{textAlign: "center", marginTop: "20%", fontWeight: "bold", fontSize: "45px"}}>There's currently no shoes related to this brand</p>
+                    )}
                 </div>
             </div>
         </>

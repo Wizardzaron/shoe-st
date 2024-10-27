@@ -31,13 +31,13 @@ const LoginPassword = ({}, ref) => {
               value={sendPassword}
               onChange={(e) => setSendPassword(e.target.value)}
               />
+          </div>
               {/*if showPassword is true we us eyeOpen.png else we use eyeClosed.png*/}
-              {/* <img
+              <img
               src={showPassword ? "/eyeOpen.png" : "/eyeClosed.png"}
               className={styles.eyeimage}
               onClick={() => setShowPassword(!showPassword)}
-              /> */}
-          </div>
+              />
         </div>
     );
 }

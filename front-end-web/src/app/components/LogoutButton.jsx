@@ -1,7 +1,6 @@
 "use client"
-import styles from "../page.module.css";
-import Link from "next/link";
 import React, { useEffect } from 'react';
+import styles from "../page.module.css";
 
 export default function LogoutButton() {
 
@@ -29,7 +28,10 @@ export default function LogoutButton() {
   }
 
     // need to use useEffect when calling the fetch on log out
-    // bring LogOut.jsx into here 
+    // bring LogOut.jsx into here
+    
+    //sans serif font
+
     return(
       <button onClick={LogOut} className={styles.spaceBetweenLink}>
         {" "}

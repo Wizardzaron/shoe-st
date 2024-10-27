@@ -22,15 +22,6 @@ const LoginPage = () => {
     const password = AddressRef.current.getPassword();
     const username = UsernameRef.current.getUsername();
 
-//     SELECT 
-//     column_name, 
-//     data_type 
-// FROM 
-//     information_schema.columns 
-// WHERE 
-//     table_name = 'image';
-
-
 
     try {
       fetch(process.env.NEXT_PUBLIC_LOCAL_HOST_URL + "/login?passwd=" + password + "&username=" + username, {

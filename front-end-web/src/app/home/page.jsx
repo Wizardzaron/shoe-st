@@ -16,7 +16,6 @@ import SearchButton from "../components/SearchButton"
 //NEED TO LOOK UP LOCALIZATION LIBRARIES
 
 
-
 function HomePage() {
   // const [searchValue, setSearchValue] = useState(null); 
   const [item, setItem] = useState(null);
@@ -52,30 +51,10 @@ function HomePage() {
 
   }
 
-  // useEffect(() => {
 
 
     //how do we make sure that we check that the user is logged in before the page is rendered
     //If the useEffect fires at each render we need to make a token that checks once an hour
-
-  //   if (loginToken == null) {
-  //     const appcontext = useContext(AppContext);
-  //     if(appcontext == null){
-
-  //       fetch(process.env.NEXT_PUBLIC_LOCAL_HOST_URL + "/getlogin", {
-  //         method: "GET",
-  //         credentials: "include",
-  //       })
-  //         .then((response) => response.json())
-  //         .then((authenticateValue) => {
-  //           setLoginToken(authenticateValue);
-  //         })
-  //         .catch((e) => {
-  //           console.log({ e });
-  //         });
-  //     }
-  //   }
-  // })
   
   useEffect(() => {
     // console.log("Heyo",process.env.NEXT_PUBLIC_LOCAL_HOST_URL)
@@ -106,9 +85,6 @@ function HomePage() {
       .catch((e) => {
         console.log({ e });
       });
-
-
-    // https://shoe-st-api-58c2623d13b8.herokuapp.com
 
     fetch(process.env.NEXT_PUBLIC_LOCAL_HOST_URL + "/allshoedata")
       .then((response) => response.json())

@@ -16,7 +16,6 @@ function ShoeList(){
     // const [colorImage, setColorImages] = useState([]);
 
 
-
     useEffect(() => {
 
         fetch(process.env.NEXT_PUBLIC_LOCAL_HOST_URL + '/connect')
@@ -41,7 +40,7 @@ function ShoeList(){
             .then((response) => response.json())
             .then((authenticateValue) => {
                 console.log(authenticateValue);
-                setConnect(connect)
+                setConnect(authenticateValue);
             })
             .catch((e) => {
                 console.log({ e });

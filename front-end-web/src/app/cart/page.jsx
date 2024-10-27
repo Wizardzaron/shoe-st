@@ -74,15 +74,14 @@ const OrderPage = () => {
 
     const gettingSizes = () =>{
 
-        console.log("Boom");
+        console.log("Getting shoe sizes");
         console.log(cartData)
-        var formData = new FormData(cartData['id']);
-        console.log(formData);
+        var formData = new FormData(cartData.id);
 
         const url = process.env.NEXT_PUBLIC_LOCAL_HOST_URL + '/allsizes'
         const id = formData.get('id')
 
-        const encodedURL = encodeURI(`${url}?id=${id}`)
+        const encodedURL = encodeURI(`${url}`)
 
         fetch(encodedURL, {
             method: 'GET',
@@ -112,8 +111,8 @@ const OrderPage = () => {
 
     const addToFavorites = () => {
 
-
-        router.push('/favorites');
+        alert("Favorites feature will be added later");
+        // router.push('/favorites');
     }
 
     const setTotalCost = (cartData) => {
@@ -165,6 +164,7 @@ const OrderPage = () => {
                 console.log("After error")
             })      
 
+            
         setCartData([...cartData]);
     }
     
@@ -225,6 +225,7 @@ const OrderPage = () => {
         })
 
         .then((data) => {
+            console.log("retrieving cart data")
             console.log(data);
             setCartData(data);
             // data.forEach(shoe => {
@@ -250,9 +251,6 @@ const OrderPage = () => {
                             hieght={100}
                         />
                     </a>
-                    <div>
-                        {setTotalCost(cartData)}
-                    </div>
                     <>
                         <Link href="/home" className={styles.spaceBetweenLink}> Home</Link>
                     </>
@@ -271,95 +269,102 @@ const OrderPage = () => {
                             <button type='submit' style={{ marginLeft: "10px" }}>Search</button>
                         </div>
                     </form>
+                    <div>
+                        {setTotalCost(cartData)}
+                    </div>
+
                 </div>
                 </div>
                 <p style={{fontWeight: "bold" , fontSize: "25px", marginLeft: "15%", marginTop: "25px"}}>Bag</p>
                 {/* Item image component (essentially how we handle css in mobile apps)*/}
-                {cartData.map((cartItem, index) => (
-                    <div className={styles.cartitem} key={cartItem.cart_item_id}>
-                        <div className={styles.cartimagediv} key={cartItem.image_id}>
-                            <img
-                                className={styles.cartimage}
-                                key={cartItem.image_id}
-                                src={cartItem.image_url}
-                            />
-                        </div>
-                        <div className={styles.cartdescriptivetext}>
-                            <p style={{fontWeight:"bold"}}>{cartItem.brand_name} {cartItem.shoe_name}</p>
-                            <p>{cartItem.sex} Shoe&apos;s</p>
-                            <p>{cartItem.color}</p>
+                {cartData && cartData.length > 0 ? (
 
-                            <Dropdown>
-                                <DropdownTrigger>
-                                    <button variant="bordered">
-                                        Size {cartItem.size} v
-                                    </button>
-                                </DropdownTrigger>
-                                <DropdownMenu aria-label="Static Actions">
-                                    {/* <div className={styles.dropdown}> */}
-                                    {/* setSizeData(data);  */}
-                                        {sizeData.map((qty) => 
-                                            <DropdownItem 
-                                                key={qty} 
-                                                // onClick={() => changeSize(cartItem,qty)}
-                                                >{qty}
-                                            </DropdownItem>)}
-                                    {/* </div> */}
-                                </DropdownMenu>
-                            </Dropdown>
-
-                            <Dropdown>
-                                <DropdownTrigger>
-                                    <button variant="bordered">
-                                    Quantity {cartItem.Quantity} v
-                                    </button>
-                                </DropdownTrigger>
-                                <DropdownMenu aria-label="Static Actions">
-                                    {/* <div className={styles.dropdown}> */}
-                                        {range(1,10).map((qty) => 
-                                            <DropdownItem 
-                                                key={qty} 
-                                                onClick={() => changeQuantity(cartItem,qty)}
-                                                >{qty}
-                                            </DropdownItem>)}
-                                    {/* </div> */}
-                                </DropdownMenu>
-                            </Dropdown>                            
-                            <div className={styles.icons}>
-                                <img 
-                                    src="/heart.png"
-                                    height={20}
-                                    width={20}
-                                    // must use () => otherwise the function is called automatically and causes an undefined error
-                                    onClick={() => addToFavorites()}
-                                />
-                                <img 
-                                    src="/trashCan.png"
-                                    height={20}
-                                    width={20}
-                                    // must use () => otherwise the function is called automatically and causes an undefined error
-                                    onClick={() => deleteCartItems(cartItem.cart_item_id)}
+                    cartData.map((cartItem, index) => (
+                        <div className={styles.cartitem} key={cartItem.cart_item_id}>
+                            <div className={styles.cartimagediv} key={cartItem.image_id}>
+                                <img
+                                    className={styles.cartimage}
+                                    key={cartItem.image_id}
+                                    src={cartItem.image_url}
                                 />
                             </div>
-                        </div>
-                        <div className={styles.cartprice}>
-                            <p style={{fontWeight: "bold"}}> ${cartItem.price}</p>
-                        </div>
-                        <div key={index}>
-                            { index == 0 && (
-                                <div style={{fontWeight:"bold", marginLeft: "200px"}}>
-                                    <p style={{fontSize: "25px"}}>Summary</p>
-                                    <p style={{marginTop: "10px"}}>Subtotal: ${totalPrice - 8}</p>
-                                    <p style={{marginTop: "10px"}}>Estimated Shipping & Handling: 8.00</p>
-                                    <p style={{marginTop: "10px"}}>Total:${totalPrice}</p>
-                                    <button className={styles.buttonorder} onClick={() => goToCheckout(cartItem.cart_id)}>
-                                        Checkout
-                                    </button>
+                            <div className={styles.cartdescriptivetext}>
+                                <p style={{fontWeight:"bold"}}>{cartItem.brand_name} {cartItem.shoe_name}</p>
+                                <p>{cartItem.sex} Shoe&apos;s</p>
+                                <p>{cartItem.color}</p>
+
+                                <Dropdown>
+                                    <DropdownTrigger>
+                                        <button variant="bordered" onClick={gettingSizes}>
+                                            Size {cartItem.size} v
+                                        </button>
+                                    </DropdownTrigger>
+                                    <DropdownMenu aria-label="Static Actions">
+                                        {sizeData.map((item,index) =>
+                                            <DropdownItem
+                                            key={index} 
+                                            // onClick={() => changeSize(cartItem,qty)}
+                                            >{item}    
+                                            </DropdownItem>
+                                        )}
+                                    </DropdownMenu>
+                                </Dropdown>
+
+                                <Dropdown>
+                                    <DropdownTrigger>
+                                        <button variant="bordered">
+                                        Quantity {cartItem.quantity} v
+                                        </button>
+                                    </DropdownTrigger>
+                                    <DropdownMenu aria-label="Static Actions">
+                                        {/* <div className={styles.dropdown}> */}
+                                            {range(1,10).map((qty) => 
+                                                <DropdownItem 
+                                                    key={qty} 
+                                                    onClick={() => changeQuantity(cartItem,qty)}
+                                                    >{qty}
+                                                </DropdownItem>)}
+                                        {/* </div> */}
+                                    </DropdownMenu>
+                                </Dropdown>                            
+                                <div className={styles.icons}>
+                                    <img 
+                                        src="/heart.png"
+                                        height={20}
+                                        width={20}
+                                        // must use () => otherwise the function is called automatically and causes an undefined error
+                                        onClick={() => addToFavorites()}
+                                    />
+                                    <img 
+                                        src="/trashCan.png"
+                                        height={20}
+                                        width={20}
+                                        // must use () => otherwise the function is called automatically and causes an undefined error
+                                        onClick={() => deleteCartItems(cartItem.cart_item_id)}
+                                    />
                                 </div>
-                            )}
+                            </div>
+                            <div className={styles.cartprice}>
+                                <p style={{fontWeight: "bold"}}> ${cartItem.price}</p>
+                            </div>
+                            <div key={index}>
+                                { index == 0 && (
+                                    <div style={{fontWeight:"bold", marginLeft: "200px"}}>
+                                        <p style={{fontSize: "25px"}}>Summary</p>
+                                        <p style={{marginTop: "10px"}}>Subtotal: ${totalPrice - 8}</p>
+                                        <p style={{marginTop: "10px"}}>Estimated Shipping & Handling: 8.00</p>
+                                        <p style={{marginTop: "10px"}}>Total:${totalPrice}</p>
+                                        <button className={styles.buttonorder} onClick={() => goToCheckout(cartItem.cart_id)}>
+                                            Checkout
+                                        </button>
+                                    </div>
+                                )}
+                            </div>
                         </div>
-                    </div>
-                ))}
+                    ))
+                    ) : (
+                        <p style={{fontWeight: "bold" , fontSize: "25px", textAlign: "center"}}>No items in bag</p>
+                )}
         </div>
     );
 };

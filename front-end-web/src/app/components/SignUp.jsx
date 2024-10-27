@@ -117,9 +117,13 @@ const SignUp = ({}, ref) => {
           />
         </div>
 
-        <button type="button" onClick={hideTextBox}>
-            Would you like to input city and state?
-        </button>
+        {/* put street and zip under the button */}
+        <div className={styles.flexbutton}>
+            <button type="button" onClick={hideTextBox} className={styles.buttoncontainer}>
+                Enter city and state
+            </button>
+        </div>
+
 
        {showTextBox ?
             (
