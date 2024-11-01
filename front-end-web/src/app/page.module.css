@@ -8,12 +8,6 @@
   display:block
 }
 
-.brandContainer {
-  display: flex;
-  flex-wrap: wrap; /* Allows multiple "cards" to wrap onto new lines */
-  gap: 20px; /* Space between each card */
-}
-
 .brand {
   display: flex;
   flex-direction: column; /* Stack image and text vertically */
@@ -253,7 +247,7 @@
 .flexcarouselrow {
   display:flex;
   flex-direction: row;
-  width: 10%;
+  gap:10px;
 }
 
 .navigationbar {
@@ -265,45 +259,70 @@
   width: auto;
 }
 
-.grid-container {
-  display:grid;
+.shoesByBrand {
+  padding-left: 300px;
+  display: flex;
+  flex-wrap: wrap; /* Allows multiple "cards" to wrap onto new lines */
+  gap: 20px; /* Space between each card */
+}
 
-/* grid-template-areas is used to define spaces for where we want to place our items */
 
-  grid-template-areas: 
-  "address total total"
-  "address total total"
-  "address checkoutimage cart"
-  "address checkoutimage cart";
+.flex-container {
+  display:flex;
+  flex-direction: row;
 }
 
 .address {
-  grid-area: address;
+  width: 50%;
 }
-.total {
-  grid-area: total;
+
+.addresstext{
+  margin-left: 270px;
 }
+
 .cart {
-  grid-area: cart;
+  width: 50%;
 }
 
-.checkoutimage {
-  grid-area: checkoutimage;
+.carttext {
+  margin-right: 270px;
 }
 
-/* .grid-item:hover {
-  background-color: white;
-  color:black;
+.carttable {
+  display: table-row;
 }
 
-.grid-item {
-  grid-template-columns: auto auto auto auto auto;
-  background-color: rgba(255, 255, 255, 0.8);
-  border: 1px solid rgba(0, 0, 0, 0.8);
-  padding: 20px;
-  font-size: 30px;
+.checkoutimg {
+  display: table-cell;
+  vertical-align: top;
+  text-align: right;
+  width: 25%;
+}
+
+.checkoutinfo {
+  display: table-cell;
+  width: 25%;
+  font-size:12px;
+}
+
+.buttoncheckout {
+
+  background-color: black;
+  color:white;
   text-align: center;
-} */
+  border-radius: 25px;
+  padding: 25px 120px;
+  margin-left: 10px;
+  transition: background-color 300ms ease;
+
+}
+
+.buttoncheckout:hover {
+
+  background-color: white;
+  color: black;
+}
+
 
 .ghostbutton:hover {
 

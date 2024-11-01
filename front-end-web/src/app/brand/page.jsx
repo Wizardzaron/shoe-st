@@ -46,9 +46,9 @@ function Brand() {
         })
 
             .then((response) => response.json())
-            .then((item) => {
-                console.log(item)
-                setShoeBrand(item)
+            .then((items) => {
+                console.log(items)
+                setShoeBrand(items)
             })
             .catch(e => {
                 console.log("Before error")
@@ -83,15 +83,16 @@ function Brand() {
                         )}
                     </div>
                 </div>
-                <div>
+                <div className={styles.shoesByBrand}>
                     {shoeBrand && shoeBrand.length > 0 ? (
+                        // <h1 style={{textAlign: "center"}}>{shoeBrand[0].manufacture_name} Brand Shoes</h1>
                         shoeBrand.map((it) => {
                             return (
                                 <ShoeBrandList key={it.id} brands={it}/>
                             )
                         })
                     ): (
-                        <p style={{textAlign: "center", marginTop: "20%", fontWeight: "bold", fontSize: "45px"}}>There's currently no shoes related to this brand</p>
+                        <p style={{textAlign: "center", marginTop: "20%", fontWeight: "bold", fontSize: "45px"}}>There&apos;s currently no shoes related to this brand</p>
                     )}
                 </div>
             </div>

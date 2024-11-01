@@ -16,16 +16,15 @@ const OrderPage = () => {
   const [state, setState] = useState("");
   const [city, setCity] = useState("");
   const [cartData, setCartData] = useState([]);
+  const [totalPrice, setTotalPrice] = useState(null);
+
+
   const router = useRouter();
-
-  const searchParams = new URLSearchParams(window.location.search);
-  const total = searchParams.get("priceForEverything");
-
 
   const createOrder = () => {
     const cart_id = searchParams.get("cart_id");
     const url = process.env.NEXT_PUBLIC_LOCAL_HOST_URL + "/ordercreate";
-    const encodedURL = encodeURI(`${url}?total=${total}&cart_id=${cart_id}`);
+    const encodedURL = encodeURI(`${url}?total=${totalPrice}&cart_id=${cart_id}`);
 
     fetch(encodedURL, {
       method: "POST",
@@ -118,11 +117,9 @@ const OrderPage = () => {
         .then((data) => {
             console.log("retrieving cart data")
             console.log(data);
-            setCartData(data);
-            // data.forEach(shoe => {
-            //     setTotalCost(shoe.price, shoe.Quantity)
-            //     console.log("Test")
-            // })
+            setCartData(data[0]);
+            setTotalPrice(Number(data[1].subTotal) + 8.00);
+
 
         })
         .catch(e => {
@@ -198,53 +195,55 @@ const OrderPage = () => {
           </>
         )}
         {shippingAddressAvailable ? (
-            //can only access the class with [] due to the hyphen
-          <div className={styles['grid-container']}>
+          <>
+            {/* can only access the class with [] due to the hyphen */}
+          <div className={styles['flex-container']}>
             <div className={styles.address}>
-              <h2>Shipping Address</h2>
-              <p>{shippingAddressAvailable.email}</p>
-              <p>{shippingAddressAvailable.city}</p>
-              <p>{shippingAddressAvailable.state}</p>
-              <p>{shippingAddressAvailable.streetaddress}</p>
-              <p>{shippingAddressAvailable.zipcode}</p>
-            </div>
-            
-            <div className={styles.total}>
-                <h3>Total Amount</h3>
-                <p>Subtotal: ${total}</p>
-                <p>Estimated Shipping: $0.00</p>
-                <p>Estimated Handeling: $0.00</p>
-                <p>Total: ${total}</p>
+              <div className={styles.addresstext}>
+                <h2>Shipping Address</h2>
+                <p>{shippingAddressAvailable.email}</p>
+                <p>{shippingAddressAvailable.city}</p>
+                <p>{shippingAddressAvailable.state}</p>
+                <p>{shippingAddressAvailable.streetaddress}</p>
+                <p>{shippingAddressAvailable.zipcode}</p>
+              </div>
             </div>
             <div className={styles.cart}>
-            {cartData.map((cartItem, index) => (
-                <>
-                    <div className={styles.checkoutimage}>
-                        <img
-                            style={{height:"10%", width:"10%"}}
-                            key={cartItem.image_id}
-                            src={cartItem.image_url}
-                        />
-                    </div>
-                    <div className={styles.cart}>
-                        <p style={{fontWeight:"bold"}}>{cartItem.brand_name} {cartItem.shoe_name}</p>
-                        <p>{cartItem.sex} Shoe&apos;s</p>
-                        <p>Size: {cartItem.size}</p>
-                        <p>Color: {cartItem.color}</p>
-                        <p>Quantity: {cartItem.quantity}</p>
+              <div className={styles.carttext}>
+                <h3>Total Amount</h3>
+                <p>Subtotal: ${totalPrice}</p>
+                <p>Estimated Shipping: $0.00</p>
+                <p>Estimated Handeling: $0.00</p>
+                <p>Total: ${totalPrice}</p>
 
+                {cartData.map((cartItem, index) => (
+                  <div className={styles.carttable} key={index}>  
+                    <div className={styles.checkoutimg}>
+                      <img
+                          style={{width: '20%', height: '40%'}}
+                          key={cartItem.image_id}
+                          src={cartItem.image_url}
+                      />
                     </div>
-                </>
-            ))}
+                    <div className={styles.checkoutinfo}>
+                      <b>{cartItem.brand_name} {cartItem.shoe_name}</b>
+                      <p>{cartItem.sex} Shoe&apos;s</p>
+                      <p>Size: {cartItem.size}</p>
+                      <p>Color: {cartItem.color}</p>
+                      <p>Quantity: {cartItem.quantity}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
+          <button className={styles.buttoncheckout} onClick={() => createOrder()}>
+            Place your order
+          </button>
+        </>
         ) : (
           <></>
         )}
-
-        <button className={styles.buttonorder} onClick={() => createOrder()}>
-          Place your order
-        </button>
       </div>
     </div>
   );

@@ -44,7 +44,7 @@ const OrderPage = () => {
     const [authenticate, setAuthenticate] = useState({});
     const [searchValue, setSearchValue] = useState(""); 
     const [sizeData, setSizeData] = useState([]);
-    const [totalPrice, setTotalPrice] = useState(0);
+    const [totalPrice, setTotalPrice] = useState(null);
     const router = useRouter()
 
     const deleteCartItems = (cart_item_id) => {
@@ -72,16 +72,15 @@ const OrderPage = () => {
     }
 
 
-    const gettingSizes = () =>{
+    const gettingSizes = (shoeId) =>{
 
         console.log("Getting shoe sizes");
-        console.log(cartData)
-        var formData = new FormData(cartData.id);
+        console.log(shoeId)
+        var id = shoeId;
 
         const url = process.env.NEXT_PUBLIC_LOCAL_HOST_URL + '/allsizes'
-        const id = formData.get('id')
 
-        const encodedURL = encodeURI(`${url}`)
+        const encodedURL = encodeURI(`${url}?id=${id}`)
 
         fetch(encodedURL, {
             method: 'GET',
@@ -109,40 +108,41 @@ const OrderPage = () => {
 
     }
 
+    const changeSize = (sizeId,cart_item_id) => {
+
+        console.log("Getting shoe sizes");
+        console.log(sizeId)
+        console.log(cart_item_id)
+        var id = sizeId;
+        const url = process.env.NEXT_PUBLIC_LOCAL_HOST_URL + '/changeshoesize'
+
+        const encodedURL = encodeURI(`${url}?id=${id}&cart_item_id=${cart_item_id}`)
+
+        fetch(encodedURL,{
+            method: 'PATCH',
+        })
+      
+            .then((response) => response.json())
+            .catch(e => {
+                console.log("Before error")
+                console.log({ e })
+                console.log("After error")
+            })      
+
+            
+        setCartData([...cartData]);
+
+
+    }
+
+
+
     const addToFavorites = () => {
 
         alert("Favorites feature will be added later");
         // router.push('/favorites');
     }
 
-    const setTotalCost = (cartData) => {
-
-        const quantity = cartData.map(item => item.quantity)
-        const prices = cartData.map(item => item.price)
-
-        // console.log("Hi")
-        // console.log(cartData)
-        console.log(quantity)
-        // console.log(prices)
-        const url = process.env.NEXT_PUBLIC_LOCAL_HOST_URL + '/totalcost'
-        const encodedURL = encodeURI(`${url}?quantity=${quantity}&prices=${prices}`)
-
-        fetch(encodedURL,{
-            method: 'GET',
-        })
-
-        .then((response) => response.json())
-        .catch(e => {
-            console.log("Before error")
-            console.log({ e })
-            console.log("After error")
-        }) 
-
-        .then((total) => {
-            const totalValue = Number(total) + 8.00;
-            setTotalPrice(totalValue);
-          })
-    }
 
     const changeQuantity = (cartItem, newQuantity) => {
         console.log("Hi");
@@ -166,6 +166,31 @@ const OrderPage = () => {
 
             
         setCartData([...cartData]);
+
+        const quantity = cartData.map(item => item.quantity)
+        const prices = cartData.map(item => item.price)
+
+        const url2 = process.env.NEXT_PUBLIC_LOCAL_HOST_URL + '/totalcost'
+        const encodedURL2 = encodeURI(`${url2}?quantity=${quantity}&prices=${prices}`)
+
+        fetch(encodedURL2,{
+            method: 'GET',
+        })
+
+        .then((response) => response.json())
+        .catch(e => {
+            console.log("Before error")
+            console.log({ e })
+            console.log("After error")
+        }) 
+
+        .then((total) => {
+            const totalValue = Number(total) + 8.00;
+            console.log(totalValue)
+            setTotalPrice(totalValue);
+          })
+
+
     }
     
 
@@ -183,7 +208,6 @@ const OrderPage = () => {
 
     const goToCheckout = (cart_id) => {
         const queryParams = {
-            priceForEverything: totalPrice,
             cart_id: cart_id
         };
         const queryString = new URLSearchParams(queryParams).toString();
@@ -192,6 +216,9 @@ const OrderPage = () => {
     }
 
     useEffect(() => {
+    if(totalPrice != null){
+        return
+    }
 
         fetch(process.env.NEXT_PUBLIC_LOCAL_HOST_URL + '/getlogin',{
             method: 'GET',
@@ -224,21 +251,23 @@ const OrderPage = () => {
             return response.json(); // Assuming the response is JSON
         })
 
-        .then((data) => {
+        .then((data, subTotal) => {
             console.log("retrieving cart data")
             console.log(data);
-            setCartData(data);
+            setCartData(data[0]);
+            console.log(Number(data[1].subTotal));
             // data.forEach(shoe => {
             //     setTotalCost(shoe.price, shoe.Quantity)
             //     console.log("Test")
             // })
-
+            setTotalPrice(Number(data[1].subTotal) + 8.00);
         })
         .catch(e => {
             console.log("Before error")
             console.log({ e })
             console.log("After error")
         });
+    
     }, []);
     return(
         <div className={styles.homepage}>
@@ -269,9 +298,6 @@ const OrderPage = () => {
                             <button type='submit' style={{ marginLeft: "10px" }}>Search</button>
                         </div>
                     </form>
-                    <div>
-                        {setTotalCost(cartData)}
-                    </div>
 
                 </div>
                 </div>
@@ -295,7 +321,7 @@ const OrderPage = () => {
 
                                 <Dropdown>
                                     <DropdownTrigger>
-                                        <button variant="bordered" onClick={gettingSizes}>
+                                        <button variant="bordered" onClick={() => gettingSizes(cartItem.id)}>
                                             Size {cartItem.size} v
                                         </button>
                                     </DropdownTrigger>
@@ -303,8 +329,8 @@ const OrderPage = () => {
                                         {sizeData.map((item,index) =>
                                             <DropdownItem
                                             key={index} 
-                                            // onClick={() => changeSize(cartItem,qty)}
-                                            >{item}    
+                                            onClick={() => changeSize(item.size_id,cartItem.cart_item_id)}
+                                            >{item.size}    
                                             </DropdownItem>
                                         )}
                                     </DropdownMenu>
@@ -321,7 +347,7 @@ const OrderPage = () => {
                                             {range(1,10).map((qty) => 
                                                 <DropdownItem 
                                                     key={qty} 
-                                                    onClick={() => changeQuantity(cartItem,qty)}
+                                                    onClick={() => changeQuantity(cartItem,qty,cartData)}
                                                     >{qty}
                                                 </DropdownItem>)}
                                         {/* </div> */}
@@ -351,7 +377,7 @@ const OrderPage = () => {
                                 { index == 0 && (
                                     <div style={{fontWeight:"bold", marginLeft: "200px"}}>
                                         <p style={{fontSize: "25px"}}>Summary</p>
-                                        <p style={{marginTop: "10px"}}>Subtotal: ${totalPrice - 8}</p>
+                                        <p style={{marginTop: "10px"}}>Subtotal: ${totalPrice - 8.00}</p>
                                         <p style={{marginTop: "10px"}}>Estimated Shipping & Handling: 8.00</p>
                                         <p style={{marginTop: "10px"}}>Total:${totalPrice}</p>
                                         <button className={styles.buttonorder} onClick={() => goToCheckout(cartItem.cart_id)}>
