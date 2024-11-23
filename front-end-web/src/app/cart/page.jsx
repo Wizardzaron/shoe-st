@@ -3,7 +3,7 @@ import React, { useState, useEffect} from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import styles from '../page.module.css'
-
+import SearchButton from "../components/SearchButton"
 import ListButton from '../components/ListButton'
 
 
@@ -42,7 +42,6 @@ import {
 const OrderPage = () => {
     const [cartData, setCartData] = useState([]);
     const [authenticate, setAuthenticate] = useState({});
-    const [searchValue, setSearchValue] = useState(""); 
     const [sizeData, setSizeData] = useState([]);
     const [totalPrice, setTotalPrice] = useState(null);
     const router = useRouter()
@@ -185,7 +184,7 @@ const OrderPage = () => {
         }) 
 
         .then((total) => {
-            const totalValue = Number(total) + 8.00;
+            const totalValue = parseFloat(total) + 8.00;
             console.log(totalValue)
             setTotalPrice(totalValue);
           })
@@ -193,19 +192,6 @@ const OrderPage = () => {
 
     }
     
-
-    const setSearch = (event) => {
-
-        setSearchValue(event.target.value)
-    }
-
-    const searching = (event) => {
-
-        event.preventDefault();
-
-        console.log(searchValue);
-    }
-
     const goToCheckout = (cart_id) => {
         const queryParams = {
             cart_id: cart_id
@@ -255,12 +241,12 @@ const OrderPage = () => {
             console.log("retrieving cart data")
             console.log(data);
             setCartData(data[0]);
-            console.log(Number(data[1].subTotal));
+            console.log(parseFloat(data[1].subTotal));
             // data.forEach(shoe => {
             //     setTotalCost(shoe.price, shoe.Quantity)
             //     console.log("Test")
             // })
-            setTotalPrice(Number(data[1].subTotal) + 8.00);
+            setTotalPrice(parseFloat(data[1].subTotal) + 8.00);
         })
         .catch(e => {
             console.log("Before error")
@@ -285,19 +271,8 @@ const OrderPage = () => {
                     </>
                     <ListButton />
 
-                    <form style={{ display: 'inline-block' }} onSubmit={searching}>
-                        <input style={{ marginLeft: "30px" }}
-                            id="search"
-                            type="text"
-                            className="input"
-                            placeholder="search..."
-                            value={searchValue}
-                            onChange={setSearch}
-                        />
-                        <div id="form-action" style={{ display: 'inline-block' }}>
-                            <button type='submit' style={{ marginLeft: "10px" }}>Search</button>
-                        </div>
-                    </form>
+                    <SearchButton />
+                    <hr style={{  border: "2px solid black"}}/>
 
                 </div>
                 </div>
@@ -308,11 +283,13 @@ const OrderPage = () => {
                     cartData.map((cartItem, index) => (
                         <div className={styles.cartitem} key={cartItem.cart_item_id}>
                             <div className={styles.cartimagediv} key={cartItem.image_id}>
-                                <img
-                                    className={styles.cartimage}
-                                    key={cartItem.image_id}
-                                    src={cartItem.image_url}
-                                />
+                                <a href={"/shoedetail?id=" + cartItem.id}>
+                                    <img
+                                        className={styles.cartimage}
+                                        key={cartItem.image_id}
+                                        src={cartItem.image_url}
+                                    />
+                                </a>
                             </div>
                             <div className={styles.cartdescriptivetext}>
                                 <p style={{fontWeight:"bold"}}>{cartItem.brand_name} {cartItem.shoe_name}</p>
@@ -325,9 +302,10 @@ const OrderPage = () => {
                                             Size {cartItem.size} v
                                         </button>
                                     </DropdownTrigger>
-                                    <DropdownMenu aria-label="Static Actions">
+                                    <DropdownMenu aria-label="Static Actions" style={{backgroundColor:"white"}}>
                                         {sizeData.map((item,index) =>
                                             <DropdownItem
+                                            className={styles.dropdownitems}
                                             key={index} 
                                             onClick={() => changeSize(item.size_id,cartItem.cart_item_id)}
                                             >{item.size}    
@@ -342,10 +320,10 @@ const OrderPage = () => {
                                         Quantity {cartItem.quantity} v
                                         </button>
                                     </DropdownTrigger>
-                                    <DropdownMenu aria-label="Static Actions">
-                                        {/* <div className={styles.dropdown}> */}
+                                    <DropdownMenu aria-label="Static Actions" style={{backgroundColor:"white"}}>
                                             {range(1,10).map((qty) => 
                                                 <DropdownItem 
+                                                    className={styles.dropdownitems}
                                                     key={qty} 
                                                     onClick={() => changeQuantity(cartItem,qty,cartData)}
                                                     >{qty}
@@ -354,13 +332,13 @@ const OrderPage = () => {
                                     </DropdownMenu>
                                 </Dropdown>                            
                                 <div className={styles.icons}>
-                                    <img 
+                                    {/* <img 
                                         src="/heart.png"
                                         height={20}
                                         width={20}
                                         // must use () => otherwise the function is called automatically and causes an undefined error
                                         onClick={() => addToFavorites()}
-                                    />
+                                    /> */}
                                     <img 
                                         src="/trashCan.png"
                                         height={20}
@@ -378,7 +356,7 @@ const OrderPage = () => {
                                     <div style={{fontWeight:"bold", marginLeft: "200px"}}>
                                         <p style={{fontSize: "25px"}}>Summary</p>
                                         <p style={{marginTop: "10px"}}>Subtotal: ${totalPrice - 8.00}</p>
-                                        <p style={{marginTop: "10px"}}>Estimated Shipping & Handling: 8.00</p>
+                                        <p style={{marginTop: "10px"}}>Estimated Shipping & Handling: $8.00</p>
                                         <p style={{marginTop: "10px"}}>Total:${totalPrice}</p>
                                         <button className={styles.buttonorder} onClick={() => goToCheckout(cartItem.cart_id)}>
                                             Checkout

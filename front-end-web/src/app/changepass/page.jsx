@@ -3,7 +3,8 @@ import React, { useState} from 'react';
 import { useRouter} from 'next/navigation'
 import styles from '../page.module.css'
 import ChangePassword from '../components/ChangePassword'
-
+import SignUpButton from "../components/SignUpButton"
+import LoginButton from "../components/LoginButton"
 
 const PassPage = () => {
     const router = useRouter()
@@ -35,19 +36,28 @@ const PassPage = () => {
 
     return (
         <div className={styles.loginpage}>
-
-            <h1>Enter new password</h1>
-            
-            <form onSubmit={changepassword}>
-                <ChangePassword />
-                <div className={styles.flexbutton}>
-                    <div id="form-action">
-                        <button type="submit" className={styles.buttoncontainer}>
-                            Submit new password
-                        </button>
-                    </div>
+            <div className={styles.navigationbar}>
+                <div className={styles.spaceForImage}>
+                    <img src="/fakeLogo.png" width={100} height={100} />
+                    <SignUpButton />
+                    <LoginButton />
                 </div>
-            </form>    
+                <hr style={{border: "2px solid black", marginTop: "10px"}}/>
+            </div>
+            <div style={{textAlign: "center"}}>
+                <h1>Enter new password</h1>
+                
+                <form onSubmit={changepassword}>
+                    <ChangePassword />
+                    <div className={styles.flexbutton}>
+                        <div id="form-action">
+                            <button type="submit" className={styles.buttoncontainer}>
+                                Submit new password
+                            </button>
+                        </div>
+                    </div>
+                </form> 
+            </div>   
         </div>    
     );
 };

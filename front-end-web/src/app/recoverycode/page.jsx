@@ -3,8 +3,8 @@ import React, { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import styles from "../page.module.css";
-// import Cookie from '../components/cookiejar.jsx'
-// import {fetch, CookieJar} from 'node-fetch-cookies';
+import SignUpButton from "../components/SignUpButton"
+import LoginButton from "../components/LoginButton"
 
 const CodePage = () => {
   const router = useRouter();
@@ -64,43 +64,51 @@ const CodePage = () => {
 
   return (
     <div className={styles.loginpage}>
-      <h1>Enter recovery code</h1>
-
-      <p className={styles.textcondense}>
-        Enter the recovery code sent to you via email and click Submit. If the
-        email you provided was&apos;t found in our database double-check to see if
-        you spelled it correctly, or sign up to create an account.
-      </p>
-
-      <form onSubmit={checkcode}>
-        <div id="recovery" className="mb-3">
-          <label htmlFor="resetCode" className={styles.attributetext}>
-            Recovery code
-          </label>
-          <input
-            type="text"
-            placeholder="Recovery code..."
-            name="resetCode"
-            required
-            className={styles.textbox}
-          />
-        </div>
-
-        <div className={styles.flexbutton}>
-          <div id="form-action">
-            <button type="submit" className={styles.buttoncontainer}>
-              Verify recovery code
-            </button>
+      <div className={styles.navigationbar}>
+          <div className={styles.spaceForImage}>
+              <img src="/fakeLogo.png" width={100} height={100} />
+              <SignUpButton />
+              <LoginButton />
           </div>
-        </div>
-        <div className={styles.flexbutton}>
-          <a href={"/forgotpass"}>
-            <button type="button" className={styles.buttoncontainer}>
-              Go Back
-            </button>
-          </a>
-        </div>
-      </form>
+          <hr style={{border: "2px solid black", marginTop: "10px"}}/>
+      </div>
+      <div style={{textAlign: "center"}}>
+        <h1>Enter recovery code</h1>
+        <p className={styles.textcondense}>
+          Enter the recovery code sent to you via email and click Submit. If the
+          email you provided was&apos;t found in our database double-check to see if
+          you spelled it correctly, or sign up to create an account.
+        </p>
+
+        <form onSubmit={checkcode}>
+          <div id="recovery" className="mb-3">
+            <label htmlFor="resetCode" className={styles.attributetext}>
+              Recovery code
+            </label>
+            <input
+              type="text"
+              placeholder="Recovery code..."
+              name="resetCode"
+              required
+              className={styles.textbox}
+            />
+          </div>
+          <div className={styles.flexbutton}>
+            <div id="form-action">
+              <button type="submit" className={styles.buttoncontainer}>
+                Verify recovery code
+              </button>
+            </div>
+          </div>
+          <div className={styles.flexbutton}>
+            <a href={"/forgotpass"}>
+              <button type="button" className={styles.buttoncontainer}>
+                Go Back
+              </button>
+            </a>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

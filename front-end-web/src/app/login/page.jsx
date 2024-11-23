@@ -45,7 +45,7 @@ const LoginPage = () => {
   return (
     <div>
       <section className={styles.loginpage}>
-        <h1 className={styles.aligntext}>Welcome to fake.com</h1>
+        <h1 className={styles.aligntext}>Login</h1>
         <div className={styles.flexbutton}>
           <form onSubmit={Login}>
             <UserName ref={UsernameRef}/>

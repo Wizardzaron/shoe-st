@@ -72,7 +72,7 @@ function Signingup() {
 
   return (
     <div className={styles.signup}>
-      <h1 className={styles.aligntext}>Sign Up</h1>
+      <h1 className={styles.aligntext}>Create Account</h1>
         <form onSubmit={submitInfo}>
           <SignUp ref={UserRef}/>
         </form>

@@ -6,14 +6,6 @@ import React, { useState } from "react";
 export default function ChangePassword() {
 
     const [showPassword,setShowPassword] = useState(false)
-    const [eye, setEye] = useState("/eyeClosed.png")
-
-    const changEye = () =>{
-        
-        setEye(eye == "/eyeClosed.png" ? "/eyeOpen.png" : "/eyeClosed.png") 
-        setShowPassword(showPassword == true ? false : true)
-    }
-
 
     return(
         <>
@@ -29,17 +21,19 @@ export default function ChangePassword() {
             
             <div id="password2" className="mb-3">
                 <label htmlFor="passwordcode2" className={styles.attributetext}>Confirm Password</label>
-                <input
-                    type={showPassword ? "text" : "password"}
-                    placeholder="Confirm your new password"
-                    name="passwordcode2"
-                    className={styles.textbox}
-                />
-                <img 
-                    src={eye}
-                    className={styles.eyeimage}
-                    onClick={changEye}
-                />
+                <div style={{marginLeft: "50px"}}>     
+                    <input
+                        type={showPassword ? "text" : "password"}
+                        placeholder="Confirm your new password"
+                        name="passwordcode2"
+                        className={styles.textbox}
+                    />
+                    <img
+                        src={showPassword ? "/eyeOpen.png" : "/eyeClosed.png"}
+                        className={styles.eyeimage}
+                        onClick={() => setShowPassword(!showPassword)}
+                    />
+                </div>
             </div>
         </>
     )

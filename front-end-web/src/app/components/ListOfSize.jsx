@@ -20,7 +20,7 @@ export default function ListOfSize ({listOfShoeSizes, indexOfSize, currentSize, 
       }    
 
     return (
-            <div className="radio" key={indexOfSize + 1}>
+            <div className="radio" key={indexOfSize + 1} style={{ margin: "1%" }}>
             {/* need some help with explanation */}
             {listOfShoeSizes.in_stock > 0 &&(
               <label className={ styles.ghostbutton + " " + (selectedSize == listOfShoeSizes.size_id ? styles.ispressed : "")}>

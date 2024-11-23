@@ -82,6 +82,7 @@ function Brand() {
                             </>
                         )}
                     </div>
+                    <hr style={{  border: "2px solid black"}}/>
                 </div>
                 <div className={styles.shoesByBrand}>
                     {shoeBrand && shoeBrand.length > 0 ? (

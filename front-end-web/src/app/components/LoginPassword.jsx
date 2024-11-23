@@ -22,7 +22,7 @@ const LoginPassword = ({}, ref) => {
             <label htmlFor="password" className={styles.attributetext}>
             Password
             </label>
-            <div style={{display: "flex", alignItems: "center"}}>
+            <div style={{display: "flex", alignItems: "center", justifyContent: "center", marginLeft: "8%"}}>
               <input
               type={showPassword ? "text" : "password"}
               placeholder="Password..."
@@ -31,13 +31,13 @@ const LoginPassword = ({}, ref) => {
               value={sendPassword}
               onChange={(e) => setSendPassword(e.target.value)}
               />
-          </div>
               {/*if showPassword is true we us eyeOpen.png else we use eyeClosed.png*/}
               <img
               src={showPassword ? "/eyeOpen.png" : "/eyeClosed.png"}
               className={styles.eyeimage}
               onClick={() => setShowPassword(!showPassword)}
               />
+            </div>
         </div>
     );
 }

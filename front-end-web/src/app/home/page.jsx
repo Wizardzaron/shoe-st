@@ -23,7 +23,7 @@ function HomePage() {
   // const [authenticate, setAuthenticate] = useState({});
 
   const [loginToken, setLoginToken] = useState({});
-  
+
 
   // const { REACT_APP_API_ENDPOINT } = process.env;
   //console.log({line:20,env:process.env, endpoint:process.env.NEXT_PUBLIC_LOCAL_HOST_URL, foo:process.env.NEXT_PUBLIC_FOO})
@@ -57,19 +57,6 @@ function HomePage() {
     //If the useEffect fires at each render we need to make a token that checks once an hour
   
   useEffect(() => {
-    // console.log("Heyo",process.env.NEXT_PUBLIC_LOCAL_HOST_URL)
-    // const url = 'https://example.com'; // Replace with the URL you want to check
-
-    // fetch(url)
-    //     .then(response => {
-    //         console.log('Status code:', response.status);
-    //         // Handle the response status code as needed
-    //     })
-    //     .catch(error => {
-    //         console.error('Error fetching URL:', error);
-    //     });
-
-
 
     //app context stores global variables
 
@@ -130,6 +117,7 @@ function HomePage() {
             <ListButton />
             <SearchButton />
           </div>
+          <hr style={{border: "2px solid black"}}/>
         </div>
         <Carousel autoPlay={true} interval={3000} infiniteLoop={true} showThumbs={false}>
           {item.map((anImage) => {
@@ -139,7 +127,7 @@ function HomePage() {
             )}
           )}
         </Carousel>
-        <div style={{ marginTop: "20px", textAlign: "center" }}>
+        <div style={{ marginTop: "40px", textAlign: "center" }}>
           <b>Available Brands</b>
         </div>
         <BrandImage />

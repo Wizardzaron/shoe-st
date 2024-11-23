@@ -11,8 +11,13 @@
   },
   "dependencies": {
     "@nextui-org/dropdown": "^2.1.26",
+    "@nextui-org/modal": "^2.0.41",
+    "@nextui-org/react": "^2.4.8",
+    "@nextui-org/system": "^2.2.6",
+    "@nextui-org/theme": "^2.2.11",
     "@vercel/postgres": "^0.7.2",
     "bootstrap": "^5.3.2",
+    "framer-motion": "^11.11.11",
     "next": "14.0.4",
     "node-fetch-cookies": "^2.1.1",
     "patch-package": "^8.0.0",
@@ -20,7 +25,8 @@
     "react-bootstrap": "^2.9.2",
     "react-dom": "^18",
     "react-hot-toast": "^2.4.1",
-    "react-responsive-carousel": "^3.2.23"
+    "react-responsive-carousel": "^3.2.23",
+    "tailwindcss": "^3.4.14"
   },
   "devDependencies": {
     "eslint": "^8",

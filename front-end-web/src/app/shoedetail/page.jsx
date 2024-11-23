@@ -47,16 +47,26 @@ const ShoePage = () => {
 
   const addItemToCart = (event) => { 
     console.log("addItemToCart");
-    var size_id = document.querySelector('input[name="size"]:checked').value;
-    console.log(size_id);
 
+    //helps us customize the error message we want the user to see
+    try{
+      document.querySelector('input[name="size"]:checked').value
+    }
+    catch {
+      alert("Please choose a shoe size")  
+    }
+    
     if (authenticate["loggedin"] == "False") {
       alert("You must be logged in to be able to order shoes")
     }
     else{
-
+      const urlParams = new URLSearchParams(window.location.search);
+      var size_id = document.querySelector('input[name="size"]:checked').value;  
+      var shoe_id = urlParams.get("id");
+    
       const formData = new FormData();
       formData.append('size_id',size_id);
+      formData.append('shoe_id', shoe_id)
       const obj = Object.fromEntries(formData.entries());
       console.log(obj);
 
@@ -181,6 +191,7 @@ const ShoePage = () => {
               )}
               <SearchButton />
         </div>
+        <hr style={{  border: "2px solid black"}}/>
       </div>
 
       <div className={styles.detailflex}>
@@ -194,6 +205,7 @@ const ShoePage = () => {
             className={styles.imgsize}
             src={mainImage}
           />
+          <p>{shoedet.descript}</p>
         </div>
         <div className={styles.descriptiveflex}>
           <ShoeDescription ShoeDesc={shoedet} />
@@ -224,9 +236,6 @@ const ShoePage = () => {
               </div>
             </div>
           </form>
-          <div className={styles.descriptivetext}>
-            <p>{shoedet.descript}</p>
-          </div>
         </div>
       </div>
     </div>

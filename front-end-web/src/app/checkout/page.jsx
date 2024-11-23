@@ -152,6 +152,7 @@ const OrderPage = () => {
             </>
           )}
         </div>
+        <hr style={{border: "2px solid black", marginTop: "10px"}}/>
       </div>
       <div className={styles.checkout}>
         <h1>Checkout</h1>

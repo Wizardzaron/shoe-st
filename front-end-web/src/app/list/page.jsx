@@ -109,6 +109,7 @@ function ShoeList(){
                             </>
                         )}
                     </div>
+                    <hr style={{border: "2px solid black", marginTop: "10px"}}/>
                 </div>
                 <div className={styles.flexshoelist}>
                     {brands.map((aBrand) => {
