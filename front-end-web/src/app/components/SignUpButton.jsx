@@ -47,35 +47,60 @@ export default function SignUpButton() {
   };
 
 
-  const signup = (event) => {
+  const signup = (event, onClose) => {
 
     try {
+      event.preventDefault();
+      const formData = new FormData();
+      formData.append("firstname", firstname);
+      formData.append("lastname", lastname);
+      formData.append("email", email);
+      formData.append("passwd", password);
+      formData.append("streetaddress", streetaddress);
+      formData.append("username", username);
+      formData.append("zipcode", zipcode);
+      formData.append("city", city);
+      formData.append("state", state);
+
+      const obj = Object.fromEntries(formData.entries());
+
       fetch(process.env.NEXT_PUBLIC_LOCAL_HOST_URL + "/signup", {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(obj)
       })
 
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
+        //The function gets this far
+        console.log("I made it this far")
+
+        .then(async (response) => {
+
+          console.log("Here is the response from the server: " + JSON.stringify(response))
+
+          if (response.ok) {
+              console.log("About to return the OK response");
+              return response.json(); // Assuming the response is JSON
           }
-          return response.json(); // Assuming the response is JSON
+          if (response.status === 406) {
+            const data = await response.json();
+            toast.error(data.message); // Show error message using toast
+            throw new Error(data.message); // Reject the promise with a meaningful error
+          }
+          throw new Error('Network response was not ok: ' + response.status);
         })
 
         .then((data) => {
           console.log("Data: " + data);
         })
         .catch(e => {
-          console.log("Before error")
-          console.log({ e })
-          console.log("After error")
+          console.log("Signup error", {e})
         });
     } catch (error) {
       console.error("Error occured at posting data: ", error);
     }
-    router.push('/home');
 
+    onClose();
+    window.location.reload();
 
   }
 
@@ -101,7 +126,7 @@ export default function SignUpButton() {
               </div>
               <ModalBody className={styles.modalbody}>
                 <h1 className={styles.aligntext}>Create Account</h1>
-                <form onSubmit={signup}>
+                <form onSubmit={(e)=>signup(e,onClose)}>
                   <div id="firstName" className="mb-3">
                     <label htmlFor="firstname" className={styles.attributetext}>
                       First Name
@@ -232,24 +257,24 @@ export default function SignUpButton() {
                   ) : (
                     ""
                   )}
+                  <div style={{display:"flex",justifyContent: "center" ,alignItems:"center"}}>
+                  <Button                  
+                    className={styles.modalbuttonclose}
+                    variant="light"
+                    onPress={onClose}
+                  >
+                    Close
+                  </Button>
+                  <Button                 
+                    className={styles.modalbuttoninput}
+                    color="primary"
+                    type="submit"
+                  >
+                    Submit Info
+                  </Button>
+                  </div>
                 </form>
               </ModalBody>
-              <ModalFooter  style={{display:"flex",justifyContent: "center" ,alignItems:"center"}}>
-                <Button
-                  className={styles.modalbuttonclose}
-                  variant="light"
-                  onPress={onClose}
-                >
-                  Close
-                </Button>
-                <Button
-                  className={styles.modalbuttoninput}
-                  color="primary"
-                  onClick={signup}
-                >
-                  Submit Info
-                </Button>
-              </ModalFooter>
             </>
           )}
         </ModalContent>

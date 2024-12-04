@@ -203,8 +203,8 @@ const OrderPage = () => {
               <div className={styles.addresstext}>
                 <h2>Shipping Address</h2>
                 <p>{shippingAddressAvailable.email}</p>
-                <p>{shippingAddressAvailable.city}</p>
                 <p>{shippingAddressAvailable.state}</p>
+                <p>{shippingAddressAvailable.city}</p>
                 <p>{shippingAddressAvailable.streetaddress}</p>
                 <p>{shippingAddressAvailable.zipcode}</p>
               </div>
@@ -214,7 +214,7 @@ const OrderPage = () => {
                 <h3>Total Amount</h3>
                 <p>Subtotal: ${totalPrice}</p>
                 <p>Estimated Shipping: $0.00</p>
-                <p>Estimated Handeling: $0.00</p>
+                <p>Estimated Handling: $0.00</p>
                 <p>Total: ${totalPrice}</p>
 
                 {cartData.map((cartItem, index) => (

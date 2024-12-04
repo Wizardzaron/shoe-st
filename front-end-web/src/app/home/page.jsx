@@ -66,7 +66,7 @@ function HomePage() {
     })
       .then((response) => response.json())
       .then((authenticateValue) => {
-        console.log(authenticateValue);
+        console.log("Checking if login was valid or not: ", authenticateValue);
         setLoginToken(authenticateValue);
       })
       .catch((e) => {
@@ -85,7 +85,7 @@ function HomePage() {
   
   //return a loading screen instead of a console.log()
   if (item == null) {
-    return console.log("returned null");
+    return console.log("placeholder for when I create a loading screen");
   }
 
 //Reducers allow you to update the things you want to update and nothing else
@@ -127,8 +127,8 @@ function HomePage() {
             )}
           )}
         </Carousel>
-        <div style={{ marginTop: "40px", textAlign: "center" }}>
-          <b>Available Brands</b>
+        <div style={{ marginTop: "40px", textAlign: "center", fontSize: "30px" }}>
+          <b>Brands</b>
         </div>
         <BrandImage />
       </div>

@@ -23,7 +23,8 @@ export default function LoginButton() {
   const AddressRef = useRef(null);
   const UsernameRef = useRef(null);
 
-  const Login = (event) => {
+  // we are passing the address of onClose function
+  const Login = (event, onClose) => {
     event.preventDefault();
 
     console.log("I'm in login");
@@ -44,8 +45,8 @@ export default function LoginButton() {
         .then((response) => response.json())
         .then((loginResponse) => {
           if (loginResponse["loggedin"] == "True") {
-            console.log("Triggering Reload");
-            onClose;
+            onClose();
+            window.location.reload();
           } else {
             alert("Incorrect username or password");
           }
@@ -86,7 +87,8 @@ export default function LoginButton() {
               <Button className={styles.modalbuttonclose} variant="light" onPress={onClose}>
                 Close
               </Button>
-              <Button className={styles.modalbuttoninput} color="primary" onClick={Login}>
+              {/* the ()=> is a lambda function which says not to call onClose right this minute until it is called in the function */}
+              <Button className={styles.modalbuttoninput} color="primary" onClick={(e)=>Login(e,onClose)}>
                 Login
               </Button>
             </ModalFooter>

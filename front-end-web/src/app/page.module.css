@@ -62,7 +62,7 @@
   bottom: 270px;
   width: 250px;
   font-size: 17px;
-  text-wrap:balanced;
+  overflow-wrap: break-word;
 }
 
 .brandpage {
@@ -417,6 +417,7 @@
   max-height: 80vh;
   overflow-y: auto;
 }
+
 
 .itemdiv {
 
