@@ -26,7 +26,7 @@ export default function SignUpButton() {
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
   const [showTextBox, setShowTextBox] = useState(false);
-
+  const [error, setError] = useState("");
 
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
 
@@ -42,7 +42,7 @@ export default function SignUpButton() {
       setZipcode(numericValue);
     } else {
       // Alert the user about invalid input
-      toast.error("Invalid Input", "Please enter a valid numeric value.");
+      setError("Invalid input please enter a valid numeric value");
     }
   };
 
@@ -70,37 +70,31 @@ export default function SignUpButton() {
         body: JSON.stringify(obj)
       })
 
-        //The function gets this far
-        console.log("I made it this far")
-
-        .then(async (response) => {
-
-          console.log("Here is the response from the server: " + JSON.stringify(response))
-
-          if (response.ok) {
-              console.log("About to return the OK response");
-              return response.json(); // Assuming the response is JSON
-          }
-          if (response.status === 406) {
-            const data = await response.json();
-            toast.error(data.message); // Show error message using toast
-            throw new Error(data.message); // Reject the promise with a meaningful error
-          }
-          throw new Error('Network response was not ok: ' + response.status);
+        .then((response) => {
+          return response.json();
         })
 
         .then((data) => {
-          console.log("Data: " + data);
+          if (data.message) {
+            setError(data.message);
+            throw new Error('Network response was not ok' + data.status + data.message);
+          }
         })
-        .catch(e => {
-          console.log("Signup error", {e})
-        });
+
+        .then(data => {
+            console.log("Successful Signup from server: " + JSON.stringify(data));
+            onClose();
+            window.location.reload();
+        })
+
+
+        .catch((error) => {
+            console.log("SignUp error: " + JSON.stringify(error));
+        })
+
     } catch (error) {
       console.error("Error occured at posting data: ", error);
     }
-
-    onClose();
-    window.location.reload();
 
   }
 
@@ -126,6 +120,8 @@ export default function SignUpButton() {
               </div>
               <ModalBody className={styles.modalbody}>
                 <h1 className={styles.aligntext}>Create Account</h1>
+                <h2 className={styles.aligntext}>{error}</h2>
+
                 <form onSubmit={(e)=>signup(e,onClose)}>
                   <div id="firstName" className="mb-3">
                     <label htmlFor="firstname" className={styles.attributetext}>
