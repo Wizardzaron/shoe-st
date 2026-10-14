@@ -1,10 +1,7 @@
 // Isolated preview only. No credentials, payments, or live database connections.
 import crypto from 'node:crypto';
-import { createRequire } from 'node:module';
 import { fail } from './proxy.mjs';
-
-const require = createRequire(import.meta.url);
-const products = require('../data/demo-products.json');
+import products from '../data/demo-products.json' with { type: 'json' };
 
 const secret = process.env.DEMO_SECRET || crypto.randomBytes(32).toString('hex');
 const sizeLabels = ['6', '6.5', '7', '7.5', '8', '8.5', '9', '9.5', '10', '10.5', '11', '12'];
