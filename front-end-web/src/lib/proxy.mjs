@@ -25,7 +25,7 @@ export async function proxy(request, path, config, fetcher = fetch) {
   const mutate = request.method !== 'GET';
   let payload;
   if (mutate) {
-    if (request.headers.get('Origin') !== expectedOrigin) return fail('Origin is not allowed.', 403);
+    if (request.headers.get('Origin') !== expectedOrigin) return fail(`Origin "${request.headers.get('Origin')}" does not match expected "${expectedOrigin}". fwdProto="${request.headers.get('x-forwarded-proto')}" host="${request.headers.get('host')}" url="${request.url}"`, 403);
     if (!request.headers.get('Content-Type')?.startsWith('application/json')) return fail('Send JSON.', 415);
     const raw = await request.text();
     if (Buffer.byteLength(raw) > 32 * 1024) return fail('Request is too large.', 413);
