@@ -17,7 +17,11 @@ export async function proxy(request, path, config, fetcher = fetch) {
   if (path.length !== 1 || !Object.hasOwn(methods, path[0])) return fail('Endpoint not found.', 404);
   if (request.method !== methods[path[0]]) return fail('Method not allowed.', 405);
   const incoming = new URL(request.url);
-  const expectedOrigin = new URL(`${incoming.protocol}//${request.headers.get('host') || incoming.host}`).origin;
+  // On Vercel/edge platforms, TLS terminates upstream so request.url has http:
+  // even for https visitors. Trust x-forwarded-proto which the platform sets.
+  const forwardedProto = request.headers.get('x-forwarded-proto');
+  const protocol = forwardedProto ? `${forwardedProto}:` : incoming.protocol;
+  const expectedOrigin = new URL(`${protocol}//${request.headers.get('host') || incoming.host}`).origin;
   const mutate = request.method !== 'GET';
   let payload;
   if (mutate) {
