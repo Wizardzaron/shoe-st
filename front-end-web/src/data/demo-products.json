@@ -1,0 +1,58 @@
+[
+  {
+    "brand_id": 1,
+    "brand_name": "Nike Air Force 1",
+    "color": "White/Blue",
+    "descript": "The Nike Air Force 1 Shadow puts a playful twist on a classic b-ball design. Using a layered approach, double the branding and an exaggerated midsole, it highlights AF1 DNA with a bold look.",
+    "id": 1,
+    "image_id": 1,
+    "image_url": "/products/shoe-1.png",
+    "price": "135.00",
+    "sex": "Woman",
+    "shoe_id": 1,
+    "shoe_name": "Shadow",
+    "manufacture_id": 2
+  },
+  {
+    "brand_id": 1,
+    "brand_name": "Nike Air Force 1",
+    "color": "White/Fireberry/Light Lemon Twist/ Blue Tint",
+    "descript": "Everything you love about the AF1—but doubled! The Nike Air Force 1 Shadow puts a playful twist on a hoops icon to highlight the best of AF1 DNA. Layered overlays bring added depth while doubled branding and an exaggerated midsole help give these sneakers a bold look. Vibrant colors provide an energetic look for 2 times the style",
+    "id": 2,
+    "image_id": 2,
+    "image_url": "/products/shoe-2.png",
+    "price": "135.00",
+    "sex": "Woman",
+    "shoe_id": 2,
+    "shoe_name": "Shadow",
+    "manufacture_id": 2
+  },
+  {
+    "brand_id": 2,
+    "brand_name": "Air Jordan 1",
+    "color": "Black/Cement Grey/White/Fire Red",
+    "descript": "Inspired by the original that debuted in 1985, the Air Jordan 1 Low offers a clean, classic look that's familiar yet always fresh. With an iconic design that pairs perfectly with any 'fit, these kicks ensure you'll always be on point.",
+    "id": 3,
+    "image_id": 4,
+    "image_url": "/products/shoe-3.png",
+    "price": "115.00",
+    "sex": "Men",
+    "shoe_id": 3,
+    "shoe_name": "Low",
+    "manufacture_id": 4
+  },
+  {
+    "brand_id": 2,
+    "brand_name": "Air Jordan 1",
+    "color": "White/Black/Metallic Gold",
+    "descript": "Inspired by the original that debuted in 1985, the Air Jordan 1 Low offers a clean, classic look that's familiar yet always fresh. With an iconic design that pairs perfectly with any 'fit, these kicks ensure you'll always be on point.",
+    "id": 4,
+    "image_id": 7,
+    "image_url": "/products/shoe-4.png",
+    "price": "115.00",
+    "sex": "Men",
+    "shoe_id": 4,
+    "shoe_name": "Low",
+    "manufacture_id": 4
+  }
+]

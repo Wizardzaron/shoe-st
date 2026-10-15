@@ -1,10 +1,3 @@
-'use client'
+import { redirect } from 'next/navigation';
 
-import { redirect } from 'next/navigation'
-
-function Redirect() {
-
-    redirect('/home');
-
-}
-export default Redirect;
+export default function Page() { redirect('/home'); }

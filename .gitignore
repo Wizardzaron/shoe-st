@@ -1,3 +1,9 @@
 /.venv
 .vercel
 .env
+
+# VSCode local history extension
+/.history/
+
+# Personal study notes — not for public repo
+/study-guide/
